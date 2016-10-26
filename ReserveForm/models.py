@@ -9,8 +9,9 @@ class ReserveForm(models.Model):
     serviceTarh = models.ManyToManyField('ServiceTarh')
     hasParche = models.BooleanField()
     parche = models.ForeignKey('Parche')
-    sizeX = models.FloatField()
-    sizeY = models.FloatField()
+    parcheWidth = models.FloatField()
+    parcheHeight = models.FloatField()
+    number = models.IntegerField(null=True, )
     typeChap = models.ForeignKey('Chap')
     hasLabel = models.BooleanField()
     dayChoice = (
@@ -66,8 +67,13 @@ class Chap(models.Model):
 
 class Process(models.Model):
     name = models.TextField()
-    duration = models.IntegerField()
+
+
+class ProcessFormKargar(models.Model):
+    process = models.ForeignKey(Process)
     kargar = models.ForeignKey(Kargar)
+    form = models.ForeignKey(ReserveForm)
+
 
 
 

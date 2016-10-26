@@ -13,6 +13,10 @@ class Customer(models.Model):
     companyName = models.TextField()
 
 
+class CustomerMessage(models.Model):
+    customer = models.ForeignKey(Customer)
+    message = models.TextField()
+
 
 class Kargar(models.Model):
     name = models.CharField(max_length=200)

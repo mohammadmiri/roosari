@@ -6,11 +6,14 @@ from django.contrib import admin
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'name', 'phoneNumber',)
+    list_display_links = ('name',)
+    search_fields = ('name', 'id')
 
 
 class KargarAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name',)
+    list_display_links = ('name',)
 
 
 admin.site.register(Customer, CustomerAdmin)
