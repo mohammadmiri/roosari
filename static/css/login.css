@@ -1,0 +1,58 @@
+#main-wrapper{
+    font-family: "B Yekan+";
+    min-width: 33cm;
+    min-height: 13cm;
+    padding-top: 5cm;
+}
+
+#form-wrapper{
+    margin: 0 auto;
+    width: 8cm;
+    height: 7cm;
+    max-height: 3cm;
+    padding: 2.5cm;
+    padding-top: 2cm;
+    border-radius: 0.5cm;
+    border: solid 1px #999999;
+}
+
+.input-wrapper input{
+    width: 7cm;
+    height: 0.9cm;
+    padding-left: 0.2cm;
+    margin-bottom: 0.4cm;
+    border-radius: 0.2cm;
+}
+
+#submit-wrappper{
+    margin-top: 0.3cm;
+    text-align: center;
+}
+
+#submit-wrappper input{
+    height: 1cm;
+    width: 2cm;
+    border: hidden;
+    background-color: #5cb85c;
+    border-radius: 0.2cm;
+    color: white;
+    font-size: 0.5cm;
+}
+
+#forgetpassword_link{
+    margin-top: 0.5cm;
+    margin-bottom: 0.5cm;
+    text-align: center;
+}
+
+#forgetpassword_link a{
+    text-decoration: none;
+}
+
+#forgetpassword_link a:visited{
+    /*color: black;*/
+}
+
+
+
+
