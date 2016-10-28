@@ -1,4 +1,5 @@
-
+from ReserveForm.models import ReserveForm
+from .models import Customer
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -85,10 +86,12 @@ def show_message(request, message):
 
 
 
-
 @login_required()
 def show_reserves(request):
-    pass
+    customer = request.user
+    form = ReserveForm.objects.filter(customer=customer)
+    context = {}
+    return render(request, 'showReserves.html', context=context)
 
 
 
