@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
 
+
 import traceback
 
 
@@ -90,11 +91,13 @@ def show_message(request, message):
 def show_reserves(request):
     customer = request.user
     form = ReserveForm.objects.filter(customer=customer)
-    context = {}
+    context = {'form':form}
     return render(request, 'showReserves.html', context=context)
 
 
 
+def test(request):
+    Customer.objects.all().first().delete()
 
 
 

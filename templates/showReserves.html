@@ -6,5 +6,45 @@
 </head>
 <body>
 
+<div id="main-wrapper">
+    <div id="reserves-wrapper">
+        {% for form in forms %}
+            <div class="reserve-id list-row"><span class="title">کد سفارش</span><span class="value">{{ form.tarh.name }}</span></div>
+            <div class="service-tarh list-row"><span class="title">سرویس طرح</span><span class="value">{{ form.serviceTarh }}</span></div>
+            <div class="has-parche list-row"><span class="title">پارچه</span><span class="value">
+                {% if form.has_parche %}
+                    دارد
+                {% else %}
+                    ندارد
+                {% endif %}
+            </span></div>
+            <div class="parche list-row"><span class="title">پارچه</span><span class="value">{{ form.parche.name }}</span></div>
+            <div class="parche-width list-row"><span class="title">عرض پارچه</span><span class="value">{{ form.parcheWidth }}</span></div>
+            <div class="parche-height list-row"><span class="title">طول پارچه</span><span class="value">{{ form.parcheHeight }}</span></div>
+            <div class="number list-row"><span class="title"></span>تعداد<span class="value">{{ form.number }}</span></div>
+            <div class="chap list-row"><span class="title"></span>چاپ<span class="value">{{ form.typeChap }}</span></div>
+            <div class="has-label list-row"><span class="title">برچسب دارد</span><span class="value">
+                {% if form.has_label %}
+                    دارد
+                {% else %}
+                    ندارد
+                {% endif %}
+            </span></div>
+            <div class="reserve-date">
+                <span class="title">تاریخ سفارش</span>
+                <span class="day">/{{ form.reserveDay }}</span>
+                <span class="month">/{{ form.reserveMonth }}</span>
+                <span class="year">{{ form.reserveYear }}</span>
+            </div>
+            <div class="delivery-date">
+                <span class="title">تاریخ سفارش</span>
+                <span class="day">/{{ form.deliveryDay }}</span>
+                <span class="month">/{{ form.deliveryMonth }}</span>
+                <span class="year">{{ form.deliveryYear }}</span>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
 </body>
 </html>

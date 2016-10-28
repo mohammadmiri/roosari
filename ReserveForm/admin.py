@@ -55,6 +55,8 @@ class ReserveFormAdmin(admin.ModelAdmin):
             return ('customer', 'tarh', 'serviceTarh', 'hasParche', 'parche', 'parcheWidth', 'parcheHeight', 'typeChap', 'hasLabel',
                     'reserveDay', 'reserveMonth', 'reserveYear', 'deliveryDay', 'deliveryMonth', 'deliveryYear', 'description',
                     'process',)
+        else:
+            return ()
 
 
 class DookhtAdmin(admin.ModelAdmin):

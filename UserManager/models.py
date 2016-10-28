@@ -1,10 +1,12 @@
 from django.db import models
 
-
-
+from django.contrib.auth.models import User
+from django.db.models.signals import pre_delete, post_delete
+from django.dispatch import receiver
 
 class Customer(models.Model):
-    name = models.CharField(max_length=200, verbose_name='نام',)
+    user = models.OneToOneField(User, null=True, editable=False)
+    name = models.CharField(max_length=100, null=True, verbose_name='نام')
     phoneNumber = models.CharField(max_length=50, verbose_name='شماره تلفن همراه',)
     email = models.EmailField(verbose_name='ایمیل',)
     moaref = models.CharField(max_length=200, verbose_name='نام معرف',)
@@ -27,6 +29,14 @@ class Kargar(models.Model):
 
     def __str__(self):
         return self.name
+
+
+@receiver(post_delete, sender=Customer)
+def customer_post_delete(sender, instance, **kwargs):
+    print('before delete in models'+str(type(instance))+' '+str(instance)+' '+str(instance.user))
+    user = User.objects.get(id=instance.user.id)
+    user.delete()
+
 
 
 
