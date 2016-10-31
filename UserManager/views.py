@@ -12,7 +12,6 @@ import traceback
 
 
 def loginFunc(request):
-    print('in login_function')
     error = ''
     if request.method == 'POST':
         email = request.POST['email']
@@ -45,18 +44,14 @@ def forget_password(request):
                            'اینجا' + \
                            '</a></p></body></html>'
             try:
-                print('before sending mail')
                 send_mail(subject=subj,
                           from_email=fromMy,
                           message=message,
                           recipient_list=[email_to_send, ],
                           html_message=html_message)
             except:
-                print('in except')
-                traceback.print_exc()
                 error = 'امکان ارسال ایمیل وجود ندارد'
         else:
-            print('email does not exist')
             error = 'ایمیل در سایت وجود ندارد'
     context = {'error': error}
     return render(request, 'forgetPassword.html', context)

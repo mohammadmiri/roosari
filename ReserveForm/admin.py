@@ -59,7 +59,6 @@ class ReserveFormAdmin(admin.ModelAdmin):
             return ()
 
     def save_model(self, request, obj, form, change):
-        print('changed_data:'+str(form.changed_data))
         if change and 'tarh' in form.changed_data:
             reserve = ReserveForm.objects.get(id=obj.id)
             reserve.tarh.delete(False)
