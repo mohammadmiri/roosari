@@ -27,16 +27,6 @@ class CustomerAdmin(admin.ModelAdmin):
             obj.user = user
             obj.save()
 
-    def delete_model(self, request, obj):
-        print('in delete model function')
-
-    # def delete_model(self, request, query_set):
-    #     print('in delete model function'+str(query_set))
-        # user = User.objects.get(id=obj.user.id)
-        # print('user:'+user)
-        # user.delete()
-        # obj.delete()
-
 
 
 

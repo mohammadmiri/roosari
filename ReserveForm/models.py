@@ -1,12 +1,14 @@
 from UserManager.models import Kargar, Customer
 
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import pre_delete
 
 
 class ReserveForm(models.Model):
     customer = models.ForeignKey(Customer, verbose_name='مشتری',)
-    tarh = models.ImageField(upload_to='tarh/', verbose_name='طرح',)
-    serviceTarh = models.ManyToManyField('ServiceTarh', verbose_name='خدمات طرح',)
+    tarh = models.ImageField(upload_to='tarh/', verbose_name='طرح', )
+    serviceTarh = models.ManyToManyField('ServiceTarh', verbose_name='خدمات طرح', blank=True, null=True)
     hasParche = models.BooleanField(verbose_name='پارچه دارد',)
     parche = models.ForeignKey('Parche',verbose_name='پارچه',)
     parcheWidth = models.FloatField(verbose_name='عرض پارچه',)
@@ -37,36 +39,64 @@ class ReserveForm(models.Model):
     reserveMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه',)
     reserveYear = models.IntegerField(verbose_name='سال',)
     # delivery date
-    deliveryDay = models.IntegerField(choices=dayChoice, verbose_name='روز',)
-    deliveryMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه',)
-    deliveryYear = models.IntegerField(verbose_name='سال',)
-    description = models.TextField(verbose_name='توضیح',)
+    deliveryDay = models.IntegerField(choices=dayChoice, verbose_name='روز', blank=True, null=True)
+    deliveryMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه', blank=True, null=True)
+    deliveryYear = models.IntegerField(verbose_name='سال', blank=True, null=True)
+    description = models.TextField(verbose_name='توضیح', blank=True, null=True)
     process = models.ForeignKey('Process', verbose_name='فرایند',)
 
+    class Meta:
+        verbose_name_plural = 'سفارش'
 
 
 class Parche(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
     price = models.IntegerField(verbose_name='قیمت',)
 
+    class Meta:
+        verbose_name_plural = 'پارچه'
+
+    def __str__(self):
+        return self.name
 
 class Dookht(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
     price = models.IntegerField(verbose_name='قیمت',)
 
+    class Meta:
+        verbose_name_plural = 'دوخت'
+
+    def __str__(self):
+        return self.name
 
 class ServiceTarh(models.Model):
     name = models.TextField(verbose_name='نام',)
     price = models.IntegerField(verbose_name='قیمت',)
 
+    class Meta:
+        verbose_name_plural = 'خدمات طرح'
+
+    def __str__(self):
+        return self.name
 
 class Chap(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
     price = models.IntegerField(verbose_name='قیمت',)
 
+    class Meta:
+        verbose_name_plural = 'چاپ'
+
+    def __str__(self):
+        return self.name
 
 class Process(models.Model):
     name = models.TextField(verbose_name='نام',)
+
+    class Meta:
+        verbose_name_plural = 'فرایند'
+
+    def __str__(self):
+        return self.name
 
 
 class ProcessFormKargar(models.Model):
@@ -74,8 +104,14 @@ class ProcessFormKargar(models.Model):
     kargar = models.ForeignKey(Kargar, verbose_name='کارگر',)
     form = models.ForeignKey(ReserveForm, verbose_name='فرم',)
 
+    class Meta:
+        verbose_name_plural = 'فرایند و سفارش'
 
 
 
+#signals:
 
-
+@receiver(pre_delete, sender=ReserveForm)
+def reserveForm_pre_delete(sender, instance, **kwargs):
+    print('before delete the reserve file')
+    instance.tarh.delete(False)

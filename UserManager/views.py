@@ -21,7 +21,7 @@ def loginFunc(request):
         user = authenticate(username=user.username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(reverse('Profile'))
+            return redirect(reverse('ShowReserves'))
         else:
             'نام کاربری یا رمز اشتباه است'
     context = {'error': error}
@@ -89,9 +89,9 @@ def show_message(request, message):
 
 @login_required()
 def show_reserves(request):
-    customer = request.user
-    form = ReserveForm.objects.filter(customer=customer)
-    context = {'form':form}
+    customer = Customer.objects.get(user=request.user)
+    forms = ReserveForm.objects.filter(customer=customer)
+    context = {'forms':forms}
     return render(request, 'showReserves.html', context=context)
 
 
