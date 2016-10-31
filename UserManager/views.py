@@ -22,7 +22,7 @@ def loginFunc(request):
             login(request, user)
             return redirect(reverse('ShowReserves'))
         else:
-            'نام کاربری یا رمز اشتباه است'
+            error = 'نام کاربری یا رمز اشتباه است'
     context = {'error': error}
     return render(request, 'login.html', context)
 
