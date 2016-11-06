@@ -43,7 +43,7 @@ def forget_password(request):
             html_message = '<html><body><p>' + \
                            'برای تغییر رمز خود برروی لینک زیر کلیک کنید' + \
                            '</p><p>' + \
-                           '<a href=http://127.0.0.1:8000' + reverse('ResetPassword', args=[user.id]) + '>' + \
+                           '<a href=http://108.61.200.118:8000' + reverse('ResetPassword', args=[user.id]) + '>' + \
                            'اینجا' + \
                            '</a></p></body></html>'
             try:
