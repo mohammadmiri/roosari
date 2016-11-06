@@ -9,7 +9,7 @@
     margin: 0 auto;
     width: 8cm;
     height: 7cm;
-    max-height: 3cm;
+    max-height: 4.5cm;
     padding: 2.5cm;
     padding-top: 2cm;
     border-radius: 0.5cm;
@@ -53,6 +53,10 @@
     /*color: black;*/
 }
 
-
+.error-message{
+    margin-bottom: 0.5cm;
+    color: red;
+    text-align: center;
+}
 
 

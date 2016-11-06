@@ -80,11 +80,15 @@ class ChapAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
 
 
+class ProcessStatusInline(admin.TabularInline):
+    model = ReserveForm
+    extra = 0
+
 class ProcessAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name',)
-    inlines = [ProcessInline, ]
+    inlines = [ProcessStatusInline, ProcessInline, ]
 
 class ServiceTarhAdmin(admin.ModelAdmin):
     list_display = ('name', 'price',)

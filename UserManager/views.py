@@ -14,15 +14,18 @@ import traceback
 def loginFunc(request):
     error = ''
     if request.method == 'POST':
-        email = request.POST['email']
-        user = User.objects.get(email=email)
-        password = request.POST['password']
-        user = authenticate(username=user.username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect(reverse('ShowReserves'))
-        else:
-            'نام کاربری یا رمز اشتباه است'
+        try:
+            email = request.POST['email']
+            user = User.objects.get(email=email)
+            password = request.POST['password']
+            user = authenticate(username=user.username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect(reverse('ShowReserves'))
+            else:
+                error = 'نام کاربری یا رمز اشتباه است'
+        except User.DoesNotExist:
+            error = 'نام کاربری یا رمز اشتباه است'
     context = {'error': error}
     return render(request, 'login.html', context)
 

@@ -59,6 +59,8 @@ class Parche(models.Model):
     def __str__(self):
         return self.name
 
+
+
 class Dookht(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
     price = models.IntegerField(verbose_name='قیمت',)
@@ -68,6 +70,8 @@ class Dookht(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
 class ServiceTarh(models.Model):
     name = models.TextField(verbose_name='نام',)
@@ -79,6 +83,8 @@ class ServiceTarh(models.Model):
     def __str__(self):
         return self.name
 
+
+
 class Chap(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
     price = models.IntegerField(verbose_name='قیمت',)
@@ -88,6 +94,8 @@ class Chap(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
 class Process(models.Model):
     name = models.TextField(verbose_name='نام',)
@@ -99,6 +107,7 @@ class Process(models.Model):
         return self.name
 
 
+
 class ProcessFormKargar(models.Model):
     process = models.ForeignKey(Process, verbose_name='فرایند',)
     kargar = models.ForeignKey(Kargar, verbose_name='کارگر',)
@@ -106,6 +115,9 @@ class ProcessFormKargar(models.Model):
 
     class Meta:
         verbose_name_plural = 'فرایند و سفارش'
+
+
+
 
 
 
