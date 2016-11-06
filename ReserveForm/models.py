@@ -125,5 +125,4 @@ class ProcessFormKargar(models.Model):
 
 @receiver(pre_delete, sender=ReserveForm)
 def reserveForm_pre_delete(sender, instance, **kwargs):
-    print('before delete the reserve file')
     instance.tarh.delete(False)

@@ -46,7 +46,6 @@ class Kargar(models.Model):
 
 @receiver(post_delete, sender=Customer)
 def customer_post_delete(sender, instance, **kwargs):
-    print('before delete in models'+str(type(instance))+' '+str(instance)+' '+str(instance.user))
     user = User.objects.get(id=instance.user.id)
     user.delete()
 
