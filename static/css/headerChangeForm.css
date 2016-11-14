@@ -1,0 +1,38 @@
+
+#main-wrapper #title{
+    background-color: #417690;
+    color: white;
+    padding-top: 0.2cm;
+    padding-right: 0.8cm;
+    padding-bottom: 0.2cm;
+    border-radius: 0.1cm;
+}
+#main-wrapper #title #title-page{
+    font-size: 0.8cm;
+    margin-bottom: 0.2cm;
+}
+#main-wrapper #title #link-to-mainpage{
+    font-size: 0.4cm;
+}
+a:link{
+    color: white;
+}
+a:hover{
+}
+a:active{
+    color: white;
+}
+
+
+#header{
+    background-color: #79aec8;
+    padding: 0.3cm;
+    padding-right: 0.8cm;
+    color: white;
+    border-radius: 0.1cm;
+}
+
+
+
+
+

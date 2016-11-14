@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/headerChangeForm.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'ReserveForm/change_form.css' %}" type="text/css" rel="stylesheet">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</head>
+<body>
+
+<div id="main-wrapper">
+    <div id="title">
+        <div id="title-page">ثبت فرم سفارش</div>
+        <div id="link-to-mainpage"><a href="#">صفحه اصلی</a></div>
+    </div>
+    <div id="header">
+        <div class="print-link">پرینت فرم سفارش</div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">مشتری</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">مشتری</div>
+            <div class="field-input col-md-2 col-md-push-6">
+                <select class="form-control">
+                    {% for customer in customers %}
+                        {% if customer.id == currentCustomer.id %}
+                            <option value="{{ customer.id }}" selected>{{ customer.name }}</option>
+                        {% else %}
+                            <option value="{{ customer.id }}">{{ customer.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">طرح</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">اپلود طرح</div>
+            <div class="field-input col-md-2 col-md-push-5">
+                <input id="input-1a" type="file" class="file" data-show-preview="false">
+            </div>
+        </div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">خدمات طرح</div>
+            <div class="field-input col-md-2 col-md-push-5">
+                {% for service in services %}
+                    <div class="checkbox">
+                        {% if service in formServices|dictsort:"id" %}
+                            <input type="checkbox" value="{{ service.id }}" checked><div class="checkbox-label">{{ service.name }}</div>
+                        {% else %}
+                            <input type="checkbox" value="{{ service.id }}"><div class="checkbox-label">{{ service.name }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row"></div>
+        <div class="field-input-wrapper row"></div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row"></div>
+        <div class="field-input-wrapper row"></div>
+    </div>
+
+
+</div>
+
+
+
+
+
+</body>
+</html>
