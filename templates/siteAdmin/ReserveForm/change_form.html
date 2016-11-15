@@ -66,13 +66,101 @@
     </div>
 
     <div class="field-wrapper container-fluid">
-        <div class="field-wrapper-header row"></div>
-        <div class="field-input-wrapper row"></div>
+        <div class="field-wrapper-header row">پارچه</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">پارچه دارد؟</div>
+            <div class="field-input col-md-2 col-md-push-5">
+                <div class="checkbox" value="hasParche"><input type="checkbox"></div>
+            </div>
+        </div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">نوع پارچه</div>
+            <div class="field-input col-md-2 col-md-push-6">
+                <select class="form-control">
+                    {% for parche in parches %}
+                        {% if parche.id == form.parche.id %}
+                            <option value="{{ parche.id }}" selected>{{ parche.name }}</option>
+                        {% else %}
+                            <option value="{{ parche.id }}">{{ parche.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
     </div>
 
     <div class="field-wrapper container-fluid">
-        <div class="field-wrapper-header row"></div>
-        <div class="field-input-wrapper row"></div>
+        <div class="field-wrapper-header row">اندازه پارچه</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">عرض</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <input type="number" placeholder="عرض" value="{{ form.parcheWidth }}">
+            </div>
+            <div class="field-label col-md-1 col-md-pull-0">طول</div>
+            <div class="field-input col-md-2 col-md-pull-3">
+                <input type="number" placeholder="طول" value="{{ form.parcheHeight }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">دوخت</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">نوع دوخت</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <select class="form-control" title="نوع دوخت">
+                    {% for dookht in dookhts %}
+                        {% if dookht.id == form.dookht.id %}
+                            <option value="{{ dookht.id }}" selected>{{ dookht.name }}</option>
+                        {% else %}
+                            <option value="{{ dookht.id }}">{{ dookht.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">لیبل دارد</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <input type="checkbox" value="{{ form.parcheWidth }}" >
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">چاپ</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">نوع چاپ</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <select class="form-control" title="چاپ">
+                    {% for chap in chaps %}
+                        {% if chap.id == form.chap.id %}
+                            <option value="{{ chap.id }}" selected>{{ chap.name }}</option>
+                        {% else %}
+                            <option value="{{ chap.id }}">{{ chap.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">چاپ</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">نوع چاپ</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <select class="form-control" title="چاپ">
+                    {% for chap in chaps %}
+                        {% if chap.id == form.chap.id %}
+                            <option value="{{ chap.id }}" selected>{{ chap.name }}</option>
+                        {% else %}
+                            <option value="{{ chap.id }}">{{ chap.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
     </div>
 
 

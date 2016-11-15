@@ -15,6 +15,7 @@ class ReserveForm(models.Model):
     parcheHeight = models.FloatField(verbose_name='طول پارچه',)
     number = models.IntegerField(null=True, verbose_name='تعداد',)
     typeChap = models.ForeignKey('Chap', verbose_name='چاپ',)
+    dookht = models.ForeignKey('Dookht', verbose_name='دوخت', null=True)
     hasLabel = models.BooleanField(verbose_name='برچسب دارد',)
     dayChoice = (
         (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),
