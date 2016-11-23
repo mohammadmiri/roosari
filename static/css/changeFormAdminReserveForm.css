@@ -26,17 +26,32 @@
 }
 
 .field-input-wrapper .field-label{
-
+    text-align: left;
 }
 .field-input-wrapper .field-input{
-
+    text-align: right;
 }
 
 .checkbox-label{
     margin-right: 0.6cm;
 }
 
+.button-wrapper{
+    border-bottom: solid 3px #999999;
+    padding-bottom: 0.5cm;
+}
 
+.button-wrapper div{
+    margin-top: 1cm;
+    border-radius: 0.1cm;
+}
 
+.button-wrapper div div{
+    width: 2cm;
+    height: 1cm;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 0.25cm;
+}
 
 

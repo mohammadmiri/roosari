@@ -95,11 +95,19 @@ class ServiceTarhAdmin(admin.ModelAdmin):
     list_display_links = ('name',)
 
 
+class ProcessFormKargarAdmin(admin.ModelAdmin):
+    list_display = ('id', 'get_form_customer',)
+    list_display_links = ('id', 'get_form_customer')
+
+    def get_form_customer(self, obj):
+        return obj.form.customer.name
+
+
 admin.site.register(ReserveForm, ReserveFormAdmin)
 admin.site.register(Dookht, DookhtAdmin)
 admin.site.register(Chap, ChapAdmin)
 admin.site.register(Parche, ParcheAdmin)
 admin.site.register(Process, ProcessAdmin)
 admin.site.register(ServiceTarh, ServiceTarhAdmin)
-
+admin.site.register(ProcessFormKargar, ProcessFormKargarAdmin)
 
