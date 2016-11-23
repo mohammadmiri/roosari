@@ -20,6 +20,7 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+
 class CustomerMessage(models.Model):
     customer = models.ForeignKey(Customer, verbose_name='مشتری',)
     message = models.TextField(verbose_name='نامه',)
@@ -29,6 +30,7 @@ class CustomerMessage(models.Model):
 
     def __str__(self):
         return self.message[:15]
+
 
 class Kargar(models.Model):
     name = models.CharField(max_length=200, verbose_name='نام',)
@@ -41,6 +43,34 @@ class Kargar(models.Model):
 
 
 
+class KarbarTehran(models.Model):
+    user = models.OneToOneField(User)
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(null=True)
+
+    class Meta:
+        verbose_name_plural = 'کاربر تهران'
+
+    def __str__(self):
+        return self.username
+
+
+class KarbarKarkhane(models.Model):
+    user = models.OneToOneField(User)
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(null=True)
+
+    class Meta:
+        verbose_name_plural = 'کاربر کارخانه'
+
+    def __str__(self):
+        return self.username
+
+
 
 #signals:
 
@@ -50,5 +80,13 @@ def customer_post_delete(sender, instance, **kwargs):
     user.delete()
 
 
+@receiver(post_delete, sender=KarbarTehran)
+def karbarTehran_post_delete(sender, instance, **kwargs):
+    user = User.objects.get(id=instance.user.id)
+    user.delete()
 
 
+@receiver(post_delete, sender=KarbarKarkhane)
+def karbarKarkhane_post_delete(sender, instance, **kwargs):
+    user = User.objects.get(id=instance.user.id)
+    user.delete()

@@ -1,4 +1,4 @@
-from .models import Kargar, Customer
+from .models import Kargar, Customer, KarbarKarkhane, KarbarTehran
 
 from django.contrib import admin
 from django.contrib.auth.models import User
@@ -28,16 +28,25 @@ class CustomerAdmin(admin.ModelAdmin):
             obj.save()
 
 
-
-
 class KargarAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
 
 
+
+class KarbarTehranAdmin(admin.ModelAdmin):
+    pass
+
+
+class KarbarKharkhaneAdmin(admin.ModelAdmin):
+    pass
+
+
+
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Kargar, KargarAdmin)
-
+admin.site.register(KarbarTehran, KarbarTehranAdmin)
+admin.site.register(KarbarKarkhane, KarbarKharkhaneAdmin)
 
 
 

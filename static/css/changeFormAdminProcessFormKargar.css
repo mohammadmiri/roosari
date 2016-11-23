@@ -1,0 +1,35 @@
+#main-wrapper{
+    min-width: 20cm;
+    min-height: 10cm;
+    padding: 1cm;
+    padding-top: 1cm;
+    direction: rtl;
+}
+
+
+.field-wrapper{
+    margin-top: 0.5cm;
+    border-radius: 0.1cm;
+}
+.field-wrapper .field-wrapper-header{
+    background-color: #79aec8;
+    padding: 0.2cm;
+    padding-right: 0.8cm;
+    color: white;
+    border-radius: 0.1cm;
+}
+
+.field-input-wrapper{
+    padding: 0.3cm;
+    padding-right: 0.8cm;
+    border: solid #999999 1px;
+    border-radius: 0.1cm;
+}
+
+.field-input-wrapper .field-label{
+    text-align: left;
+}
+.field-input-wrapper .field-input{
+    text-align: right;
+}
+

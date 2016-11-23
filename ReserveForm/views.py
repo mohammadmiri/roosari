@@ -1,5 +1,5 @@
 from .models import ReserveForm, Dookht, Parche, Process, ProcessFormKargar, ServiceTarh, Chap
-from UserManager.models import Customer
+from UserManager.models import Customer, Kargar
 
 from django.shortcuts import render
 
@@ -26,13 +26,15 @@ def reserveForm_change_form(request, id):
     context = {'form':form, 'currentCustomer':form.customer, 'customers':customers, 'services':services, 'formServices':formServices
                , 'parches':parches, 'dookhts':dookhts, 'chaps':chaps, 'daysChoice':dayChoice, 'monthChoice':monthChoice,
                'yearChoice':yearChoice, 'processes':processes}
-    return render(request, 'siteAdmin/ReserveForm/../templates/changeFormAdminReserveForm.html', context)
+    return render(request, 'changeFormAdminReserveForm.html', context)
 
 
 
 def processFormKargar_change_form(request, id_processFormKargar):
     processFormKargar = ProcessFormKargar.objects.get(id=id_processFormKargar)
-    context = {'processFormkargar':processFormKargar}
+    processes = Process.objects.all()
+    kargars = Kargar.objects.all()
+    context = {'processFormkargar':processFormKargar, 'processes':processes, 'kargars':kargars}
     return render(request, 'changeFormAdminProcessReserveKargar.html', context=context)
 
 

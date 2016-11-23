@@ -1,0 +1,149 @@
+{#{% extends "admin/base_site.html" %}#}
+{#{% load i18n admin_static %}#}
+{##}
+{#{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}#}
+{##}
+{#{% block coltype %}colMS{% endblock %}#}
+{##}
+{#{% block bodyclass %}dashboard{% endblock %}#}
+{##}
+{#{% block breadcrumbs %}{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<div id="content-main">#}
+{##}
+{#{% if app_list %}#}
+{#    {% for app in app_list %}#}
+{#        <div class="module">#}
+{#        <table summary="{% blocktrans with name=app.name %}Models available in the {{ name }} application.{% endblocktrans %}">#}
+{#        <caption><a href="{{ app.app_url }}" class="section">{% blocktrans with name=app.name %}{{ name }}{% endblocktrans %}</a></caption>#}
+{#        {% for model in app.models %}#}
+{#            <tr>#}
+{#            {% if model.admin_url %}#}
+{#                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>#}
+{#            {% else %}#}
+{#                <th scope="row">{{ model.name }}</th>#}
+{#            {% endif %}#}
+{##}
+{#            {% if model.add_url %}#}
+{#                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>#}
+{#            {% else %}#}
+{#                <td>&nbsp;</td>#}
+{#            {% endif %}#}
+{##}
+{#            {% if model.admin_url %}#}
+{#                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>#}
+{#            {% else %}#}
+{#                <td>&nbsp;</td>#}
+{#            {% endif %}#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </table>#}
+{#        </div>#}
+{#    {% endfor %}#}
+{#{% else %}#}
+{#    <p>{% trans "You don't have permission to edit anything." %}</p>#}
+{#{% endif %}#}
+{#</div>#}
+{#{% endblock %}#}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/indexAdmin.css' %}" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div id="main-wrapper">
+
+    <div id="header-page">مدیریت سایت</div>
+    <div id="content-wrapper">
+        <div class="group-wrapper container-fluid">
+            <div class="group-header row">
+                <div class="col-md-4 col-md-offset-8">داده ها</div>
+            </div>
+            <div class="link-row row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="ReserveForm/reserveform/">سفارش ها</a></div>
+            </div>
+        </div>
+        <div class="group-wrapper container-fluid">
+            <div class="group-header row">
+                <div class="col-md-4 col-md-offset-8">کاربران</div>
+            </div>
+            <div class="link-row row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="UserManager/customer/">مشتریان</a></div>
+            </div>
+            <div class=" link-row row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="UserManager/karbartehran/">کاربران تهران</a></div>
+            </div>
+            <div class=" link-row row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="UserManager/karbarkarkhane/">کاربران کارخانه</a></div>
+            </div>
+            <div class=" link-row row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="UserManager/kargar/">کارگران</a></div>
+            </div>
+        </div>
+        <div class="group-wrapper container-fluid">
+            <div class="row group-header">
+                <div class="col-md-4 col-md-offset-8">اطلاعات پایه</div>
+            </div>
+            <div class="row link-row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="ReserveForm/dookht">دوخت</a></div>
+            </div>
+            <div class="row link-row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="ReserveForm/parche">پارچه</a></div>
+            </div>
+            <div class="row link-row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="ReserveForm/servicetarh">خدمات طرح</a></div>
+            </div>
+            <div class="row link-row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="ReserveForm/chap">چاپ</a></div>
+            </div>
+            <div class="row link-row">
+                <div class="link-label col-md-6 col-md-offset-6"><a href="ReserveForm/process">فرایند</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
