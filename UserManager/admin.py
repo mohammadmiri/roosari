@@ -1,8 +1,7 @@
 from .models import Kargar, Customer, KarbarKarkhane, KarbarTehran
 
 from django.contrib import admin
-from django.contrib.auth.models import User
-
+from django.contrib.auth.models import User, Group
 
 
 
@@ -17,11 +16,7 @@ class CustomerAdmin(admin.ModelAdmin):
         return obj.user.username
 
     def save_model(self, request, obj, form, change):
-        try:
-            # creating a new model
-            customer = Customer.objects.get(id=obj.id)
-        except Customer.DoesNotExist:
-            # changing an existing model
+        if change == False:
             user = User.objects.create_user(username=form.cleaned_data['name'], password=12345678,
                                             email=form.cleaned_data['email'])
             obj.user = user
@@ -35,11 +30,40 @@ class KargarAdmin(admin.ModelAdmin):
 
 
 class KarbarTehranAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'username', 'name')
+    list_display_links = ('id', 'username', 'name')
+
+    def save_model(self, request, obj, form, change):
+        print('count: '+str(KarbarTehran.objects.count()))
+        if change == False:
+            print('in change model')
+            user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'],
+                                            email = form.cleaned_data['email'])
+            obj.user = user
+            user.is_staff = True
+            user.save()
+            obj.save()
+            print('after save')
+            group = Group.objects.get(name='karbarTehran')
+            group.user_set.add(user)
+
 
 
 class KarbarKharkhaneAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'username', 'name')
+    list_display_links = ('id', 'username', 'name')
+
+    def save_model(self, request, obj, form, change):
+        if change == False:
+            user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'],
+                                            email = form.cleaned_data['email'])
+            obj.user = user
+            user.is_staff = True
+            user.save()
+            obj.save()
+            group = Group.objects.get(name='karbarKarkhane')
+            group.user_set.add(user)
+
 
 
 

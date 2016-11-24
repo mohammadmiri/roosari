@@ -5,7 +5,8 @@ from django.db.models.signals import pre_delete, post_delete
 from django.dispatch import receiver
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, null=True, editable=False)
+    user = models.OneToOneField(User, editable=False)
+    username = models.CharField(max_length=100)
     name = models.CharField(max_length=100, null=True, verbose_name='نام')
     phoneNumber = models.CharField(max_length=50, verbose_name='شماره تلفن همراه',)
     email = models.EmailField(verbose_name='ایمیل',)
@@ -44,7 +45,7 @@ class Kargar(models.Model):
 
 
 class KarbarTehran(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, editable=False)
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
@@ -58,7 +59,7 @@ class KarbarTehran(models.Model):
 
 
 class KarbarKarkhane(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, editable=False)
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)

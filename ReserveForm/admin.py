@@ -113,5 +113,5 @@ admin.site.register(Chap, ChapAdmin)
 admin.site.register(Parche, ParcheAdmin)
 admin.site.register(Process, ProcessAdmin)
 admin.site.register(ServiceTarh, ServiceTarhAdmin)
-admin.site.register(ProcessFormKargar, ProcessFormKargarAdmin)
+# admin.site.register(ProcessFormKargar, ProcessFormKargarAdmin)
 
