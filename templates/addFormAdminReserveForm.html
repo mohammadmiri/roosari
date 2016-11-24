@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/headerChangeForm.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/changeFormAdminReserveForm.css' %}" type="text/css" rel="stylesheet">
+    <script src="{% static 'js/jquery.js' %}"></script>
+
+</head>
+<body>
+
+<div id="main-wrapper">
+    <div id="title">
+        <div id="title-page">ثبت فرم سفارش</div>
+        <div id="link-to-mainpage"><a href="#">صفحه اصلی</a></div>
+    </div>
+    <div id="header">
+        <div class="print-link">پرینت فرم سفارش</div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">مشتری</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">مشتری</div>
+            <div class="field-input col-md-2 col-md-push-6">
+                <select class="form-control">
+                    {% for customer in customers %}
+                        {% if customer.id == currentCustomer.id %}
+                            <option value="{{ customer.id }}" selected>{{ customer.name }}</option>
+                        {% else %}
+                            <option value="{{ customer.id }}">{{ customer.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">طرح</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">اپلود طرح</div>
+            <div class="field-input col-md-2 col-md-push-5">
+                <input id="input-1a" type="file" class="file" data-show-preview="false">
+            </div>
+        </div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">خدمات طرح</div>
+            <div class="field-input col-md-2 col-md-push-5">
+                {% for service in services %}
+                    <div class="checkbox">
+                        {% if service in formServices|dictsort:"id" %}
+                            <input type="checkbox" value="{{ service.id }}" checked><div class="checkbox-label">{{ service.name }}</div>
+                        {% else %}
+                            <input type="checkbox" value="{{ service.id }}"><div class="checkbox-label">{{ service.name }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">پارچه</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">پارچه دارد؟</div>
+            <div class="field-input col-md-2 col-md-push-5">
+                <div class="checkbox" value="hasParche"><input type="checkbox"></div>
+            </div>
+        </div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-2 col-md-push-10">نوع پارچه</div>
+            <div class="field-input col-md-2 col-md-push-6">
+                <select class="form-control">
+                    {% for parche in parches %}
+                        {% if parche.id == form.parche.id %}
+                            <option value="{{ parche.id }}" selected>{{ parche.name }}</option>
+                        {% else %}
+                            <option value="{{ parche.id }}">{{ parche.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">اندازه پارچه</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">عرض</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <input type="number" placeholder="عرض" value="{{ form.parcheWidth }}">
+            </div>
+            <div class="field-label col-md-1 col-md-pull-0">طول</div>
+            <div class="field-input col-md-2 col-md-pull-3">
+                <input type="number" placeholder="طول" value="{{ form.parcheHeight }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">دوخت</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">نوع دوخت</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <select class="form-control" title="نوع دوخت">
+                    {% for dookht in dookhts %}
+                        {% if dookht.id == form.dookht.id %}
+                            <option value="{{ dookht.id }}" selected>{{ dookht.name }}</option>
+                        {% else %}
+                            <option value="{{ dookht.id }}">{{ dookht.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">لیبل دارد</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <input type="checkbox" value="{{ form.parcheWidth }}" >
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">چاپ</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">نوع چاپ</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <select class="form-control" title="چاپ">
+                    {% for chap in chaps %}
+                        {% if chap.id == form.chap.id %}
+                            <option value="{{ chap.id }}" selected>{{ chap.name }}</option>
+                        {% else %}
+                            <option value="{{ chap.id }}">{{ chap.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">تاریخ سفارش</div>
+        <div class="field-input-wrapper row">
+            {#     select day      #}
+            <div class="field-label col-md-1 col-md-push-11">روز</div>
+            <div class="field-input col-md-2 col-md-push-8">
+                <select class="form-control" title="روز">
+                    {% for day in daysChoice %}
+                        {% if form.reserveDay == day.0 %}
+                            <option value="{{ day.0 }}" selected>{{ day.1 }}</option>
+                        {% else %}
+                            <option value="{{ day.0 }}">{{ day.1 }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            {#      select month      #}
+            <div class="field-label col-md-1 col-md-push-3">ماه</div>
+            <div class="field-input col-md-2 col-md-push-0">
+                <select class="form-control" title="ماه">
+                    {% for month in monthChoice %}
+                        {% if form.reserveMonth == day.0 %}
+                            <option value="{{ month.0 }}" selected>{{ month.1 }}</option>
+                        {% else %}
+                            <option value="{{ month.0 }}">{{ month.1 }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            {#     select year       #}
+            <div class="field-label col-md-1 col-md-pull-4">سال</div>
+            <div class="field-input col-md-2 col-md-pull-7">
+                <select class="form-control" title="سال">
+                    {% for year in yearChoice %}
+                        {% if form.reserveYear == year.0 %}
+                            <option value="{{ year.0 }}" selected>{{ year.1 }}</option>
+                        {% else %}
+                            <option value="{{ year.0 }}">{{ year.1 }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">تاریخ تحویل</div>
+        <div class="field-input-wrapper row">
+            {#     select day      #}
+            <div class="field-label col-md-1 col-md-push-11">روز</div>
+            <div class="field-input col-md-2 col-md-push-8">
+                <select class="form-control" title="روز">
+                    {% for day in daysChoice %}
+                        {% if form.deliveryDay == day.0 %}
+                            <option value="{{ day.0 }}" selected>{{ day.1 }}</option>
+                        {% else %}
+                            <option value="{{ day.0 }}">{{ day.1 }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            {#      select month      #}
+            <div class="field-label col-md-1 col-md-push-3">ماه</div>
+            <div class="field-input col-md-2 col-md-push-0">
+                <select class="form-control" title="ماه">
+                    {% for month in monthChoice %}
+                        {% if form.deliveryMonth == day.0 %}
+                            <option value="{{ month.0 }}" selected>{{ month.1 }}</option>
+                        {% else %}
+                            <option value="{{ month.0 }}">{{ month.1 }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            {#     select year       #}
+            <div class="field-label col-md-1 col-md-pull-4">سال</div>
+            <div class="field-input col-md-2 col-md-pull-7">
+                <select class="form-control" title="سال">
+                    {% for year in yearChoice %}
+                        {% if form.deliveryYear == year.0 %}
+                            <option value="{{ year.0 }}" selected>{{ year.1 }}</option>
+                        {% else %}
+                            <option value="{{ year.0 }}">{{ year.1 }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">توضیح</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">توضیح</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <textarea class="form-control" type="text" rows="10" cols="50">{{ form.description }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-wrapper container-fluid">
+        <div class="field-wrapper-header row">فرایند</div>
+        <div class="field-input-wrapper row">
+            <div class="field-label col-md-1 col-md-push-10">فرایند</div>
+            <div class="field-input col-md-2 col-md-push-7">
+                <select class="form-control" title="فرایند">
+                    {% for process in processes %}
+                        {% if form.process.id == process.id %}
+                            <option value="{{ process.id }}" selected>{{ process.name }}</option>
+                        {% else %}
+                            <option value="{{ process.id }}">{{ process.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="button-wrapper row">
+            <div class="col-md-6">
+                <div class="btn-danger">حذف</div>
+            </div>
+            <div class="col-md-6">
+                <div class="btn-info"> ذخیره</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+</body>
+</html>

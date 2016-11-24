@@ -1,8 +1,8 @@
 from .models import Dookht, Chap, Process, Parche, ReserveForm, ProcessFormKargar, ServiceTarh
 
 from django.contrib import admin
-
-
+from django.db import models
+from django.forms import CheckboxSelectMultiple
 
 
 class ProcessInline(admin.TabularInline):
@@ -16,7 +16,7 @@ class ReserveFormAdmin(admin.ModelAdmin):
     def get_customer_name(self, obj):
         return obj.customer.name
 
-    raw_id_fields = ['customer',]
+    # raw_id_fields = ['customer',]
     inlines = [ProcessInline]
     fieldsets = (
         ('property', {
@@ -44,6 +44,10 @@ class ReserveFormAdmin(admin.ModelAdmin):
             'fields':('description', 'process', )
         })
     )
+
+    formfield_overrides = {
+        models.ManyToManyField: {'widget':CheckboxSelectMultiple},
+    }
 
     def get_readonly_fields(self, request, obj=None):
         groupnames = request.user.groups.values_list('name', flat=True)

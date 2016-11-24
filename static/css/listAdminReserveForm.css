@@ -1,0 +1,79 @@
+#main-wrapper{
+    min-width: 10cm;
+    height: 10cm;
+}
+
+#header-page{
+    background-color: #1b6d85;
+    height: 2cm;
+}
+
+#page-title{
+    color: #f2df4f;
+    font-size: 0.8cm;
+    text-align: center;
+    padding-top: 0.3cm;
+}
+
+#links-wrapper{
+    text-align: center;
+    padding-top: 0.5cm;
+}
+
+#links-wrapper a{
+    color: white;
+}
+
+#quit-link{
+    display: inline-block;
+}
+
+#change-password{
+    display: inline-block;
+}
+
+#content-wrapper{
+    padding: 1cm;
+    padding-right: 2cm;
+    padding-left: 2cm;
+}
+
+#addnew-link-wrapper{
+    height: 1cm;
+}
+
+#addnew-link{
+    background-color: #2aabd2;
+    border-radius: 0.4cm;
+    height: 0.8cm;
+    padding-top: 0.1cm;
+    text-align: center;
+    color: white;
+}
+
+#list-wrapper{
+    margin-top: 1cm;
+}
+
+#header-list{
+    background-color: #e6f0ff;
+}
+
+#list-wrapper .row{
+    height: 1cm;
+    padding-top: 0.3cm;
+    border-bottom: solid #999999 1px;
+}
+
+#delete-label{
+    text-align: center;
+}
+
+.delete-icon{
+    text-align: center;
+}
+
+
+
+
+
