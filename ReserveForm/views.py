@@ -3,6 +3,8 @@ from UserManager.models import Customer, Kargar
 from . import forms
 
 from django.shortcuts import render, redirect, reverse
+from django.core.urlresolvers import get_resolver
+
 
 dayChoice = [
         (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),
@@ -15,8 +17,8 @@ monthChoice = [ (1, 'فروردین'), (2, 'اردیبهشت'), (3, 'خرداد'
 yearChoice = [(1395, '۱۳۹۵'), (1396, '۱۳۹۶'), (1397, '۱۹۳۷'), (1398, '۱۳۹۸'), (1399, '۱۳۹۹'), (1400, '۱۴۰۰'), (1401, '۱۴۰۱'),
               (1402, '۱۴۰۲'), (1403, '۱۴۰۳'), (1404, '۱۴۰۴'), (1405, '۱۴۰۵')]
 
-def reserveForm_change_form(request, id_reserveForm):
-    form = ReserveForm.objects.get(id=id_reserveForm)
+def reserveForm_change_form(request, id):
+    form = ReserveForm.objects.get(id=id)
     if request.method == 'POST':
         forms.save_processFormKargar(form, request.POST)
         return redirect(reverse('ReserveFormListAdmin'))
@@ -38,7 +40,15 @@ def reserveForm_add_form(request):
         form = ReserveForm.objects.create()
         forms.save_reserveForm(form, request.POST)
         return redirect(reverse('ReserveFormListAdmin'))
-    return render(request, 'addFormAdminReserveForm.html')
+    customers = Customer.objects.all()
+    services = ServiceTarh.objects.all()
+    parches = Parche.objects.all()
+    dookhts = Dookht.objects.all()
+    chaps = Chap.objects.all()
+    processes = Process.objects.all()
+    context = {'customers':customers, 'parches':parches, 'services':services, 'dookhts':dookhts, 'chaps':chaps,
+               'processes':processes, 'daysChoice':dayChoice, 'monthChoice':monthChoice, 'yearChoice':yearChoice}
+    return render(request, 'addFormAdminReserveForm.html', context)
 
 
 def reserveForm_delete(request, id_reserveForm):
@@ -84,5 +94,9 @@ def print_reserve(request, id):
 
 
 
-
+def test(request):
+    print('in test func')
+    keys = get_resolver(None).reverse_dict.keys()
+    for key in keys:
+        print(str(key))
 

@@ -18,9 +18,13 @@ from . import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.core.urlresolvers import reverse
+from django.views.generic.base import RedirectView
+
 
 urlpatterns = [
     url(r'^reserve/', include('ReserveForm.urls')),
     url(r'^user/', include('UserManager.urls')),
+    url(r'^$', RedirectView.as_view(url='/admin'), name='AdminIndex'),
     url(r'^admin/', admin.site.urls),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

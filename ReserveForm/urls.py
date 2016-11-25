@@ -1,5 +1,6 @@
 from django.conf.urls import url
 
+
 from . import views
 
 
@@ -12,4 +13,6 @@ urlpatterns = [
     url(r'^adminsite/processFormKargar/addForm/', view=views.processFormKargar_add_form, name='ProcessFormKargarAddForm'),
     url(r'^adminsite/processFormKargar/delete/(?P<id_processFormKargar>[0-9]+)', view=views.processFormKargar_delete, name='ProcessFormKargarDelete'),
     url(r'^printForm/(?P<id>[0-9]+)', view=views.print_reserve, name='PrintReserveForm'),
+    url(r'test/', view=views.test, name='Test'),
+
 ]

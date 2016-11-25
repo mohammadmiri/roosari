@@ -25,7 +25,7 @@
     <div id="content-wrapper">
         <div id="addnew-link-wrapper" class="container-fluid">
             <div class="row">
-                <a href="#"><div id="addnew-link" class="col-md-2 col-md-offset-8">اضافه کردن سفارش</div></a>
+                <a href="{% url 'ReserveFormAddForm' %}"><div id="addnew-link" class="col-md-2 col-md-offset-8">اضافه کردن سفارش</div></a>
             </div>
         </div>
         <div id="list-wrapper">
@@ -38,7 +38,7 @@
                 {% for form in forms %}
                     <div class="row">
                         <div class="col-md-2">{{ form.id }}</div>
-                        <div class="col-md-3 col-md-offset-1">{{ form.customer.name }}</div>
+                        <div class="col-md-3 col-md-offset-1"><a href="{% url 'ReserveFormChangeForm' form.id %}">{{ form.customer.name }}</a></div>
                         <div class="col-md-2 delete-icon"><a href="#"><img src="{% static 'img/inline-delete.svg' %}"></a></div>
                     </div>
                 {% endfor %}
