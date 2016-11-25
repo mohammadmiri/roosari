@@ -29,15 +29,15 @@ class ReserveFormAdmin(admin.ModelAdmin):
     list_display_links = ('get_customer_name',)
 
 
-    def get_view_on_site_url(self, obj=None):
-        return 'http://google.com'
-        return reverse('PrintReserveForm', kwargs={'id':obj.id})
+    # def get_view_on_site_url(self, obj=None):
+    #     return 'http://google.com'
+    #     return reverse('PrintReserveForm', kwargs={'id':obj.id})
 
     def get_customer_name(self, obj):
         return obj.customer.name
 
     # raw_id_fields = ['customer',]
-    inlines = [ProcessInline]
+    # inlines = [ProcessInline]
     fieldsets = (
         ('مشتری', {
             'fields':('customer', )
@@ -123,11 +123,44 @@ class ServiceTarhAdmin(admin.ModelAdmin):
 
 
 class ProcessFormKargarAdmin(admin.ModelAdmin):
-    list_display = ('id', 'get_form_customer',)
-    list_display_links = ('id', 'get_form_customer')
+    list_display = ( 'form_code', 'customer', 'form_status', 'kargar')
+    list_display_links = ( 'form_code', 'customer',)
+    search_fields = ('form__id',)
 
-    def get_form_customer(self, obj):
+    def customer(self, obj):
         return obj.form.customer.name
+
+    def form_code(self, obj):
+        return obj.form.id
+
+    def form_status(self, obj):
+        return obj.form.process.name
+
+    def kargar(self, obj):
+        return obj.kargar.name
+
+
+    fieldsets = (
+        ('سفارش',{
+            'fields':('form',)
+        }),
+        ('فرایند',{
+            'fields':('process',)
+        }),
+        ('کارگر',{
+             'fields':('kargar',)
+        }),
+        ('زمان شروع فرایند', {
+            'fields':('startDay', 'startMonth', 'startYear',)
+        }),
+        ('زمان اتمام فرایند',{
+            'fields':('endDay', 'endMonth', 'endYear',)
+        }),
+    )
+
+
+
+
 
 
 admin.site.register(ReserveForm, ReserveFormAdmin)
@@ -136,5 +169,5 @@ admin.site.register(Chap, ChapAdmin)
 admin.site.register(Parche, ParcheAdmin)
 admin.site.register(Process, ProcessAdmin)
 admin.site.register(ServiceTarh, ServiceTarhAdmin)
-# admin.site.register(ProcessFormKargar, ProcessFormKargarAdmin)
+admin.site.register(ProcessFormKargar, ProcessFormKargarAdmin)
 

@@ -53,6 +53,8 @@ class ReserveForm(models.Model):
     class Meta:
         verbose_name_plural = "1. سفارش ها"
 
+    def __str__(self):
+        return 'code: '+str(self.id)
 
 class Parche(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
@@ -127,7 +129,7 @@ class ProcessFormKargar(models.Model):
     endYear = models.IntegerField(choices=yearChoice, verbose_name='سال اتمام', blank=True, null=True)
 
     class Meta:
-        verbose_name_plural = 'فرایند و سفارش'
+        verbose_name_plural = 'وضعیت سفارش'
 
 
 
