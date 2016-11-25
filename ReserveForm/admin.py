@@ -8,6 +8,20 @@ from django.forms import CheckboxSelectMultiple
 class ProcessInline(admin.TabularInline):
     model = ProcessFormKargar
     extra = 1
+    fieldsets = (
+        ('فرایند', {
+            'fields':('process',)
+        }),
+        ('کارگر', {
+            'fields':('kargar',)
+        }),
+        ('زمان شروع', {
+            'fields':('startDay', 'startMonth', 'startYear',)
+        }),
+        ('زمان اتمام', {
+            'fields':('endDay', 'endMonth', 'endYear',)
+        }),
+    )
 
 class ReserveFormAdmin(admin.ModelAdmin):
     list_display = ('id', 'get_customer_name',)
@@ -19,28 +33,31 @@ class ReserveFormAdmin(admin.ModelAdmin):
     # raw_id_fields = ['customer',]
     inlines = [ProcessInline]
     fieldsets = (
-        ('property', {
+        ('مشتری', {
             'fields':('customer', )
         }),
-        ('tarh', {
+        ('طرح', {
             'fields':('tarh', 'serviceTarh',)
         }),
-        ('parche', {
+        ('پارچه', {
             'fields':('hasParche', 'parche', )
         }),
-        ('size', {
+        ('اندازه', {
             'fields':('parcheWidth', 'parcheHeight', )
         }),
-        ('property', {
-            'fields':('typeChap', 'hasLabel', 'number')
+        ('دوخت', {
+            'fields':('dookht', 'hasLabel')
         }),
-        ('reserve',{
+        ('اطلاعات', {
+            'fields':('typeChap', 'number')
+        }),
+        ('زمان سفارش',{
             'fields':('reserveDay', 'reserveMonth', 'reserveYear',),
         }),
-        ('delivery', {
+        ('زمان تحویل', {
             'fields':('deliveryDay', 'deliveryMonth', 'deliveryYear', )
         }),
-        ('property', {
+        ('اطلاعات', {
             'fields':('description', 'process', )
         })
     )
@@ -92,7 +109,7 @@ class ProcessAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name',)
-    inlines = [ProcessStatusInline, ProcessInline, ]
+    inlines = [ProcessStatusInline ]
 
 class ServiceTarhAdmin(admin.ModelAdmin):
     list_display = ('name', 'price',)
