@@ -118,13 +118,13 @@ class ProcessFormKargar(models.Model):
     kargar = models.ForeignKey(Kargar, verbose_name='کارگر',)
     form = models.ForeignKey(ReserveForm, verbose_name='فرم',)
     # start date
-    startDay = models.IntegerField(choices=dayChoice, verbose_name='روز', blank=True, null=True)
-    startMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه', blank=True, null=True)
-    startYear = models.IntegerField(choices=yearChoice, verbose_name='سال', blank=True, null=True)
+    startDay = models.IntegerField(choices=dayChoice, verbose_name='روز شروع', blank=True, null=True)
+    startMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه شروع', blank=True, null=True)
+    startYear = models.IntegerField(choices=yearChoice, verbose_name='سال شروع', blank=True, null=True)
     # end date
-    endDay = models.IntegerField(choices=dayChoice, verbose_name='روز', blank=True, null=True)
-    endMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه', blank=True, null=True)
-    endYear = models.IntegerField(choices=yearChoice, verbose_name='سال', blank=True, null=True)
+    endDay = models.IntegerField(choices=dayChoice, verbose_name='روز اتمام', blank=True, null=True)
+    endMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه اتمام', blank=True, null=True)
+    endYear = models.IntegerField(choices=yearChoice, verbose_name='سال اتمام', blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'فرایند و سفارش'

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load toPersian %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/printReserve.css' %}">
+</head>
+<body>
+
+<div id="main-wrapper">
+    <div id="reserves-wrapper">
+        <div class="reserve-id list-row"><div class="title">کد سفارش</div><div class="value">{{ form.id }}</div></div>
+
+        <div class="service-tarh list-row"><div class="title">سرویس طرح</div><div class="value">
+            {% for service in form.serviceTarh.all %}
+                <div>
+                    {{ service }}
+                </div>
+            {% endfor %}
+        </div></div>
+
+        <div class="has-parche list-row"><div class="title">پارچه</div><div class="value">
+            {% if form.has_parche %}
+                دارد
+            {% else %}
+                ندارد
+            {% endif %}
+        </div></div>
+
+        <div class="parche list-row"><div class="title">پارچه</div><div class="value">
+            {% if form.parche.name %}
+                {{ form.parche.name }}
+            {% endif %}
+        </div></div>
+
+        <div class="parche-width list-row"><div class="title">عرض پارچه</div><div class="value">
+            {% if form.parcheWidth %}
+                {{ form.parcheWidth|FloatToPersian }}
+            {% endif %}
+        </div></div>
+
+        <div class="parche-height list-row"><div class="title">طول پارچه</div><div class="value">
+            {% if form.parcheWidth %}
+                {{ form.parcheHeight|FloatToPersian }}
+            {% endif %}
+        </div></div>
+
+        <div class="number list-row"><div class="title">تعداد</div><div class="value">
+            {% if form.number %}
+                {{ form.number|IntegerToPersian }}
+            {% endif %}
+        </div></div>
+
+        <div class="chap list-row"><div class="title">چاپ</div><div class="value">
+            {% if form.typeChap %}
+            {{ form.typeChap }}
+            {% endif %}
+        </div></div>
+
+        <div class="has-label list-row"><div class="title">برچسب</div><div class="value">
+            {% if form.has_label %}
+                دارد
+            {% else %}
+                ندارد
+            {% endif %}
+        </div></div>
+
+        <div class="reserve-date">
+            <div class="title">تاریخ سفارش</div>
+            <div class="day">{{ form.reserveDay|IntegerToPersian }} /</div>
+            <div class="month">{{ form.reserveMonth|IntegerToPersian }} /</div>
+            <div class="year">{{ form.reserveYear|IntegerToPersian }}</div>
+        </div>
+
+        <div class="delivery-date">
+            <div class="title">تاریخ سفارش</div>
+            <div class="day">{{ form.deliveryDay|IntegerToPersian }} /</div>
+            <div class="month">{{ form.deliveryMonth|IntegerToPersian }} /</div>
+            <div class="year">{{ form.deliveryYear|IntegerToPersian }}</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

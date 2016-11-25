@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^adminsite/processFormKargar/changeForm/(?P<id_processFormKargar>[0-9]+)', view=views.processFormKargar_change_form, name='ProcessFormKargarChangeForm'),
     url(r'^adminsite/processFormKargar/addForm/', view=views.processFormKargar_add_form, name='ProcessFormKargarAddForm'),
     url(r'^adminsite/processFormKargar/delete/(?P<id_processFormKargar>[0-9]+)', view=views.processFormKargar_delete, name='ProcessFormKargarDelete'),
+    url(r'^printForm/(?P<id>[0-9]+)', view=views.print_reserve, name='PrintReserveForm'),
 ]

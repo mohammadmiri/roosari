@@ -3,6 +3,7 @@ from .models import Dookht, Chap, Process, Parche, ReserveForm, ProcessFormKarga
 from django.contrib import admin
 from django.db import models
 from django.forms import CheckboxSelectMultiple
+from django.shortcuts import reverse
 
 
 class ProcessInline(admin.TabularInline):
@@ -26,6 +27,11 @@ class ProcessInline(admin.TabularInline):
 class ReserveFormAdmin(admin.ModelAdmin):
     list_display = ('id', 'get_customer_name',)
     list_display_links = ('get_customer_name',)
+
+
+    def get_view_on_site_url(self, obj=None):
+        return 'http://google.com'
+        return reverse('PrintReserveForm', kwargs={'id':obj.id})
 
     def get_customer_name(self, obj):
         return obj.customer.name

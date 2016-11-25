@@ -1,0 +1,52 @@
+#main-wrapper{
+    min-height: 20cm;
+    min-width: 30cm;
+}
+
+#reserves-wrapper{
+    min-width: 15cm;
+    width: 15cm;
+    margin: 0 auto;
+    border-radius: 0.2cm;
+    border: solid 1px #999999;
+}
+
+.list-row{
+    width: 100%;
+    border-bottom: solid 1px #999999;
+    direction: rtl;
+    overflow: hidden;
+}
+
+.list-row .title{
+    width: 4.5cm;
+    height: 100%;
+    float: right;
+    padding: 0.1cm 0.2cm 0.1cm 0;
+}
+
+.list-row .value{
+    float: left;
+    height: 100%;
+    width: 10cm;
+    padding: 0.1cm 0.2cm 0.1cm 0;
+}
+
+.reserve-date{
+    direction: rtl;
+}
+
+.reserve-date div{
+    display: inline-block;
+}
+
+.delivery-date{
+    direction: rtl;
+}
+
+.delivery-date div{
+    display: inline-block;
+}
+
+
+

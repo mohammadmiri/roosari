@@ -34,16 +34,13 @@ class KarbarTehranAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'username', 'name')
 
     def save_model(self, request, obj, form, change):
-        print('count: '+str(KarbarTehran.objects.count()))
         if change == False:
-            print('in change model')
             user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'],
                                             email = form.cleaned_data['email'])
             obj.user = user
             user.is_staff = True
             user.save()
             obj.save()
-            print('after save')
             group = Group.objects.get(name='karbarTehran')
             group.user_set.add(user)
 

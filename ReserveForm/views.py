@@ -77,6 +77,11 @@ def reserveForm_list_admin(request):
 
 
 
+def print_reserve(request, id):
+    form = ReserveForm.objects.get(id = id)
+    context = {'form':form}
+    return render(request, 'printReserve.html', context)
+
 
 
 
