@@ -1,0 +1,16 @@
+#main-page-link-wrapper{
+    height: 1cm;
+    background-color: #79aec8;
+}
+
+#main-page-link-wrapper #link-wrapper{
+    padding-right: 1cm;
+    padding-top: 0.2cm;
+}
+
+#main-page-link-wrapper a{
+    text-decoration: none;
+    color: white;
+}
+
+

@@ -29,7 +29,7 @@ yearChoice = ((1395, '۱۳۹۵'), (1396, '۱۳۹۶'), (1397, '۱۹۳۷'), (1398,
 class ReserveForm(models.Model):
     customer = models.ForeignKey(Customer, verbose_name='مشتری', )
     tarh = models.ImageField(upload_to='tarh/', verbose_name='طرح', blank=True, null=True)
-    serviceTarh = models.ManyToManyField('ServiceTarh', verbose_name='خدمات طرح')
+    serviceTarh = models.ManyToManyField('ServiceTarh', verbose_name='خدمات طرح', blank=True)
     hasParche = models.BooleanField(verbose_name='پارچه دارد',)
     parche = models.ForeignKey('Parche',verbose_name='پارچه', blank=True, null=True)
     parcheWidth = models.FloatField(verbose_name='عرض پارچه', blank=True, null=True)

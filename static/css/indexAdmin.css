@@ -6,20 +6,30 @@ a{
     min-width: 20cm;
     min-height: 10cm;
     height: auto;
-    padding: 1cm;
     padding-bottom: 3cm;
-    /*background-color: #1f7e9a;*/
-    padding-top: 1cm;
-    /*direction: rtl;*/
     overflow: auto;
 }
 
 #header-page{
-    width: 10cm;
-    margin: 0 auto;
     text-align: center;
     font-size: 0.9cm;
-    color: #1b6d85;
+    height: 2cm;
+    background-color: #1b6d85;
+}
+
+#page-title{
+    color: white;
+    padding-top: 0.2cm;
+}
+
+#quit-link{
+    font-size: 0.4cm;
+    color: white;
+    padding-top: 0.3cm;
+}
+
+#quit-link a{
+    color: white;
 }
 
 #content-wrapper{

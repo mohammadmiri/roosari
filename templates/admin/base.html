@@ -9,7 +9,10 @@
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
 {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
 <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
-{% block extrahead %}{% endblock %}
+{% block extrahead %}
+    <link rel='stylesheet' href='{% static 'admin/css/rtl.css' %}' />
+    <link rel='stylesheet' href="{% static 'css/base_admin.css' %}" />
+{% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 </head>
 {% load i18n %}
@@ -42,12 +45,19 @@
         {% block nav-global %}{% endblock %}
     </div>
     <!-- END Header -->
-    {% block breadcrumbs %}
-    <div class="breadcrumbs">
-    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-    {% if title %} &rsaquo; {{ title }}{% endif %}
+{#    {% block breadcrumbs %}#}
+{#    <div class="breadcrumbs">#}
+{#    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>#}
+{#    {% if title %} &rsaquo; {{ title }}{% endif %}#}
+{#    </div>#}
+{#    {% endblock %}#}
+
+    <div id="main-page-link-wrapper" class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-8" id="link-wrapper"><a href="{% url 'SiteAdminIndex' %}">صفحه اصلی</a></div>
+        </div>
     </div>
-    {% endblock %}
+
     {% endif %}
 
     {% block messages %}

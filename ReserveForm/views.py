@@ -4,6 +4,9 @@ from . import forms
 
 from django.shortcuts import render, redirect, reverse
 from django.core.urlresolvers import get_resolver
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 
 
 dayChoice = [
@@ -99,4 +102,54 @@ def test(request):
     keys = get_resolver(None).reverse_dict.keys()
     for key in keys:
         print(str(key))
+
+
+
+
+
+@login_required()
+def siteadmin(request):
+    groups = list(request.user.groups.all())
+    for group in groups:
+        print('group:'+str(group.name))
+    group = ''
+    if request.user.is_superuser:
+        group = 'superuser'
+        print('if1')
+    elif groups[0].name == 'admin':
+        group = 'admin'
+        print('if2')
+    elif groups[0].name == 'karbarTehran':
+        group = 'karbarTehran'
+        print('if3')
+    elif groups[0].name == 'karbarKarkhane':
+        group = 'karbarKarkhane'
+    context = {'group':group}
+    return render(request, 'admin/index.html', context)
+
+
+
+
+def loginFunc(request):
+    error = ''
+    if request.method == 'POST':
+        try:
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect(reverse('SiteAdminIndex'))
+            else:
+                error = 'نام کاربری یا رمز اشتباه است'
+        except User.DoesNotExist:
+            error = 'نام کاربری یا رمز اشتباه است'
+    context = {'error': error}
+    return render(request, 'login.html', context)
+
+
+
+
+
+
 
