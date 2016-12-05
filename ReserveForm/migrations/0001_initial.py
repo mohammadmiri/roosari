@@ -78,12 +78,12 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AddField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='serviceTarh',
             field=models.ManyToManyField(to='ReserveForm.ServiceTarh'),
         ),
         migrations.AddField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='typeChap',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ReserveForm.Chap'),
         ),

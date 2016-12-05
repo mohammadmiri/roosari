@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             options={'verbose_name_plural': 'فرایند و سفارش'},
         ),
         migrations.AlterModelOptions(
-            name='reserveform',
+            name='ReserveForm',
             options={'verbose_name_plural': 'سفارش'},
         ),
         migrations.AlterModelOptions(
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
             options={'verbose_name_plural': 'خدمات طرح'},
         ),
         migrations.AddField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='dookht',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='ReserveForm.Dookht', verbose_name='دوخت'),
         ),

@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.db import models
 from django.forms import CheckboxSelectMultiple
 from django.shortcuts import reverse
+from django.conf.urls import url
 
 
 class ProcessInline(admin.TabularInline):
@@ -65,7 +66,10 @@ class ReserveFormAdmin(admin.ModelAdmin):
         }),
         ('اطلاعات', {
             'fields':('description', 'process', )
-        })
+        }),
+        ('زمان تست', {
+            'fields':('testtime',)
+        }),
     )
 
     formfield_overrides = {
@@ -90,6 +94,17 @@ class ReserveFormAdmin(admin.ModelAdmin):
             reserve = ReserveForm.objects.get(id=obj.id)
             reserve.tarh.delete(False)
         obj.save()
+
+    def get_urls(self):
+        print('in get_urls')
+        urls = super(ReserveFormAdmin, self).get_urls()
+        my_urls = [
+            url('^my_view/$', self.my_view),
+        ]
+        return my_urls+urls
+
+    def my_view(self, request):
+        print('in my_view func')
 
 
 class DookhtAdmin(admin.ModelAdmin):

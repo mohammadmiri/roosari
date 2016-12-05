@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='number',
             field=models.IntegerField(null=True),
         ),

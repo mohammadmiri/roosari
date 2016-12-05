@@ -21,7 +21,7 @@ def loginFunc(request):
             user = authenticate(username=user.username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect(reverse('ShowReserves'))
+                return redirect(reverse('HomepageCustomer'))
             else:
                 error = 'نام کاربری یا رمز اشتباه است'
         except User.DoesNotExist:
@@ -76,12 +76,22 @@ def reset_password(request, id):
     return render(request, 'resetPassword.html', context)
 
 
-
-
 def show_message(request, message):
     pass
 
 
+@login_required()
+def show_profile(request):
+    customer = Customer.objects.get(user=request.user)
+    context = {'customer':customer}
+    return render(request, 'showProfileCustomer.html', context=context)
+
+
+@login_required()
+def homepage(request):
+    customer = Customer.objects.get(user=request.user)
+    context = {'customer':customer}
+    return render(request, 'customerHomepage.html', context=context)
 
 
 
@@ -94,9 +104,11 @@ def show_reserves(request):
 
 
 
-def test(request):
-    Customer.objects.all().first().delete()
-
+@login_required()
+def show_event(request):
+    customer = Customer.objects.get(user=request.user)
+    context = {'customer':customer}
+    return render(request, 'showEvents.html', context=context)
 
 
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/customer_base.css' %}" type="text/css" rel="stylesheet">
+
+    {% block load_style_file %}
+    {% endblock %}
+</head>
+<body>
+
+{% block header_page %}
+    <div id="header-wrapper" class="container-fluid">
+        <div class="row">
+            <div id="user-property-wrapper" class="col-md-3">
+                <div id="username-wrapper"></div>
+                <div id="image-wrapper"><img src="{% static customer.get_image_url %}"></div>
+            </div>
+            <div id="page-title-wrapper" class="col-md-5 col-md-offset-4">صفحه ارتباط با مشتری</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

@@ -13,27 +13,27 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='deliveryDay',
             field=models.IntegerField(blank=True, choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12), (13, 13), (14, 14), (15, 15), (16, 16), (17, 17), (18, 18), (19, 19), (20, 20), (21, 21), (22, 22), (23, 23), (24, 24), (25, 25), (26, 26), (27, 27), (28, 28), (29, 29), (30, 30), (31, 31)], null=True, verbose_name='روز'),
         ),
         migrations.AlterField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='deliveryMonth',
             field=models.IntegerField(blank=True, choices=[(1, 'فروردین'), (2, 'اردیبهشت'), (3, 'خرداد'), (4, 'تیر'), (5, 'مرداد'), (6, 'شهریور'), (7, 'مهر'), (8, 'آبان'), (9, 'آذر'), (10, 'دی'), (11, 'بهمن'), (12, 'اسفند')], null=True, verbose_name='ماه'),
         ),
         migrations.AlterField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='deliveryYear',
             field=models.IntegerField(blank=True, null=True, verbose_name='سال'),
         ),
         migrations.AlterField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='description',
             field=models.TextField(blank=True, null=True, verbose_name='توضیح'),
         ),
         migrations.AlterField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='serviceTarh',
             field=models.ManyToManyField(blank=True, null=True, to='ReserveForm.ServiceTarh', verbose_name='خدمات طرح'),
         ),

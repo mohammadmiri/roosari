@@ -1,8 +1,13 @@
-from .models import Kargar, Customer, KarbarKarkhane, KarbarTehran
+from .models import Kargar, Customer, KarbarKarkhane, KarbarTehran, Event
 
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
 
+
+
+class EventInline(admin.TabularInline):
+    model = Event
+    extra = 1
 
 
 class CustomerAdmin(admin.ModelAdmin):
@@ -10,17 +15,28 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display_links = ('get_name',)
     search_fields = ('get_name', 'id')
     raw_id_fields = ('user',)
-    # actions = ['delete_model']
+    inlines = [EventInline]
+    exclude = ['user']
 
     def get_name(self, obj):
         return obj.user.username
 
     def save_model(self, request, obj, form, change):
         if change == False:
-            user = User.objects.create_user(username=form.cleaned_data['name'], password=12345678,
+            user = User.objects.create_user(username=form.cleaned_data['username'], password=12345678,
                                             email=form.cleaned_data['email'])
             obj.user = user
             obj.save()
+        else:
+            if 'username' in form.cleaned_data or 'email' in form.cleaned_data:
+                user = obj.user
+                user.username = form.cleaned_data['username']
+                user.email = form.cleaned_data['email']
+                user.save()
+                obj.save()
+            else:
+                obj.save()
+
 
 
 class KargarAdmin(admin.ModelAdmin):

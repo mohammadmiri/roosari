@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
             options={'verbose_name_plural': 'وضعیت سفارش'},
         ),
         migrations.AlterModelOptions(
-            name='reserveform',
+            name='ReserveForm',
             options={'verbose_name_plural': '1. سفارش ها'},
         ),
         migrations.AlterModelOptions(
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
             field=models.IntegerField(blank=True, choices=[(1395, '۱۳۹۵'), (1396, '۱۳۹۶'), (1397, '۱۹۳۷'), (1398, '۱۳۹۸'), (1399, '۱۳۹۹'), (1400, '۱۴۰۰'), (1401, '۱۴۰۱'), (1402, '۱۴۰۲'), (1403, '۱۴۰۳'), (1404, '۱۴۰۴'), (1405, '۱۴۰۵')], null=True, verbose_name='سال شروع'),
         ),
         migrations.AlterField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             name='serviceTarh',
             field=models.ManyToManyField(blank=True, to='ReserveForm.ServiceTarh', verbose_name='خدمات طرح'),
         ),

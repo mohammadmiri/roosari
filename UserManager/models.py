@@ -4,8 +4,31 @@ from django.contrib.auth.models import User
 from django.db.models.signals import pre_delete, post_delete
 from django.dispatch import receiver
 
+
+dayChoice = (
+        (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),
+        (19, 19), (20, 20), (21, 21), (22, 22), (23, 23), (24, 24), (25, 25), (26, 26), (27, 27), (28, 28), (29, 29), (30, 30), (31, 31),
+    )
+monthChoice = (
+        (1, 'فروردین'),
+        (2, 'اردیبهشت'),
+        (3, 'خرداد'),
+        (4, 'تیر'),
+        (5, 'مرداد'),
+        (6, 'شهریور'),
+        (7, 'مهر'),
+        (8, 'آبان'),
+        (9, 'آذر'),
+        (10, 'دی'),
+        (11, 'بهمن'),
+        (12, 'اسفند'),
+    )
+yearChoice = ((1395, '۱۳۹۵'), (1396, '۱۳۹۶'), (1397, '۱۹۳۷'), (1398, '۱۳۹۸'), (1399, '۱۳۹۹'), (1400, '۱۴۰۰'), (1401, '۱۴۰۱'),
+              (1402, '۱۴۰۲'), (1403, '۱۴۰۳'), (1404, '۱۴۰۴'), (1405, '۱۴۰۵'))
+
+
 class Customer(models.Model):
-    user = models.OneToOneField(User, editable=False)
+    user = models.OneToOneField(User,)
     username = models.CharField(max_length=100)
     name = models.CharField(max_length=100, null=True, verbose_name='نام')
     phoneNumber = models.CharField(max_length=50, verbose_name='شماره تلفن همراه',)
@@ -14,12 +37,22 @@ class Customer(models.Model):
     workPhoneNumber = models.CharField(max_length=50, verbose_name='تلفن محل کار',)
     address = models.TextField(verbose_name='آدرس',)
     companyName = models.TextField(verbose_name='نام شرکت',)
+    image = models.ImageField(null=True, blank=True, verbose_name='عکس',)
 
     class Meta:
         verbose_name_plural = 'مشتری'
 
     def __str__(self):
         return self.name
+
+    def get_image_url(self):
+        print('in get_image_url')
+        if self.image:
+            print('in if 1')
+            return self.image.url
+        else:
+            print('in if 2')
+            return 'img/anonymous.png'
 
 
 class CustomerMessage(models.Model):
@@ -71,6 +104,14 @@ class KarbarKarkhane(models.Model):
     def __str__(self):
         return self.username
 
+
+
+class Event(models.Model):
+    day = models.IntegerField(verbose_name='روز', choices=dayChoice)
+    month = models.IntegerField(verbose_name='ماه', choices=monthChoice)
+    year = models.IntegerField(verbose_name='سال', choices=yearChoice)
+    customer = models.ForeignKey(Customer, verbose_name='مشتری', )
+    text = models.TextField(verbose_name='متن', )
 
 
 #signals:

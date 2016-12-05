@@ -13,12 +13,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RenameField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             old_name='sizeX',
             new_name='parcheHeighet',
         ),
         migrations.RenameField(
-            model_name='reserveform',
+            model_name='ReserveForm',
             old_name='sizeY',
             new_name='parcheWidth',
         ),

@@ -6,20 +6,14 @@ from . import views
 urlsite = 'http://localhost:8000/'
 
 urlpatterns = [
-    url(r'^adminsite/reserveForm/changeForm/(?P<id>[0-9]+)', view=views.reserveForm_change_form, name='ReserveFormChangeForm'),
-    url(r'^adminsite/reserveForm/list/', view=views.reserveForm_list_admin, name='ReserveFormListAdmin'),
-    url(r'^adminsite/reserveForm/addForm/', view=views.reserveForm_add_form, name='ReserveFormAddForm'),
-    url(r'^adminsite/reserveForm/delete/(?P<id_reserveForm>[0-9]+)', view=views.reserveForm_delete, name='ReserveFormDelete'),
-    url(r'^adminsite/processFormKargar/changeForm/(?P<id_processFormKargar>[0-9]+)', view=views.processFormKargar_change_form, name='ProcessFormKargarChangeForm'),
-    url(r'^adminsite/processFormKargar/addForm/', view=views.processFormKargar_add_form, name='ProcessFormKargarAddForm'),
-    url(r'^adminsite/processFormKargar/delete/(?P<id_processFormKargar>[0-9]+)', view=views.processFormKargar_delete, name='ProcessFormKargarDelete'),
-    url(r'^printForm/(?P<id>[0-9]+)', view=views.print_reserve, name='PrintReserveForm'),
+    url(r'^printForm/(?P<id>[0-9]+)', view=views.print_form, name='PrintReserveForm'),
+    url(r'^factorForm/(?P<id>[0-9]+)', view=views.factor_form, name='FactorReserveForm'),
     url(r'test/', view=views.test, name='Test'),
 
     # urls of admin of django
     url(r'siteadmin/$', view=views.siteadmin, name='SiteAdminIndex'),
-    url(r'^siteadmin/ReserveForm/reserveform/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/reserveform'), name='changeList_reserveform'),
-    url(r'^siteadmin/ReserveForm/reserveform/add/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/reserveform/add/'), name='addform_reserveform'),
+    url(r'^siteadmin/ReserveForm/ReserveForm/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/reserveform'), name='changeList_reserveform'),
+    url(r'^siteadmin/ReserveForm/ReserveForm/add/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/reserveform/add/'), name='addform_reserveform'),
     url(r'^siteadmin/ReserveForm/processformkargar/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/processformkargar'), name='changeList_processformkargar'),
     url(r'^siteadmin/ReserveForm/dookht/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/dookht'), name='changeList_dookht'),
     url(r'^siteadmin/ReserveForm/parche/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/parche'), name='changeList_parche'),

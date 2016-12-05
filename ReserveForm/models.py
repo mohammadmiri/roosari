@@ -51,17 +51,19 @@ class ReserveForm(models.Model):
     process = models.ForeignKey('Process', verbose_name='فرایند', blank=True, null=True)
 
     class Meta:
-        verbose_name_plural = "1. سفارش ها"
+        verbose_name_plural = "سفارش ها"
 
     def __str__(self):
         return 'code: '+str(self.id)
+
+
 
 class Parche(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
     price = models.IntegerField(verbose_name='قیمت', blank=True, null=True)
 
     class Meta:
-        verbose_name_plural = '2. پارچه'
+        verbose_name_plural = 'پارچه'
 
     def __str__(self):
         return self.name
@@ -73,7 +75,7 @@ class Dookht(models.Model):
     price = models.IntegerField(verbose_name='قیمت', blank=True, null=True)
 
     class Meta:
-        verbose_name_plural = '3. دوخت'
+        verbose_name_plural = 'دوخت'
 
     def __str__(self):
         return self.name
@@ -85,7 +87,7 @@ class ServiceTarh(models.Model):
     price = models.IntegerField(verbose_name='قیمت',)
 
     class Meta:
-        verbose_name_plural = '4. خدمات مربوط به طرح'
+        verbose_name_plural = ' خدمات مربوط به طرح'
 
     def __str__(self):
         return self.name
@@ -97,7 +99,7 @@ class Chap(models.Model):
     price = models.IntegerField(verbose_name='قیمت',)
 
     class Meta:
-        verbose_name_plural = '5. چاپ'
+        verbose_name_plural = 'چاپ'
 
     def __str__(self):
         return self.name
@@ -108,7 +110,7 @@ class Process(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
 
     class Meta:
-        verbose_name_plural = '6. فرایند'
+        verbose_name_plural = 'فرایند'
 
     def __str__(self):
         return self.name
@@ -130,10 +132,6 @@ class ProcessFormKargar(models.Model):
 
     class Meta:
         verbose_name_plural = 'وضعیت سفارش'
-
-
-
-
 
 
 #signals:

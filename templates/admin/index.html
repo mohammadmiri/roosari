@@ -119,7 +119,7 @@
                 <div class="link-row row">
                     <div class="link-label col-md-6 col-md-offset-6"><a href="{% url 'changeList_processformkargar' %}">وضعیت سفارش ها</a></div>
                 </div>
-                {% if group == 'admin' or group == 'karbarTehran' %}
+                {% if group == 'admin' or group == 'karbarTehran' or group == 'superuser' %}
                     <div class="link-row row">
                         <div class="link-label col-md-6 col-md-offset-6"><a href="{% url 'addform_reserveform' %}">افزودن سفارش جدید</a></div>
                     </div>
