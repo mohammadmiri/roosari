@@ -28,6 +28,7 @@ yearChoice = ((1395, '۱۳۹۵'), (1396, '۱۳۹۶'), (1397, '۱۹۳۷'), (1398,
 
 
 class Customer(models.Model):
+    code = models.IntegerField(default=0, verbose_name='کد',)
     user = models.OneToOneField(User,)
     username = models.CharField(max_length=100)
     name = models.CharField(max_length=100, null=True, verbose_name='نام')

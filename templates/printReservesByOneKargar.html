@@ -12,32 +12,35 @@
 <body>
 
 <div id="main-content-wrapper" class="container">
+    <div id="kargar-name">
+        {{ kargar.name }}
+    </div>
     <div class="row">
-        <div class="col-md-2 col-md-offset-2 cell center-horizontally">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 col-xs-offset-2 col-md-offset-2 cell center-horizontally">
             کد سفارش
         </div>
-        <div class="col-md-2 cell center-horizontally">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
 سفارش دهنده
         </div>
-        <div class="col-md-2 cell center-horizontally">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
 فرایند
         </div>
-        <div class="col-md-2 cell center-horizontally">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
 امتیاز کارگر
         </div>
     </div>
     {% for processformkargar in processformkargars %}
         <div class="row">
-            <div class="col-md-2 col-md-offset-2 cell center-horizontally">
+            <div class="col-md-2 col-xs-2 col-xs-offset-2 col-md-offset-2 cell center-horizontally">
 {{ processformkargar.form.id }}
             </div>
-            <div class="col-md-2 cell center-horizontally">
+            <div class="col-md-2 col-xs-2 cell center-horizontally">
 {{ processformkargar.form.customer.id }}
             </div>
-            <div class="col-md-2 cell center-horizontally">
+            <div class="col-md-2 col-xs-2 cell center-horizontally">
 {{ processformkargar.process.name }}
             </div>
-            <div class="col-md-2 cell center-horizontally">
+            <div class="col-md-2 col-xs-2 cell center-horizontally">
 {{ processformkargar.rate }}
             </div>
         </div>

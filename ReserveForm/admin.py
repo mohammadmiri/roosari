@@ -27,8 +27,9 @@ class ProcessInline(admin.TabularInline):
     )
 
 class ReserveFormAdmin(admin.ModelAdmin):
-    list_display = ('id', 'get_customer_name',)
+    list_display = ('code', 'get_customer_name',)
     list_display_links = ('get_customer_name',)
+    search_fields = ['code']
 
     def get_customer_name(self, obj):
         return obj.customer.name

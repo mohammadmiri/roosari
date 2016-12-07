@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 
 import traceback
 
+urlsite = 'http://108.61.200.118:8000'
 
 def loginFunc(request):
     error = ''
@@ -44,7 +45,7 @@ def forget_password(request):
             html_message = '<html><body><p>' + \
                            'برای تغییر رمز خود برروی لینک زیر کلیک کنید' + \
                            '</p><p>' + \
-                           '<a href=http://108.61.200.118:8000' + reverse('ResetPassword', args=[user.id]) + '>' + \
+                           '<a href='+urlsite + reverse('ResetPassword', args=[user.id]) + '>' + \
                            'اینجا' + \
                            '</a></p></body></html>'
             try:
@@ -53,6 +54,7 @@ def forget_password(request):
                           message=message,
                           recipient_list=[email_to_send, ],
                           html_message=html_message)
+                return redirect(reverse('HomepageCustomer'))
             except:
                 error = 'امکان ارسال ایمیل وجود ندارد'
         else:
@@ -65,6 +67,7 @@ def forget_password(request):
 
 def reset_password(request, id):
     error = ''
+    print('in reset password')
     if request.method == 'POST':
         password = request.POST['password']
         if len(password) < 8:
@@ -72,7 +75,9 @@ def reset_password(request, id):
         else:
             user = User.objects.get(id=id)
             if user != None:
+                print('in setting password')
                 user.set_password(password)
+                user.save()
     context = {'error': error, 'id': id}
     return render(request, 'resetPassword.html', context)
 
@@ -88,6 +93,7 @@ def show_profile(request):
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save(customer)
+            return redirect(reverse('HomepageCustomer'))
     else:
         form = ProfileForm()
     context = {'customer':customer, 'form':form}

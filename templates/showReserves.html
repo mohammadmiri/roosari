@@ -1,5 +1,6 @@
 {% extends 'customerBase.html' %}
 {% load static %}
+{% load toPersian %}
 
 
 {% block load_style_file %}
@@ -31,13 +32,21 @@
                             <h5 class="text-wrapper">{{ form.process.name }}</h5>
                         </div>
                         <div class="col-md-3 center-horizontally cell">
-                            <h5 class="text-wrapper">{{ form.deliveryDay }}</h5>
+                            <h5 class="text-wrapper">
+                                <span>{{ form.deliveryYear|IntegerToPersian }} /</span>
+                                <span>{{ form.deliveryMonth|IntegerToPersian }} /</span>
+                                <span>{{ form.deliveryDay|IntegerToPersian }}</span>
+                            </h5>
                         </div>
                         <div class="col-md-3 center-horizontally cell">
-                            <h5 class="text-wrapper">{{ form.reserveDay }}</h5>
+                            <h5 class="text-wrapper">
+                                <span>{{ form.reserveYear|IntegerToPersian }} /</span>
+                                <span>{{ form.reserveMonth|IntegerToPersian }} /</span>
+                                <span>{{ form.reserveDay|IntegerToPersian }}</span>
+                            </h5>
                         </div>
                         <div class="col-md-3 center-horizontally cell">
-                            <h5 class="text-wrapper">{{ form.id }}</h5>
+                            <h5 class="text-wrapper">{{ form.code }}</h5>
                         </div>
                     </div>
                 {% endfor %}

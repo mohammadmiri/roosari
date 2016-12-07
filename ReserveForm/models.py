@@ -27,6 +27,7 @@ yearChoice = ((1395, '۱۳۹۵'), (1396, '۱۳۹۶'), (1397, '۱۹۳۷'), (1398,
 
 
 class ReserveForm(models.Model):
+    code = models.IntegerField(default=0, verbose_name='کد')
     customer = models.ForeignKey(Customer, verbose_name='مشتری', )
     tarh = models.ImageField(upload_to='tarh/', verbose_name='طرح', blank=True, null=True)
     serviceTarh = models.ManyToManyField('ServiceTarh', verbose_name='خدمات طرح', blank=True)
