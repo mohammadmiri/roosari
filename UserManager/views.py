@@ -1,8 +1,8 @@
 from ReserveForm.models import ReserveForm
-from .models import Customer
+from .models import Customer, CustomerMessage
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
@@ -99,7 +99,7 @@ def homepage(request):
 def show_reserves(request):
     customer = Customer.objects.get(user=request.user)
     forms = ReserveForm.objects.filter(customer=customer)
-    context = {'forms':forms}
+    context = {'forms':forms, 'customer':customer}
     return render(request, 'showReserves.html', context=context)
 
 
@@ -111,6 +111,21 @@ def show_event(request):
     return render(request, 'showEvents.html', context=context)
 
 
+@login_required()
+def exit(request):
+    if request.user.is_authenticated():
+        logout(request)
+    else:
+        return redirect(reverse('HomepageCustomer'))
 
 
+@login_required()
+def contact_us(request):
+    if request.method == 'POST':
+        message = request.POST['message']
+        customerMessage = CustomerMessage.objects.create()
+        customerMessage.message = message
+        customerMessage.save()
+        return redirect(reverse('HomepageCustomer'))
+    return render(request, 'contactUs.html')
 

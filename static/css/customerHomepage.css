@@ -1,0 +1,27 @@
+#main-image-wrapper{
+    text-align: center;
+    margin-top: 0.1cm;
+}
+
+.text-wrapper{
+    direction: rtl;
+}
+
+.icon-link-wrapper img{
+    width: 2cm;
+}
+
+#icons-wrapper{
+    margin-top: 0.5cm;
+    margin-bottom: 3cm;
+}
+
+.text-link-wrapper{
+    text-align: center;
+}
+
+
+
+
+
+

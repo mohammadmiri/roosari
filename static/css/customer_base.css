@@ -1,3 +1,19 @@
+
+
+.center-vertically{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.center-horizontally{
+    text-align: center;
+}
+
 #header-wrapper{
     background-image: url("/static/img/header.jpg");
     height: 5cm;
@@ -14,6 +30,7 @@
     height: 2cm;
     border-bottom-right-radius: 1cm;
     border-top-right-radius: 1cm;
+    font-family: "B Yekan+";
 }
 
 #page-title-wrapper{
@@ -21,13 +38,57 @@
     height: 2cm;
     border-bottom-left-radius: 1cm;
     border-top-left-radius: 1cm;
+    font-size: 0.8cm;
+    text-align: center;
+    padding-top: 0.4cm;
+}
+
+#user-property-wrapper #container-property{
+    display: inline-block;
+    width: 6cm;
+    /*background-color: #1b6d85;*/
+    float: left;
+}
+
+#username-wrapper{
+    direction: rtl;
+    font-size: 0.6cm;
+}
+
+#user-property-wrapper #username-label-wrapper{
+    direction: rtl;
+    display: inline-block;
+}
+
+#user-property-wrapper #username-value-wrapper{
+    display: inline-block;
+}
+
+#links-wrapper{
+    direction: rtl;
+}
+
+#links-wrapper #exit-link{
+    display: inline-block;
+}
+
+#links-wrapper #home-link{
+    display: inline-block;
+}
+
+#image-wrapper{
+    display: inline-block;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    position: relative;
+    left:0.6cm;
 }
 
 #image-wrapper img{
     height: 2cm;
     width: 2cm;
 }
-
 
 
 

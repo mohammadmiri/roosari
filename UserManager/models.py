@@ -114,6 +114,13 @@ class Event(models.Model):
     text = models.TextField(verbose_name='متن', )
 
 
+
+class CustomerMessage(models.Model):
+    customer = models.ForeignKey(Customer, verbose_name='مشتری',)
+    message = models.TextField(verbose_name='متن نامه', )
+
+
+
 #signals:
 
 @receiver(post_delete, sender=Customer)

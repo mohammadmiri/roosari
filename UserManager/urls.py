@@ -6,6 +6,8 @@ from django.conf.urls import url
 
 urlpatterns = [
     url(r'homepage/', view=views.homepage, name='HomepageCustomer'),
+    url(r'exit/', view=views.exit, name='Exit'),
+    url(r'contact_us/', view=views.contact_us, name='ContactUs'),
     url(r'show_events/', view=views.show_event, name='ShowEvents'),
     url(r'show_reserves/', view=views.show_reserves, name='ShowReserves'),
     url(r'show_profile/', view=views.show_profile, name='ShowProfile'),

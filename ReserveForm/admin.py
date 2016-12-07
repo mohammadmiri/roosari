@@ -29,16 +29,12 @@ class ReserveFormAdmin(admin.ModelAdmin):
     list_display = ('id', 'get_customer_name',)
     list_display_links = ('get_customer_name',)
 
-
-    # def get_view_on_site_url(self, obj=None):
-    #     return 'http://google.com'
-    #     return reverse('PrintReserveForm', kwargs={'id':obj.id})
-
     def get_customer_name(self, obj):
         return obj.customer.name
 
     # raw_id_fields = ['customer',]
     # inlines = [ProcessInline]
+
     fieldsets = (
         ('مشتری', {
             'fields':('customer', )
@@ -67,9 +63,6 @@ class ReserveFormAdmin(admin.ModelAdmin):
         ('اطلاعات', {
             'fields':('description', 'process', )
         }),
-        ('زمان تست', {
-            'fields':('testtime',)
-        }),
     )
 
     formfield_overrides = {
@@ -95,16 +88,6 @@ class ReserveFormAdmin(admin.ModelAdmin):
             reserve.tarh.delete(False)
         obj.save()
 
-    def get_urls(self):
-        print('in get_urls')
-        urls = super(ReserveFormAdmin, self).get_urls()
-        my_urls = [
-            url('^my_view/$', self.my_view),
-        ]
-        return my_urls+urls
-
-    def my_view(self, request):
-        print('in my_view func')
 
 
 class DookhtAdmin(admin.ModelAdmin):

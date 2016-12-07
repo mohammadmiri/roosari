@@ -17,8 +17,19 @@
     <div id="header-wrapper" class="container-fluid">
         <div class="row">
             <div id="user-property-wrapper" class="col-md-3">
-                <div id="username-wrapper"></div>
-                <div id="image-wrapper"><img src="{% static customer.get_image_url %}"></div>
+                <div id="container-property" class="center-vertically">
+                    <div id="username-wrapper">
+                        <div id="username-label-wrapper">نام کاربری:</div>
+                        <div id="username-value-wrapper">{{ customer.name }}</div>
+                    </div>
+                    <div id="links-wrapper">
+                        <div id="home-link">خانه |</div>
+                        <div id="exit-link">خروج</div>
+                    </div>
+                </div>
+                <div id="image-wrapper" class="center-vertically">
+                    <img src="{% static customer.get_image_url %}">
+                </div>
             </div>
             <div id="page-title-wrapper" class="col-md-5 col-md-offset-4">صفحه ارتباط با مشتری</div>
         </div>
