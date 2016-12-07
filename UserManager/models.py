@@ -37,7 +37,6 @@ class Customer(models.Model):
     workPhoneNumber = models.CharField(max_length=50, verbose_name='تلفن محل کار',)
     address = models.TextField(verbose_name='آدرس',)
     companyName = models.TextField(verbose_name='نام شرکت',)
-    image = models.ImageField(null=True, blank=True, verbose_name='عکس',)
 
     class Meta:
         verbose_name_plural = 'مشتری'
@@ -45,14 +44,6 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-    def get_image_url(self):
-        print('in get_image_url')
-        if self.image:
-            print('in if 1')
-            return self.image.url
-        else:
-            print('in if 2')
-            return 'img/anonymous.png'
 
 
 class CustomerMessage(models.Model):
@@ -111,13 +102,10 @@ class Event(models.Model):
     month = models.IntegerField(verbose_name='ماه', choices=monthChoice)
     year = models.IntegerField(verbose_name='سال', choices=yearChoice)
     customer = models.ForeignKey(Customer, verbose_name='مشتری', )
+    title = models.CharField(verbose_name='تیتر', max_length=200, null=True, blank=True)
     text = models.TextField(verbose_name='متن', )
 
 
-
-class CustomerMessage(models.Model):
-    customer = models.ForeignKey(Customer, verbose_name='مشتری',)
-    message = models.TextField(verbose_name='متن نامه', )
 
 
 

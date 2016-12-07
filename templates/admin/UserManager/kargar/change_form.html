@@ -1,6 +1,5 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static admin_modify %}
-{#{% load url from future %}#}
 {% load admin_urls %}
 
 {% block extrahead %}{{ block.super }}
@@ -51,16 +50,15 @@
     {{ adminform.form.non_field_errors }}
 {% endif %}
 
+
 {% if original %}
 <div id="links-wrapper" class="container-fluid">
-{#    <div class="row">#}
-{#        <div class="col-md-2 col-md-offset-8" id="print-link-wrapper"><a href="{% url 'PrintReserveForm' original.id %}">پرینت</a></div>#}
-{#    </div>#}
     <div class="row">
-        <div class="col-md-2 col-md-offset-8" id="print-link-wrapper"><a href="{% url 'FactorReserveForm' original.id %}">پرینت فاکتور</a></div>
+        <div class="col-md-2 col-md-offset-8" id="print-link-wrapper"><a href="{% url 'PrintFormsByOneKargar' original.id %}">پرینت سفارشات</a></div>
     </div>
 </div>
 {% endif %}
+
 
 {% block field_sets %}
 {% for fieldset in adminform %}

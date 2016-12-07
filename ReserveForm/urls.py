@@ -8,10 +8,12 @@ urlsite = 'http://localhost:8000/'
 urlpatterns = [
     url(r'^printForm/(?P<id>[0-9]+)', view=views.print_form, name='PrintReserveForm'),
     url(r'^factorForm/(?P<id>[0-9]+)', view=views.factor_form, name='FactorReserveForm'),
-    url(r'test/', view=views.test, name='Test'),
+    url(r'^printFormsByOneKargar/(?P<id>[0-9]+)/', view=views.printReserveFormsByOneKargar, name='PrintFormsByOneKargar'),
+    url(r'^printFormsInOneProcess/(?P<id>[0-9]+)/', view=views.printReserveFormsInOneProcess, name='PrintFormsInOneProcess'),
 
     # urls of admin of django
-    url(r'siteadmin/$', view=views.siteadmin, name='SiteAdminIndex'),
+    url(r'^redirectToAdminIndex/$', RedirectView.as_view(url=urlsite), name='RedirectToAdminindex'),
+    url(r'^siteadmin/$', view=views.siteadmin, name='SiteAdminIndex'),
     url(r'^siteadmin/ReserveForm/ReserveForm/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/reserveform'), name='changeList_reserveform'),
     url(r'^siteadmin/ReserveForm/ReserveForm/add/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/reserveform/add/'), name='addform_reserveform'),
     url(r'^siteadmin/ReserveForm/processformkargar/$', RedirectView.as_view(url=urlsite+'admin/ReserveForm/processformkargar'), name='changeList_processformkargar'),
@@ -28,4 +30,5 @@ urlpatterns = [
     url(r'^siteadmin/loginadmin', view=views.loginFunc, name='loginCustomAdmin'),
     url(r'^siteadmin/useradmin', RedirectView.as_view(url=urlsite+'admin/auth/user/'), name='AdminAuthUsers'),
     url(r'^siteadmin/groupadmin', RedirectView.as_view(url=urlsite+'admin/auth/group/'), name='AdminAuthGroups'),
+    url(r'^siteadmin/customerMessage/', RedirectView.as_view(url=urlsite+'admin/UserManager/customermessage'), name='changeList_customerMessages')
 ]

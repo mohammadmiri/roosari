@@ -7,12 +7,12 @@
 
 
 {% block content %}
-    <div id="main-container" class="container-fluid">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4 center-horizontally" id="main-image-wrapper">
-                <img src="{% static 'img/anonymous.png' %}">
-            </div>
-        </div>
+    <div id="main-content-wrapper" class="container-fluid">
+{#        <div class="row">#}
+{#            <div class="col-md-4 col-md-offset-4" id="main-image-wrapper">#}
+{#                <img class="img-circle" src="{{ customer.get_image_url }}">#}
+{#            </div>#}
+{#        </div>#}
         <div class="row">
             <div class="col-md-4 col-md-offset-4 center-horizontally">
                 <h1 class="text-wrapper">سلام {{ customer.name }}</h1>

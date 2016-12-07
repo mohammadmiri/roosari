@@ -23,12 +23,12 @@
                         <div id="username-value-wrapper">{{ customer.name }}</div>
                     </div>
                     <div id="links-wrapper">
-                        <div id="home-link">خانه |</div>
-                        <div id="exit-link">خروج</div>
+                        <div id="home-link"><a href="{% url 'HomepageCustomer' %}">خانه</a> |</div>
+                        <div id="exit-link"><a href="{% url 'Exit' %}">خروج</a></div>
                     </div>
                 </div>
                 <div id="image-wrapper" class="center-vertically">
-                    <img src="{% static customer.get_image_url %}">
+                    <img class="img-circle" src="{% static 'img/anonymous.png' %}">
                 </div>
             </div>
             <div id="page-title-wrapper" class="col-md-5 col-md-offset-4">صفحه ارتباط با مشتری</div>

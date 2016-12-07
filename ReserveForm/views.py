@@ -22,17 +22,7 @@ yearChoice = [(1395, '۱۳۹۵'), (1396, '۱۳۹۶'), (1397, '۱۹۳۷'), (1398,
 
 
 
-
-def test(request):
-    print('in test func')
-    keys = get_resolver(None).reverse_dict.keys()
-    for key in keys:
-        print(str(key))
-
-
-
-
-@login_required()
+@login_required(login_url='/')
 def siteadmin(request):
     groups = list(request.user.groups.all())
     group = ''
@@ -74,4 +64,24 @@ def print_form(request, id):
 
 
 def factor_form(request, id):
-    pass
+    form = ReserveForm.objects.get(id=id)
+    context = {'form':form}
+    return render(request, 'printFactorReserve.html', context=context)
+
+
+
+def printReserveFormsByOneKargar(request, id):
+    karger = Kargar.objects.get(id=id)
+    context = {'processformkargars':karger.processformkargar_set.all()}
+    return render(request, 'printReservesByOneKargar.html', context=context)
+
+
+def printReserveFormsInOneProcess(request, id):
+    process = Process.objects.get(id=id)
+    context = {'forms':process.reserveform_set}
+    return render(request, 'printReservesInOneProcess.html', context=context)
+
+
+
+
+

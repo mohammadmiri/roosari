@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/printReservesInOneProcess.css' %}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<div id="main-content-wrapper" class="container">
+    <div class="row">
+        <div class="col-md-2 col-md-offset-4 cell center-horizontally">
+            کد سفارش
+        </div>
+        <div class="col-md-2 cell center-horizontally">
+سفارش دهنده
+        </div>
+    </div>
+    {% for processformkargar in processformkargars %}
+        <div class="row">
+            <div class="col-md-2 col-md-offset-4 cell center-horizontally">
+{{ processformkargar.form.id }}
+            </div>
+            <div class="col-md-2 cell center-horizontally">
+{{ processformkargar.form.customer.id }}
+            </div>
+            <div class="col-md-2 cell center-horizontally">
+{{ processformkargar.process.name }}
+            </div>
+            <div class="col-md-2 cell center-horizontally">
+{{ processformkargar.rate }}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

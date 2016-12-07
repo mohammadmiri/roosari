@@ -1,0 +1,178 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>info</title>
+    <link href="{% static 'css/printFactorReserve.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<div class="main-wrapper center-horizontally border-black">
+    <div class="header">
+        <img src="{% static 'img/header.jpg' %}">
+    </div>
+    <div class="content center-horizontally">
+{#        name#}
+        <div class="item clear-both">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                نام مشتری(آقا/خانم):
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ name }}
+                </div>
+            </div>
+        </div>
+
+{#        code#}
+        <div class="item clear-both">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    کد سفارش:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ code }}
+                </div>
+            </div>
+        </div>
+        <div class="item clear-both full-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                تصویر طرح:
+                </div>
+            </div>
+            <div class="full-width">
+                <img src="{% static image %}" id="design-image" class="center-horizontally border-black">
+            </div>
+        </div>
+        <div class="item clear-both full-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    خدمات طرح:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ services }}
+                </div>
+            </div>
+        </div>
+        <div class="item clear-both half-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    اندازه پارچه:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ size.0 }} * {{ size.1 }}
+                </div>
+            </div>
+        </div>
+        <div class="item half-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    تعداد:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ count }}
+                </div>
+            </div>
+        </div>
+        <div class="item half-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    نوع دوخت:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ dookht_type }}
+                </div>
+            </div>
+        </div>
+        <div class="item half-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    وجود برچسب:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ tag_type }}
+                </div>
+            </div>
+        </div>
+        <div class="item full-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    نوع چاپ:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ print_type }}
+                </div>
+            </div>
+        </div>
+        <div class="item half-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    زمان سفارش:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ order_time.2 }}/{{ order_time.1 }}/{{ order_time.0 }}
+                </div>
+            </div>
+        </div>
+        <div class="item half-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    زمان تحویل:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ delivery_time.2 }}/{{ delivery_time.1 }}/{{ delivery_time.0 }}
+                </div>
+            </div>
+        </div>
+        <div class="item full-width">
+            <div class="item-label">
+                <div class="direction-rtl font">
+                    توضیحات:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font">
+                    {{ description }}
+                </div>
+            </div>
+        </div>
+        <div class="item half-width center-horizontally-float-right">
+            <div class="item-label">
+                <div class="direction-rtl font bold">
+                    هزینه سفارش:
+                </div>
+            </div>
+            <div class="item-value">
+                <div class="direction-rtl font bold">
+                    {{ cost }} تومان
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

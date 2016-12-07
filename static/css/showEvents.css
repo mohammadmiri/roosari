@@ -1,0 +1,30 @@
+.text-wrapper{
+    direction: rtl;
+    padding-top: 0.3cm;
+    padding-right: 0.2cm;
+    padding-bottom: 0.3cm;
+}
+
+.event-wrapper{
+    border: solid 1px #999999;
+    margin-top: 0.5cm;
+    border-radius: 0.5cm;
+}
+
+.title-wrapper{
+    height: 1cm;
+    border-bottom: solid 1px #999999;
+}
+
+.date-wrapper{
+    height: 1cm;
+    border-bottom: solid 1px #999999;
+}
+
+
+
+
+
+
+
+

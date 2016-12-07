@@ -1,0 +1,16 @@
+#main-content-wrapper{
+    padding-top: 2cm;
+}
+
+.center-horizontally{
+    text-align: center;
+}
+
+.cell{
+    border: solid 1px #999999;
+    height: 1cm;
+    padding-top: 0.2cm;
+}
+
+
+

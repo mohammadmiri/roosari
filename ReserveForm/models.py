@@ -121,6 +121,7 @@ class ProcessFormKargar(models.Model):
     process = models.ForeignKey(Process, verbose_name='فرایند',)
     kargar = models.ForeignKey(Kargar, verbose_name='کارگر',)
     form = models.ForeignKey(ReserveForm, verbose_name='فرم',)
+    rate = models.IntegerField(verbose_name='امتیاز کارگر', null=True, blank=True, default=0)
     # start date
     startDay = models.IntegerField(choices=dayChoice, verbose_name='روز شروع', blank=True, null=True)
     startMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه شروع', blank=True, null=True)

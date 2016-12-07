@@ -1,0 +1,90 @@
+
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+.center-horizontally{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.center-horizontally-float-right{
+    position: relative;
+    right: 50%;
+    transform: translateX(50%);
+}
+.center-vertically{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.main-wrapper{
+    width: 21cm;
+    overflow: auto;
+    padding-bottom: 0.5cm;
+}
+
+.header img{
+    width: 100%;
+    height: auto;
+    max-height:4cm;
+}
+
+.content{
+    width: 80%;
+    overflow: auto;
+}
+
+.clear-both{
+    clear: both;
+}
+
+.half-width{
+    width: 50%;
+}
+.full-width{
+    width: 100%;
+}
+
+.font{
+    font-family: "B Yekan+";
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.border-black{
+    border: 1px solid #000000;
+}
+
+.item{
+    float: right;
+    margin-top: 1cm;
+    font-size: 18px;
+}
+.direction-rtl{
+    direction: rtl;
+}
+.item-label{
+    float: right;
+}
+.item-value{
+    float: right;
+    margin-right: 0.25cm;
+}
+
+#design-image{
+    height: 4cm;
+    width: auto;
+    max-width: 95%;
+    min-width: 4cm;
+    padding:0.1cm;
+    margin-top: 0.2cm;
+}
+
+
+
+

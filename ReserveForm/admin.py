@@ -1,4 +1,5 @@
 from .models import Dookht, Chap, Process, Parche, ReserveForm, ProcessFormKargar, ServiceTarh
+from UserManager.models import CustomerMessage
 
 from django.contrib import admin
 from django.db import models
@@ -159,6 +160,14 @@ class ProcessFormKargarAdmin(admin.ModelAdmin):
 
 
 
+class CustomerMessageAdmin(admin.ModelAdmin):
+    list_display = ('get_customer', 'message')
+    readonly_fields = ('message', 'customer')
+
+    def get_customer(self, obj):
+        return obj.customer.name
+
+
 
 
 admin.site.register(ReserveForm, ReserveFormAdmin)
@@ -168,4 +177,4 @@ admin.site.register(Parche, ParcheAdmin)
 admin.site.register(Process, ProcessAdmin)
 admin.site.register(ServiceTarh, ServiceTarhAdmin)
 admin.site.register(ProcessFormKargar, ProcessFormKargarAdmin)
-
+admin.site.register(CustomerMessage, CustomerMessageAdmin)

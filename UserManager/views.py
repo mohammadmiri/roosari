@@ -1,5 +1,6 @@
 from ReserveForm.models import ReserveForm
 from .models import Customer, CustomerMessage
+from .forms import ProfileForm
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -80,14 +81,20 @@ def show_message(request, message):
     pass
 
 
-@login_required()
+@login_required(login_url='/user/login/')
 def show_profile(request):
     customer = Customer.objects.get(user=request.user)
-    context = {'customer':customer}
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(customer)
+    else:
+        form = ProfileForm()
+    context = {'customer':customer, 'form':form}
     return render(request, 'showProfileCustomer.html', context=context)
 
 
-@login_required()
+@login_required(login_url='/user/login/')
 def homepage(request):
     customer = Customer.objects.get(user=request.user)
     context = {'customer':customer}
@@ -95,7 +102,7 @@ def homepage(request):
 
 
 
-@login_required()
+@login_required(login_url='/user/login/')
 def show_reserves(request):
     customer = Customer.objects.get(user=request.user)
     forms = ReserveForm.objects.filter(customer=customer)
@@ -104,22 +111,23 @@ def show_reserves(request):
 
 
 
-@login_required()
+@login_required(login_url='/user/login/')
 def show_event(request):
     customer = Customer.objects.get(user=request.user)
-    context = {'customer':customer}
+    context = {'customer':customer, 'events':customer.event_set.all()}
     return render(request, 'showEvents.html', context=context)
 
 
-@login_required()
+@login_required(login_url='/user/login/')
 def exit(request):
     if request.user.is_authenticated():
         logout(request)
+        return redirect(reverse('Login'))
     else:
         return redirect(reverse('HomepageCustomer'))
 
 
-@login_required()
+@login_required(login_url='/user/login/')
 def contact_us(request):
     if request.method == 'POST':
         message = request.POST['message']
@@ -127,5 +135,7 @@ def contact_us(request):
         customerMessage.message = message
         customerMessage.save()
         return redirect(reverse('HomepageCustomer'))
-    return render(request, 'contactUs.html')
+    customer = Customer.objects.get(user=request.user)
+    context = {'customer':customer}
+    return render(request, 'contactUs.html', context=context)
 

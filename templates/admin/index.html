@@ -124,6 +124,11 @@
                         <div class="link-label col-md-6 col-md-offset-6"><a href="{% url 'addform_reserveform' %}">افزودن سفارش جدید</a></div>
                     </div>
                 {% endif %}
+                {% if group == 'admin' or group == 'karbarTehran' or group == 'superuser' %}
+                    <div class="link-row row">
+                        <div class="link-label col-md-6 col-md-offset-6"><a href="{% url 'changeList_customerMessages' %}">پیام مشتریان</a></div>
+                    </div>
+                {% endif %}
             </div>
         {% endif %}
         {% if group == 'admin' or group == 'karbarTehran' or group == 'karbarKarkhane' or group == 'superuser' %}
