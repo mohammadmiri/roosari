@@ -4,6 +4,11 @@ html, body{
     padding: 0;
 }
 
+@font-face {
+    font-family: "Yekan";
+    src: url("/static/font/Yekan.ttf");
+}
+
 .center-horizontally{
     position: relative;
     left: 50%;
@@ -49,7 +54,7 @@ html, body{
 }
 
 .font{
-    font-family: "B Yekan+";
+    font-family: "Yekan";
 }
 
 .bold{
@@ -62,8 +67,9 @@ html, body{
 
 .item{
     float: right;
-    margin-top: 1cm;
+    margin-top: 0.5cm;
     font-size: 18px;
+    color: #333333;
 }
 .direction-rtl{
     direction: rtl;
@@ -85,6 +91,8 @@ html, body{
     margin-top: 0.2cm;
 }
 
-
+#description{
+    margin-top:0.75cm;
+}
 
 

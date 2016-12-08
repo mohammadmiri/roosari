@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load toPersian %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +23,7 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ name }}
+                    {{ form.customer.name }}
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ code }}
+                    {{ form.code }}
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="full-width">
-                <img src="{% static image %}" id="design-image" class="center-horizontally border-black">
+                <img src="{{ form.get_tarh_url }}" id="design-image" class="center-horizontally border-black">
             </div>
         </div>
         <div class="item clear-both full-width">
@@ -59,7 +59,9 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ services }}
+                    {% for service in form.serviceTarh.all %}
+                        {{ service.name }},
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -71,7 +73,7 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ size.0 }} * {{ size.1 }}
+                    {{ form.parcheWidth|FloatToPersian }} * {{ form.parcheHeight|FloatToPersian }}
                 </div>
             </div>
         </div>
@@ -83,7 +85,7 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ count }}
+                    {{ form.number|IntegerToPersian }}
                 </div>
             </div>
         </div>
@@ -95,7 +97,7 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ dookht_type }}
+                    {{ form.dookht.name }}
                 </div>
             </div>
         </div>
@@ -107,7 +109,11 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ tag_type }}
+                    {% if form.hasLabel %}
+                        دارد
+                    {% else %}
+                        ندارد
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -119,7 +125,7 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ print_type }}
+                    {{ form.typeChap.name }}
                 </div>
             </div>
         </div>
@@ -131,7 +137,7 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ order_time.2 }}/{{ order_time.1 }}/{{ order_time.0 }}
+                    {{ form.reserveYear|IntegerToPersian }}/{{ form.reserveMonth|IntegerToPersian }}/{{ form.reserveDay|IntegerToPersian }}
                 </div>
             </div>
         </div>
@@ -143,7 +149,7 @@
             </div>
             <div class="item-value">
                 <div class="direction-rtl font">
-                    {{ delivery_time.2 }}/{{ delivery_time.1 }}/{{ delivery_time.0 }}
+                    {{ form.deliveryYear|IntegerToPersian }}/{{ form.deliveryMonth|IntegerToPersian }}/{{ form.deliveryDay|IntegerToPersian }}
                 </div>
             </div>
         </div>
@@ -153,9 +159,9 @@
                     توضیحات:
                 </div>
             </div>
-            <div class="item-value">
+            <div id="description" class="clear-both full-width">
                 <div class="direction-rtl font">
-                    {{ description }}
+                    {{ form.description }}
                 </div>
             </div>
         </div>

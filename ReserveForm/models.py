@@ -57,6 +57,11 @@ class ReserveForm(models.Model):
     def __str__(self):
         return 'code: '+str(self.id)
 
+    def get_tarh_url(self):
+        if self.tarh:
+            return self.tarh.url
+        else:
+            return ''
 
 
 class Parche(models.Model):

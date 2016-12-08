@@ -34,8 +34,6 @@ class ReserveFormAdmin(admin.ModelAdmin):
     def get_customer_name(self, obj):
         return obj.customer.name
 
-    # raw_id_fields = ['customer',]
-    # inlines = [ProcessInline]
 
     fieldsets = (
         ('مشتری', {
