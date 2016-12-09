@@ -62,7 +62,6 @@ def toPersianDigit(digit):
 
 @register.filter()
 def MonthToPersian(month):
-    print('month:'+str(month)+' '+str(type(month)))
     if month == 1:
         return 'فروردین'
     if month == 2:

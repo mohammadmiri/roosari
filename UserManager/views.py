@@ -134,13 +134,14 @@ def exit(request):
 
 @login_required(login_url='/user/login/')
 def contact_us(request):
+    customer = Customer.objects.get(user=request.user)
     if request.method == 'POST':
         message = request.POST['message']
-        customerMessage = CustomerMessage.objects.create()
+        customerMessage = CustomerMessage()
         customerMessage.message = message
+        customerMessage.customer = customer
         customerMessage.save()
         return redirect(reverse('HomepageCustomer'))
-    customer = Customer.objects.get(user=request.user)
     context = {'customer':customer}
     return render(request, 'contactUs.html', context=context)
 
