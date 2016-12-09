@@ -67,7 +67,6 @@ def forget_password(request):
 
 def reset_password(request, id):
     error = ''
-    print('in reset password')
     if request.method == 'POST':
         password = request.POST['password']
         if len(password) < 8:
@@ -75,9 +74,9 @@ def reset_password(request, id):
         else:
             user = User.objects.get(id=id)
             if user != None:
-                print('in setting password')
                 user.set_password(password)
                 user.save()
+                return redirect(reverse('Login'))
     context = {'error': error, 'id': id}
     return render(request, 'resetPassword.html', context)
 
