@@ -1,4 +1,8 @@
 
+@font-face {
+    font-family: "adobe arabic";
+    src: url("/static/font/AdobeArabic-Regular.otf") format('opentype');
+}
 
 .center-vertically{
     position: relative;
@@ -19,6 +23,11 @@
     height: 5cm;
     background-size:100% 100% ;
     background-repeat: no-repeat;
+    font-family: "adobe arabic";
+}
+
+body{
+    font-family: "adobe arabic";
 }
 
 #header-wrapper .row{
@@ -30,7 +39,7 @@
     height: 2cm;
     border-bottom-right-radius: 1cm;
     border-top-right-radius: 1cm;
-    font-family: "B Yekan+";
+    min-width: 4cm;
 }
 
 #page-title-wrapper{
@@ -46,7 +55,6 @@
 #user-property-wrapper #container-property{
     display: inline-block;
     width: 6cm;
-    /*background-color: #1b6d85;*/
     float: left;
 }
 
@@ -91,5 +99,19 @@
 }
 
 
+@media screen and (max-width: 970px) {
+    #header-wrapper .row{
+        margin-top: 0.7cm;
+    }
+    #header-wrapper #container-property{
+        width: 4cm;
+    }
+}
 
+@media screen and (max-width: 1200px) {
+    .xs-invisible{
+        display: none;
+    }
+
+}
 

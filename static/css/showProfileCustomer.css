@@ -2,6 +2,12 @@
     padding-top: 3cm;
 }
 
+#form-wrapper{
+    border: solid 1px #999999;
+    padding-bottom: 1cm;
+    border-radius: 1cm;
+}
+
 .field-wrapper{
     direction: rtl;
 }
@@ -14,7 +20,10 @@
     margin-top: 0.7cm;
 }
 
-
+.label-wrapper{
+    text-align: right;
+    font-size: 0.5cm;
+}
 
 
 
