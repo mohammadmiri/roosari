@@ -4,6 +4,11 @@
     src: url("/static/font/AdobeArabic-Regular.otf") format('opentype');
 }
 
+@font-face {
+    font-family: "B titr";
+    src: url("/static/font/BTitrBd.ttf");
+}
+
 .center-vertically{
     position: relative;
     top: 50%;
@@ -35,7 +40,7 @@ body{
 }
 
 #user-property-wrapper{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.4);
     height: 2cm;
     border-bottom-right-radius: 1cm;
     border-top-right-radius: 1cm;
@@ -43,13 +48,14 @@ body{
 }
 
 #page-title-wrapper{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.4);
     height: 2cm;
     border-bottom-left-radius: 1cm;
     border-top-left-radius: 1cm;
     font-size: 0.8cm;
     text-align: center;
     padding-top: 0.4cm;
+    font-family: "B titr";
 }
 
 #user-property-wrapper #container-property{
