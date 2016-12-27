@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load toPersian %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/printLogOfProcess.css' %}" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div id="main-content-wrapper" class="container">
+    <div id="form-code">
+        {{ form.id|IntegerToPersian }} :کد سفارش
+    </div>
+    <div id="customer-name">
+        {{ form.customer.name }}
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 col-xs-offset-4 col-md-offset-4 cell center-horizontally">
+            فرایند
+        </div>
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
+کارگر
+        </div>
+    </div>
+    {% for process in processes.all %}
+        <div class="row">
+            <div class="col-md-2 col-xs-2 col-xs-offset-4 col-md-offset-4 cell center-horizontally">
+{{ process.process.name }}
+            </div>
+            <div class="col-md-2 col-xs-2 cell center-horizontally">
+{{ process.kargar.name }}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+</body>
+</html>

@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^factorForm/(?P<id>[0-9]+)', view=views.factor_form, name='FactorReserveForm'),
     url(r'^printFormsByOneKargar/(?P<id>[0-9]+)/', view=views.printReserveFormsByOneKargar, name='PrintFormsByOneKargar'),
     url(r'^printFormsInOneProcess/(?P<id>[0-9]+)/', view=views.printReserveFormsInOneProcess, name='PrintFormsInOneProcess'),
+    url(r'^printLofOfPForm/(?P<id>[0-9]+)/', view=views.printLogOfProcessOfReserveform, name='PrintLofOfProcessOfRserveForm'),
 
     # urls of admin of django
     url(r'^redirectToAdminIndex/$', RedirectView.as_view(url=urlsite), name='RedirectToAdminindex'),

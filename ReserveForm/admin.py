@@ -168,6 +168,9 @@ class ProcessFormKargarAdmin(admin.ModelAdmin):
         ('کارگر',{
              'fields':('kargar',)
         }),
+        ('امتیاز',{
+             'fields':('rate',)
+        }),
         # ('زمان شروع فرایند', {
         #     'fields':('startDay', 'startMonth', 'startYear',)
         # }),

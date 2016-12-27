@@ -81,6 +81,9 @@ def printReserveFormsInOneProcess(request, id):
     return render(request, 'printReservesInOneProcess.html', context=context)
 
 
-
+def printLogOfProcessOfReserveform(request, id):
+    form = ReserveForm.objects.get(id=id)
+    context = {'form':form, 'processes':form.processformkargar_set}
+    return render(request, 'printLogOfProcess.html', context=context)
 
 

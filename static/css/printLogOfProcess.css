@@ -1,0 +1,28 @@
+#main-content-wrapper{
+    padding-top: 2cm;
+}
+
+.center-horizontally{
+    text-align: center;
+}
+
+.cell{
+    border: solid 1px #999999;
+    height: 1cm;
+    padding-top: 0.2cm;
+}
+
+#customer-name{
+    text-align: center;
+    margin-bottom: 1cm;
+    font-size: 0.5cm;
+}
+
+#form-code{
+    text-align: center;
+    margin-bottom: 1cm;
+    font-size: 0.5cm;
+}
+
+
+
