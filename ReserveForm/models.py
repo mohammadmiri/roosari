@@ -51,7 +51,8 @@ class ReserveForm(models.Model):
     process = models.ForeignKey('Process', verbose_name='فرایند', blank=True, null=True)
 
     class Meta:
-        verbose_name_plural = "سفارش ها"
+        verbose_name = "سفارش"
+        verbose_name_plural = "سفارش"
 
     def __str__(self):
         return 'code: '+str(self.id)
@@ -68,6 +69,7 @@ class Parche(models.Model):
     price = models.IntegerField(verbose_name='قیمت', blank=True, null=True)
 
     class Meta:
+        verbose_name = 'پارچه'
         verbose_name_plural = 'پارچه'
 
     def __str__(self):
@@ -80,6 +82,7 @@ class Dookht(models.Model):
     price = models.IntegerField(verbose_name='قیمت', blank=True, null=True)
 
     class Meta:
+        verbose_name = 'دوخت'
         verbose_name_plural = 'دوخت'
 
     def __str__(self):
@@ -92,6 +95,7 @@ class ServiceTarh(models.Model):
     price = models.IntegerField(verbose_name='قیمت',)
 
     class Meta:
+        verbose_name = ' خدمات مربوط به طرح'
         verbose_name_plural = ' خدمات مربوط به طرح'
 
     def __str__(self):
@@ -104,6 +108,7 @@ class Chap(models.Model):
     price = models.IntegerField(verbose_name='قیمت',)
 
     class Meta:
+        verbose_name = 'چاپ'
         verbose_name_plural = 'چاپ'
 
     def __str__(self):
@@ -115,6 +120,7 @@ class Process(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
 
     class Meta:
+        verbose_name = 'فرایند'
         verbose_name_plural = 'فرایند'
 
     def __str__(self):
@@ -135,8 +141,12 @@ class ProcessFormKargar(models.Model):
     endDay = models.IntegerField(choices=dayChoice, verbose_name='روز اتمام', blank=True, null=True)
     endMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه اتمام', blank=True, null=True)
     endYear = models.IntegerField(choices=yearChoice, verbose_name='سال اتمام', blank=True, null=True)
+    # test widget
+    startDateTime = models.DateTimeField(null=True, blank=True)
+    endDateTime = models.DateTimeField(null=True, blank=True)
 
     class Meta:
+        verbose_name = 'وضعیت سفارش'
         verbose_name_plural = 'وضعیت سفارش'
 
 

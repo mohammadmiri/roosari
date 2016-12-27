@@ -71,14 +71,16 @@ class ReserveFormAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         groupnames = request.user.groups.values_list('name', flat=True)
-        if 'مدیر' in groupnames:
+        print('group name:'+str(groupnames))
+        if 'admin' in groupnames:
             return ()
-        elif 'کاربر تهران' in groupnames:
+        elif 'karbarTehran' in groupnames:
             return ()
-        elif 'کاربر کارخانه' in groupnames:
+        elif 'karbarKarkhane' in groupnames:
+            print('in group')
             return ('customer', 'tarh', 'serviceTarh', 'hasParche', 'parche', 'parcheWidth', 'parcheHeight', 'typeChap', 'hasLabel',
                     'reserveDay', 'reserveMonth', 'reserveYear', 'deliveryDay', 'deliveryMonth', 'deliveryYear', 'description',
-                    'process',)
+                     'dookht',)
         else:
             return ()
 
@@ -121,7 +123,7 @@ class ServiceTarhAdmin(admin.ModelAdmin):
 
 
 class ProcessFormKargarAdmin(admin.ModelAdmin):
-    list_display = ( 'form_code', 'customer', 'form_status', 'kargar')
+    list_display = ( 'form_code', 'customer', 'form_status', 'kargar', 'duration')
     list_display_links = ( 'form_code', 'customer',)
     search_fields = ('form__id',)
 
@@ -129,13 +131,31 @@ class ProcessFormKargarAdmin(admin.ModelAdmin):
         return obj.form.customer.name
 
     def form_code(self, obj):
-        return obj.form.id
+        if obj.form:
+            return obj.form.id
+        else:
+            return '-'
 
     def form_status(self, obj):
-        return obj.form.process.name
+        if obj.process:
+            return obj.process.name
+        else:
+            return '-'
 
     def kargar(self, obj):
-        return obj.kargar.name
+        if obj.kargar:
+            return obj.kargar.name
+        else:
+            return '-'
+
+    def duration(self, obj):
+        if not obj.startDateTime:
+            return 'زمان شروع به درستی وارد نشده است'
+        if not obj.endDateTime:
+            return 'زمان اتمام به درستی وارد نشده است'
+        duration = obj.endDateTime - obj.startDateTime
+        hours , reminder = divmod(duration.seconds, 3600)
+        return  'ساعت' + str(hours) + ' | ' + 'روز' + '\t' + str(duration.days)
 
 
     fieldsets = (
@@ -148,11 +168,17 @@ class ProcessFormKargarAdmin(admin.ModelAdmin):
         ('کارگر',{
              'fields':('kargar',)
         }),
-        ('زمان شروع فرایند', {
-            'fields':('startDay', 'startMonth', 'startYear',)
+        # ('زمان شروع فرایند', {
+        #     'fields':('startDay', 'startMonth', 'startYear',)
+        # }),
+        # ('زمان اتمام فرایند',{
+        #     'fields':('endDay', 'endMonth', 'endYear',)
+        # }),
+        ('زمان شروع فرایند',{
+            'fields':('startDateTime',)
         }),
         ('زمان اتمام فرایند',{
-            'fields':('endDay', 'endMonth', 'endYear',)
+            'fields':('endDateTime',)
         }),
     )
 

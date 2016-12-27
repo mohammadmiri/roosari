@@ -39,6 +39,7 @@ class Customer(models.Model):
     companyName = models.TextField(verbose_name='نام شرکت',)
 
     class Meta:
+        verbose_name = 'مشتری'
         verbose_name_plural = 'مشتری'
 
     def __str__(self):
@@ -51,6 +52,7 @@ class CustomerMessage(models.Model):
     message = models.TextField(verbose_name='نامه',)
 
     class Meta:
+        verbose_name = 'پیام مشتری'
         verbose_name_plural = 'پیام مشتری'
 
     def __str__(self):
@@ -61,6 +63,7 @@ class Kargar(models.Model):
     name = models.CharField(max_length=200, verbose_name='نام',)
 
     class Meta:
+        verbose_name = 'کارگر'
         verbose_name_plural = 'کارگر'
 
     def __str__(self):
@@ -76,6 +79,7 @@ class KarbarTehran(models.Model):
     email = models.EmailField(null=True)
 
     class Meta:
+        verbose_name = 'کاربر تهران'
         verbose_name_plural = 'کاربر تهران'
 
     def __str__(self):
@@ -90,6 +94,7 @@ class KarbarKarkhane(models.Model):
     email = models.EmailField(null=True)
 
     class Meta:
+        verbose_name = 'کاربر کارخانه'
         verbose_name_plural = 'کاربر کارخانه'
 
     def __str__(self):
@@ -105,7 +110,9 @@ class Event(models.Model):
     title = models.CharField(verbose_name='تیتر', max_length=200, null=True, blank=True)
     text = models.TextField(verbose_name='متن', )
 
-
+    class Meta:
+        verbose_name = 'رویداد'
+        verbose_name_plural = 'رویداد'
 
 
 
