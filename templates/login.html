@@ -14,7 +14,7 @@
             {{ error }}
         </div>
         <form action="{% url 'Login' %}" method="post">
-            {% csrf_token %}
+{#            {% csrf_token %}#}
             <div id="email-wrapper" class="input-wrapper">
                 <input name="email" placeholder="email">
             </div>

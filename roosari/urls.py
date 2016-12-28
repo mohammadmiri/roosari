@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.core.urlresolvers import reverse
 from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -29,3 +30,5 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/admin'), name='AdminIndex'),
     url(r'^admin/', admin.site.urls),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()

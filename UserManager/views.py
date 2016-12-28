@@ -7,12 +7,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
 
-
-import traceback
 
 urlsite = 'http://108.61.200.118:8000'
 
+@csrf_exempt
 def loginFunc(request):
     error = ''
     if request.method == 'POST':

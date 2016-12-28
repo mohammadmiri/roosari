@@ -1,4 +1,4 @@
-from .models import Dookht, Chap, Process, Parche, ReserveForm, ProcessFormKargar, ServiceTarh
+from .models import Dookht, Chap, Process, Parche, ReserveForm, ProcessFormKargar, ServiceTarh, OtherServices
 from UserManager.models import CustomerMessage
 
 from django.contrib import admin
@@ -34,6 +34,11 @@ class ReserveFormAdmin(admin.ModelAdmin):
     def get_customer_name(self, obj):
         return obj.customer.name
 
+    def get_status(self, obj):
+        if obj.process:
+            return obj.process.name
+        else:
+            '-'
 
     fieldsets = (
         ('مشتری', {
@@ -54,6 +59,9 @@ class ReserveFormAdmin(admin.ModelAdmin):
         ('اطلاعات', {
             'fields':('typeChap', 'number')
         }),
+        ('سایر خدمات', {
+            'fields':('otherServices',)
+        }),
         ('زمان سفارش',{
             'fields':('reserveDay', 'reserveMonth', 'reserveYear',),
         }),
@@ -71,16 +79,14 @@ class ReserveFormAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         groupnames = request.user.groups.values_list('name', flat=True)
-        print('group name:'+str(groupnames))
         if 'admin' in groupnames:
             return ()
         elif 'karbarTehran' in groupnames:
             return ()
         elif 'karbarKarkhane' in groupnames:
-            print('in group')
             return ('customer', 'tarh', 'serviceTarh', 'hasParche', 'parche', 'parcheWidth', 'parcheHeight', 'typeChap', 'hasLabel',
                     'reserveDay', 'reserveMonth', 'reserveYear', 'deliveryDay', 'deliveryMonth', 'deliveryYear', 'description',
-                     'dookht',)
+                     'dookht', 'number')
         else:
             return ()
 
@@ -111,11 +117,41 @@ class ProcessStatusInline(admin.TabularInline):
     model = ReserveForm
     extra = 0
 
+    def get_readonly_fields(self, request, obj=None):
+        groupnames = request.user.groups.values_list('name', flat=True)
+        if 'admin' in groupnames:
+            return ()
+        elif 'karbarTehran' in groupnames:
+            return ()
+        elif 'karbarKarkhane' in groupnames:
+            return ('customer', 'tarh', 'serviceTarh', 'hasParche', 'parche', 'parcheWidth', 'parcheHeight', 'typeChap',
+                    'hasLabel',
+                    'reserveDay', 'reserveMonth', 'reserveYear', 'deliveryDay', 'deliveryMonth', 'deliveryYear',
+                    'description',
+                    'dookht', 'number')
+        else:
+            return ()
+
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
+
 class ProcessAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name',)
     inlines = [ProcessStatusInline ]
+
+    def get_readonly_fields(self, request, obj=None):
+        groupnames = request.user.groups.values_list('name', flat=True)
+        if 'admin' in groupnames:
+            return ()
+        elif 'karbarTehran' in groupnames:
+            return ()
+        elif 'karbarKarkhane' in groupnames:
+            return ('name',)
+        else:
+            return ()
 
 class ServiceTarhAdmin(admin.ModelAdmin):
     list_display = ('name', 'price',)
@@ -126,6 +162,7 @@ class ProcessFormKargarAdmin(admin.ModelAdmin):
     list_display = ( 'form_code', 'customer', 'form_status', 'kargar', 'duration')
     list_display_links = ( 'form_code', 'customer',)
     search_fields = ('form__id',)
+    raw_id_fields = ['form']
 
     def customer(self, obj):
         return obj.form.customer.name
@@ -206,3 +243,4 @@ admin.site.register(Process, ProcessAdmin)
 admin.site.register(ServiceTarh, ServiceTarhAdmin)
 admin.site.register(ProcessFormKargar, ProcessFormKargarAdmin)
 admin.site.register(CustomerMessage, CustomerMessageAdmin)
+admin.site.register(OtherServices)

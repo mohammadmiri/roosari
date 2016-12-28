@@ -1,11 +1,12 @@
 from .models import ReserveForm, Dookht, Parche, Process, ProcessFormKargar, ServiceTarh, Chap
-from UserManager.models import Customer, Kargar
+from UserManager.models import Customer, Kargar, KarbarKarkhane
 
 from django.shortcuts import render, redirect, reverse
 from django.core.urlresolvers import get_resolver
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt
 
 
 dayChoice = [
@@ -25,6 +26,7 @@ yearChoice = [(1395, '۱۳۹۵'), (1396, '۱۳۹۶'), (1397, '۱۹۳۷'), (1398,
 def siteadmin(request):
     groups = list(request.user.groups.all())
     group = ''
+    karbarKarkhane = ''
     if request.user.is_superuser:
         group = 'superuser'
     elif groups[0].name == 'admin':
@@ -33,12 +35,14 @@ def siteadmin(request):
         group = 'karbarTehran'
     elif groups[0].name == 'karbarKarkhane':
         group = 'karbarKarkhane'
-    context = {'group':group}
+        karbarKarkhane = KarbarKarkhane.objects.get(user=request.user)
+        print('name'+str(karbarKarkhane.name))
+    context = {'group':group, 'karbarKarKhane':karbarKarkhane}
     return render(request, 'admin/index.html', context)
 
 
 
-
+@csrf_exempt
 def loginFunc(request):
     error = ''
     if request.method == 'POST':

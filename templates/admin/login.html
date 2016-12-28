@@ -78,7 +78,7 @@
             {{ error }}
         </div>
         <form action="{% url 'loginCustomAdmin' %}" method="post">
-            {% csrf_token %}
+{#            {% csrf_token %}#}
             <div id="username-wrapper" class="input-wrapper">
                 <input name="username" placeholder="username">
             </div>

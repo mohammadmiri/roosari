@@ -1,4 +1,5 @@
 from UserManager.models import Kargar, Customer
+from .templatetags.toPersian import IntegerToPersian
 
 from django.db import models
 from django.dispatch import receiver
@@ -37,8 +38,8 @@ class ReserveForm(models.Model):
     number = models.IntegerField(verbose_name='تعداد', blank=True, null=True)
     typeChap = models.ForeignKey('Chap', verbose_name='چاپ', blank=True, null=True)
     dookht = models.ForeignKey('Dookht', verbose_name='دوخت', blank=True, null=True,)
-    hasLabel = models.BooleanField(verbose_name='برچسب دارد', )
-
+    hasLabel = models.BooleanField(verbose_name='لیبل دارد', )
+    otherServices = models.ManyToManyField('OtherServices', verbose_name='سایر خدمات', blank=True)
     # reserve date
     reserveDay = models.IntegerField(choices=dayChoice, verbose_name='روز', blank=True, null=True)
     reserveMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه', blank=True, null=True)
@@ -48,14 +49,20 @@ class ReserveForm(models.Model):
     deliveryMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه', blank=True, null=True)
     deliveryYear = models.IntegerField(verbose_name='سال', blank=True, null=True)
     description = models.TextField(verbose_name='توضیح', blank=True, null=True)
-    process = models.ForeignKey('Process', verbose_name='فرایند', blank=True, null=True)
+    process = models.ForeignKey('Process', verbose_name='فرایند', blank=True, null=True, default=2)
 
     class Meta:
         verbose_name = "سفارش"
         verbose_name_plural = "سفارش"
 
     def __str__(self):
-        return 'code: '+str(self.id)
+        return str(self.id)
+
+    def get_reserve_date(self):
+        return IntegerToPersian(self.reserveDay) + '/' + IntegerToPersian(self.reserveMonth) + '/' + IntegerToPersian(self.reserveYear)
+
+    def get_delivery_date(self):
+        return IntegerToPersian(self.deliveryDay) + '/' + IntegerToPersian(self.deliveryMonth) + '/' + IntegerToPersian(self.deliveryYear)
 
     def get_tarh_url(self):
         if self.tarh:
@@ -102,6 +109,18 @@ class ServiceTarh(models.Model):
         return self.name
 
 
+class OtherServices(models.Model):
+    name = models.CharField(max_length=100, verbose_name='نام')
+    price = models.IntegerField(verbose_name='قیمت')
+
+    class Meta:
+        verbose_name = 'سایر خدمات'
+        verbose_name_plural = 'سایر خدمات'
+
+    def __str__(self):
+        return self.name
+
+
 
 class Chap(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام',)
@@ -131,7 +150,7 @@ class Process(models.Model):
 class ProcessFormKargar(models.Model):
     process = models.ForeignKey(Process, verbose_name='فرایند',)
     kargar = models.ForeignKey(Kargar, verbose_name='کارگر',)
-    form = models.ForeignKey(ReserveForm, verbose_name='فرم',)
+    form = models.ForeignKey(ReserveForm, verbose_name='کد سفارش',)
     rate = models.IntegerField(verbose_name='امتیاز کارگر', null=True, blank=True, default=0)
     # start date
     startDay = models.IntegerField(choices=dayChoice, verbose_name='روز شروع', blank=True, null=True)
@@ -148,6 +167,11 @@ class ProcessFormKargar(models.Model):
     class Meta:
         verbose_name = 'وضعیت سفارش'
         verbose_name_plural = 'وضعیت سفارش'
+
+    def get_duration(self):
+        duration = self.endDateTime - self.startDateTime
+        hours, reminder = divmod(duration.seconds, 3600)
+        return 'روز' + '\t' + str(duration.days) + ' | ' +     'ساعت' + str(hours)
 
 
 #signals:
