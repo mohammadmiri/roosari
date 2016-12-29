@@ -19,13 +19,13 @@
         {{ form.customer.name }}
     </div>
     <div class="row">
-        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 col-xs-offset-4 col-md-offset-4 cell center-horizontally">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 col-xs-offset-2 col-md-offset-2 cell center-horizontally">
             فرایند
         </div>
         <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
 کارگر
         </div>
-        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 col-xs-offset-4 col-md-offset-4 cell center-horizontally">
+        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
 امتیاز
         </div>
         <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
@@ -34,13 +34,13 @@
     </div>
     {% for process in processes.all %}
         <div class="row">
-            <div class="col-md-2 col-xs-2 col-xs-offset-4 col-md-offset-4 cell center-horizontally">
+            <div class="col-md-2 col-xs-2 col-xs-offset-2 col-md-offset-2 cell center-horizontally">
 {{ process.process.name }}
             </div>
             <div class="col-md-2 col-xs-2 cell center-horizontally">
 {{ process.kargar.name }}
             </div>
-            <div class="col-md-2 col-xs-2 col-xs-offset-4 col-md-offset-4 cell center-horizontally">
+            <div class="col-md-2 col-xs-2 cell center-horizontally">
 {{ process.rate }}
             </div>
             <div class="col-md-2 col-xs-2 cell center-horizontally">

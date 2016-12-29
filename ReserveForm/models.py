@@ -169,6 +169,8 @@ class ProcessFormKargar(models.Model):
         verbose_name_plural = 'وضعیت سفارش'
 
     def get_duration(self):
+        if self.startDateTime is None or self.endDateTime is None:
+            return '-'
         duration = self.endDateTime - self.startDateTime
         hours, reminder = divmod(duration.seconds, 3600)
         return 'روز' + '\t' + str(duration.days) + ' | ' +     'ساعت' + str(hours)
