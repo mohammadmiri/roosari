@@ -1,6 +1,7 @@
 from .models import Dookht, Chap, Process, Parche, ReserveForm, ProcessFormKargar, ServiceTarh, OtherServices
 from UserManager.models import CustomerMessage
 
+
 from django.contrib import admin
 from django.db import models
 from django.forms import CheckboxSelectMultiple
@@ -27,18 +28,27 @@ class ProcessInline(admin.TabularInline):
     )
 
 class ReserveFormAdmin(admin.ModelAdmin):
-    list_display = ('id', 'get_customer_name',)
+    list_display = ('id', 'get_customer_name', 'get_status', 'reserve_date')
     list_display_links = ('get_customer_name',)
     search_fields = ['id']
 
     def get_customer_name(self, obj):
         return obj.customer.name
+    get_customer_name.__name__ = 'مشتری'
 
     def get_status(self, obj):
         if obj.process:
             return obj.process.name
         else:
             '-'
+    get_status.__name__ = 'وضعیت'
+
+    def reserve_date(self, obj):
+        if obj.reserveDay is not None and obj.reserveMonth is not None and obj.reserveYear is not None:
+            return str(obj.reserveYear)+'/'+str(obj.reserveMonth)+'/'+str(obj.reserveDay)
+        else:
+            return '-'
+    reserve_date.__name__ = 'تاریخ ثبت سفارش'
 
     fieldsets = (
         ('مشتری', {
@@ -159,40 +169,53 @@ class ServiceTarhAdmin(admin.ModelAdmin):
 
 
 class ProcessFormKargarAdmin(admin.ModelAdmin):
-    list_display = ( 'form_code', 'customer', 'form_status', 'kargar', 'duration')
+    list_display = ( 'form_code', 'customer', 'form_status', 'kargar', 'duration', 'is_ended')
     list_display_links = ( 'form_code', 'customer',)
     search_fields = ('form__id',)
     raw_id_fields = ['form']
+    ordering = ['-startDateTime']
+
+    def is_ended(self, obj):
+        if obj.endDateTime is not None:
+            return 'تمام شده است'
+        else:
+            '-'
+    is_ended.__name__ = 'اتمام'
 
     def customer(self, obj):
         return obj.form.customer.name
+    customer.__name__ = 'مشتری'
 
     def form_code(self, obj):
         if obj.form:
             return obj.form.id
         else:
             return '-'
+    form_code.__name__ = 'کد سفارش'
 
     def form_status(self, obj):
         if obj.process:
             return obj.process.name
         else:
             return '-'
+    form_status.__name__ = 'وضعیت سفارش'
 
     def kargar(self, obj):
         if obj.kargar:
             return obj.kargar.name
         else:
             return '-'
+    kargar.__name__ = 'کارگر'
 
     def duration(self, obj):
         if not obj.startDateTime:
-            return 'زمان شروع به درستی وارد نشده است'
+            return '-'
         if not obj.endDateTime:
-            return 'زمان اتمام به درستی وارد نشده است'
+            return '-'
         duration = obj.endDateTime - obj.startDateTime
         hours , reminder = divmod(duration.seconds, 3600)
-        return  'ساعت' + str(hours) + ' | ' + 'روز' + '\t' + str(duration.days)
+        return  str(duration.days) + '\t' + 'روز' + ' | ' + str(hours) + 'ساعت'
+    duration.__name__ = 'مدت زمان'
 
 
     fieldsets = (
@@ -231,6 +254,7 @@ class CustomerMessageAdmin(admin.ModelAdmin):
 
     def get_customer(self, obj):
         return obj.customer.name
+    get_customer.__name__ = 'مشتری'
 
 
 

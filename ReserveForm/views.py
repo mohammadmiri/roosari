@@ -36,7 +36,6 @@ def siteadmin(request):
     elif groups[0].name == 'karbarKarkhane':
         group = 'karbarKarkhane'
         karbarKarkhane = KarbarKarkhane.objects.get(user=request.user)
-        print('name'+str(karbarKarkhane.name))
     context = {'group':group, 'karbarKarKhane':karbarKarkhane}
     return render(request, 'admin/index.html', context)
 
