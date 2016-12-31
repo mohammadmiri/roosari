@@ -1,35 +1,68 @@
+{#<!DOCTYPE html>#}
+{#{% load static %}#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#    <link href="{% static 'css/login.css' %}" type="text/css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{##}
+{#<div id="main-wrapper">#}
+{#    <div id="form-wrapper">#}
+{#        <div id="error_wrapper" class="error-message">#}
+{#            {{ error }}#}
+{#        </div>#}
+{#        <form action="{% url 'Login' %}" method="post">#}
+{#            {% csrf_token %}#}
+{#            <div id="email-wrapper" class="input-wrapper">#}
+{#                <input name="email" placeholder="email">#}
+{#            </div>#}
+{#            <div id="password-wrapper" class="input-wrapper">#}
+{#                <input name="password" type="password">#}
+{#            </div>#}
+{#            <div id="submit-wrappper">#}
+{#                <input type="submit" value="ورود">#}
+{#            </div>#}
+{#            <div id="forgetpassword_link">#}
+{#                <a href="{% url 'ForgetPassword' %}">رمز خود را فراموش کردید؟</a>#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+
+
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="{% static 'css/login.css' %}" type="text/css" rel="stylesheet">
+    <title>سامانه ارتباط با مشتری</title>
+    <!--<meta http-equiv="refresh" content="2">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}"/>
 </head>
-<body>
+<body lang="fa">
 
-<div id="main-wrapper">
-    <div id="form-wrapper">
-        <div id="error_wrapper" class="error-message">
-            {{ error }}
-        </div>
-        <form action="{% url 'Login' %}" method="post">
-{#            {% csrf_token %}#}
-            <div id="email-wrapper" class="input-wrapper">
-                <input name="email" placeholder="email">
-            </div>
-            <div id="password-wrapper" class="input-wrapper">
-                <input name="password" type="password">
-            </div>
-            <div id="submit-wrappper">
-                <input type="submit" value="ورود">
-            </div>
-            <div id="forgetpassword_link">
-                <a href="{% url 'ForgetPassword' %}">رمز خود را فراموش کردید؟</a>
-            </div>
-        </form>
-    </div>
+<div class="signup">
+	به سامانه ارتباط با مشتری ما خوش آمدید!
 </div>
+
+<div class="login">
+    {{ error }}
+    <form autocomplete="off" action="{% url 'Login' %}" method="post">
+        <input class="inputA" placeholder="نام کاربری" type="text" name="email">
+        <input class="inputA" placeholder="رمز عبور" type="password" name="password">
+		<a class="forget" href="http://www.google.com">فراموش کردید؟</a>
+        <input class="inputA" type="submit" value="ورود">
+    </form>
+</div>
+
 
 </body>
 </html>

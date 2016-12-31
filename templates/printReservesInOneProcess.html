@@ -16,20 +16,32 @@
         {{ process.name }}
     </div>
     <div class="row">
-        <div class="col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3 cell center-horizontally">
+        <div class="col-md-2 col-md-offset-2 col-xs-2 col-xs-offset-2 cell center-horizontally">
             کد سفارش
         </div>
-        <div class="col-md-3 col-xs-3 cell center-horizontally">
+        <div class="col-md-2 col-xs-2 cell center-horizontally">
 سفارش دهنده
+        </div>
+        <div class="col-md-2 col-xs-2 cell center-horizontally">
+تاریخ ثبت
+        </div>
+        <div class="col-md-2 col-xs-2 cell center-horizontally">
+تاریخ تحویل
         </div>
     </div>
     {% for form in forms %}
         <div class="row">
-                <div class="col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3 cell center-horizontally">
+                <div class="col-md-2 col-md-offset-2 col-xs-2 col-xs-offset-2 cell center-horizontally">
 {{ form.id }}
                 </div>
-                <div class="col-md-3 col-xs-3 cell center-horizontally">
+                <div class="col-md-2 col-xs-2 cell center-horizontally">
 {{ form.customer.name }}
+                </div>
+                <div class="col-md-2 col-xs-2 cell center-horizontally">
+{{ form.get_reserve_date }}
+                </div>
+                <div class="col-md-2 col-xs-2 cell center-horizontally">
+{{ form.get_delivery_date }}
                 </div>
         </div>
     {% endfor %}

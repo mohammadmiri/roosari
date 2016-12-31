@@ -59,16 +59,23 @@ class ReserveForm(models.Model):
         return str(self.id)
 
     def get_reserve_date(self):
-        return IntegerToPersian(self.reserveDay) + '/' + IntegerToPersian(self.reserveMonth) + '/' + IntegerToPersian(self.reserveYear)
+        if self.reserveDay is not None and self.reserveMonth is not None and self.reserveYear is not None:
+            return IntegerToPersian(self.reserveDay) + '/' + IntegerToPersian(self.reserveMonth) + '/' + IntegerToPersian(self.reserveYear)
+        else:
+            return '-'
 
     def get_delivery_date(self):
-        return IntegerToPersian(self.deliveryDay) + '/' + IntegerToPersian(self.deliveryMonth) + '/' + IntegerToPersian(self.deliveryYear)
+        if self.deliveryDay is not None and self.deliveryMonth is not None and self.deliveryYear is not None:
+            return IntegerToPersian(self.deliveryDay) + '/' + IntegerToPersian(self.deliveryMonth) + '/' + IntegerToPersian(self.deliveryYear)
+        else:
+            return '-'
 
     def get_tarh_url(self):
         if self.tarh:
             return self.tarh.url
         else:
             return ''
+
 
 
 class Parche(models.Model):
@@ -107,6 +114,7 @@ class ServiceTarh(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 class OtherServices(models.Model):

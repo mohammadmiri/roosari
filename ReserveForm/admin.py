@@ -28,9 +28,9 @@ class ProcessInline(admin.TabularInline):
     )
 
 class ReserveFormAdmin(admin.ModelAdmin):
-    list_display = ('id', 'get_customer_name', 'get_status', 'reserve_date')
+    list_display = ('id', 'get_customer_name', 'get_status', 'get_number', 'reserve_date', 'delivery_date',)
     list_display_links = ('get_customer_name',)
-    search_fields = ['id']
+    search_fields = ['id', 'customer__name', 'process__name']
 
     def get_customer_name(self, obj):
         return obj.customer.name
@@ -42,6 +42,17 @@ class ReserveFormAdmin(admin.ModelAdmin):
         else:
             '-'
     get_status.__name__ = 'وضعیت'
+
+    def get_number(self, obj):
+        return obj.number
+    get_number.__name__ = 'تعداد'
+
+    def delivery_date(self, obj):
+        if obj.deliveryDay is not None and obj.deliveryMonth is not None and obj.deliveryYear is not None:
+            return str(obj.deliveryYear)+'/'+str(obj.deliveryMonth)+'/'+str(obj.deliveryDay)
+        else:
+            return '-'
+    delivery_date.__name__ = 'تاریخ تحویل'
 
     def reserve_date(self, obj):
         if obj.reserveDay is not None and obj.reserveMonth is not None and obj.reserveYear is not None:

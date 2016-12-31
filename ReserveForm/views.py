@@ -1,5 +1,5 @@
 from .models import ReserveForm, Dookht, Parche, Process, ProcessFormKargar, ServiceTarh, Chap
-from UserManager.models import Customer, Kargar, KarbarKarkhane
+from UserManager.models import Customer, Kargar, KarbarKarkhane, KarbarTehran
 
 from django.shortcuts import render, redirect, reverse
 from django.core.urlresolvers import get_resolver
@@ -33,10 +33,11 @@ def siteadmin(request):
         group = 'admin'
     elif groups[0].name == 'karbarTehran':
         group = 'karbarTehran'
+        # karbarTehran = KarbarTehran.objects.get(user=request.user)
     elif groups[0].name == 'karbarKarkhane':
         group = 'karbarKarkhane'
-        karbarKarkhane = KarbarKarkhane.objects.get(user=request.user)
-    context = {'group':group, 'karbarKarKhane':karbarKarkhane}
+        # karbarKarkhane = KarbarKarkhane.objects.get(user=request.user)
+    context = {'group':group, 'name_person':request.user.first_name}
     return render(request, 'admin/index.html', context)
 
 

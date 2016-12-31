@@ -97,11 +97,13 @@
     <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'css/indexAdmin.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'css/IndexKarbarKarkhane.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/IndexKarbarTehran.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/IndexPageAdmin.css' %}" type="text/css" rel="stylesheet">
 </head>
 <body>
 
 
-{% if group != 'karbarKarkhane' %}
+{% if group == 'superuser' %}
 <div id="main-wrapper">
     <div id="header-page" class="container-fluid">
         <div class="row">
@@ -201,21 +203,20 @@
     </div>
 </div>
 
-{% else %}
+{% elif group == 'karbarKarkhane' %}
 
 {#  ka is short of karkhane and it appears before of id and class code below  #}
 <div id="ka-main-wrapper">
-
     <div id="header-wrapper" class="container-fluid">
         <div class="row">
             <div id="user-property-wrapper" class="col-sm-4 col-xs-5 col-md-3">
                 <div id="container-property" class="center-vertically">
                     <div id="username-wrapper">
                         <div id="username-label-wrapper">نام کاربری:</div>
-                        <div id="username-value-wrapper">{{ karbarKarKhane.name }}</div>
+                        <div id="username-value-wrapper">{{ name_person }}</div>
                     </div>
                     <div id="links-wrapper">
-                        <div id="home-link"><a href="{% url 'HomepageCustomer' %}">خانه</a> |</div>
+{#                        <div id="home-link"><a href="{% url 'HomepageCustomer' %}">خانه</a> |</div>#}
                         <div id="exit-link"><a href="{% url 'adminLogout' %}">خروج</a></div>
                     </div>
                 </div>
@@ -223,7 +224,7 @@
                     <img class="xs-invisible img-circle" src="{% static 'img/anonymous.png' %}">
                 </div>
             </div>
-            <div id="page-title-wrapper" class="col-xs-8 col-xs-offset-4 col-md-5 col-md-offset-4">صفحه ارتباط با مشتری</div>
+            <div id="page-title-wrapper" class="col-xs-8 col-xs-offset-4 col-md-5 col-md-offset-4">صفحه مدیریت ارتباط با مشتری</div>
         </div>
     </div>
 
@@ -248,7 +249,192 @@
             <div class="links-wrapper col-md-4 col-md-offset-1 container-fluid">
                 <div class="links-header-wrapper row">
                     <div class="link-header-label col-md-4 col-md-offset-5 text-wrapper"><h3>کارگران</h3></div>
-                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/kargars.png' %}"></div>
+                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/yellow_kargars.png' %}"></div>
+                </div>
+                <ul>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'add_processformkargar' %}">ثبت فعالیت جدید برای کارگران</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_processformkargar' %}">لیست فعالیت های ثبت شده کارگران</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_kargar' %}">مشاهده لیست کارگران و افزودن کارگر</a></div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+            <div class="links-wrapper col-md-4 container-fluid">
+                <div class="links-header-wrapper row">
+                    <div class="link-header-label col-md-4 col-md-offset-5 text-wrapper"><h3>سفارش ها</h3></div>
+                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/yellow_reserves.png' %}"></div>
+                </div>
+                <ul>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'change_process_reserveProcess' %}">سفارش های تازه ثبت شده(فرایند ثبت سفارش)</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_process' %}">سفارش ها بر اساس وضعیت در کار خانه</a></div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% elif group == 'karbarTehran' %}
+
+<div id="te-main-wrapper">
+    <div id="header-wrapper" class="container-fluid">
+        <div class="row">
+            <div id="user-property-wrapper" class="col-sm-4 col-xs-5 col-md-3">
+                <div id="container-property" class="center-vertically">
+                    <div id="username-wrapper">
+                        <div id="username-label-wrapper">نام کاربری:</div>
+                        <div id="username-value-wrapper">{{ name_person }}</div>
+                    </div>
+                    <div id="links-wrapper">
+{#                        <div id="home-link"><a href="{% url 'HomepageCustomer' %}">خانه</a> |</div>#}
+                        <div id="exit-link"><a href="{% url 'adminLogout' %}">خروج</a></div>
+                    </div>
+                </div>
+                <div id="image-wrapper" class="center-vertically">
+                    <img class="xs-invisible img-circle" src="{% static 'img/anonymous.png' %}">
+                </div>
+            </div>
+            <div id="page-title-wrapper" class="col-xs-8 col-xs-offset-4 col-md-5 col-md-offset-4">صفحه مدیریت ارتباط با مشتری</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4" id="main-image-wrapper">
+            <img class="img-circle" src="{% static 'img/anonymous.png' %}">
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 center-horizontally">
+                <h1 class="text-wrapper">سلام {{ karbarKarKhane.name }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 center-horizontally">
+                <h2 class="text-wrapper">خوش آمدید!</h2>
+            </div>
+        </div>
+    </div>
+
+    <div id="link-group-wrapper" class="container-fluid">
+        <div class="row">
+            <div class="links-wrapper col-md-4 col-md-offset-1 container-fluid">
+                <div class="links-header-wrapper row">
+                    <div class="link-header-label col-md-4 col-md-offset-5 text-wrapper"><h3>مشتریان</h3></div>
+                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/green_customers.png' %}"></div>
+                </div>
+                <ul>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'add_customer' %}">ثبت مشتری جدید</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_customer' %}">لیست مشتریان و ثبت رویداد</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_customerMessages' %}">پیام های مشتریان</a></div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+            <div class="links-wrapper col-md-4 container-fluid">
+                <div class="links-header-wrapper row">
+                    <div class="link-header-label col-md-4 col-md-offset-5 text-wrapper"><h3>سفارش ها</h3></div>
+                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/green_reserves.png' %}"></div>
+                </div>
+                <ul>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'change_process_reserveProcess' %}">سفارش های تازه ثبت شده(فرایند ثبت سفارش)</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_process' %}">سفارش ها بر اساس وضعیت در کار خانه</a></div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% elif group == 'admin' %}
+
+<div id="ad-main-wrapper">
+    <div id="header-wrapper" class="container-fluid">
+        <div class="row">
+            <div id="user-property-wrapper" class="col-sm-4 col-xs-5 col-md-3">
+                <div id="container-property" class="center-vertically">
+                    <div id="username-wrapper">
+                        <div id="username-label-wrapper">نام کاربری:</div>
+                        <div id="username-value-wrapper">{{ name_person }}</div>
+                    </div>
+                    <div id="links-wrapper">
+{#                        <div id="home-link"><a href="{% url 'HomepageCustomer' %}">خانه</a> |</div>#}
+                        <div id="exit-link"><a href="{% url 'adminLogout' %}">خروج</a></div>
+                    </div>
+                </div>
+                <div id="image-wrapper" class="center-vertically">
+                    <img class="xs-invisible img-circle" src="{% static 'img/anonymous.png' %}">
+                </div>
+            </div>
+            <div id="page-title-wrapper" class="col-xs-8 col-xs-offset-4 col-md-5 col-md-offset-4">صفحه مدیریت ارتباط با مشتری</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4" id="main-image-wrapper">
+            <img class="img-circle" src="{% static 'img/anonymous.png' %}">
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 center-horizontally">
+                <h1 class="text-wrapper">سلام {{ name_person }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 center-horizontally">
+                <h2 class="text-wrapper">خوش آمدید!</h2>
+            </div>
+        </div>
+    </div>
+
+    <div id="link-group-wrapper" class="container-fluid">
+        <div class="row">
+            <div class="links-wrapper col-md-4 col-md-offset-1 container-fluid">
+                <div class="links-header-wrapper row">
+                    <div class="link-header-label col-md-4 col-md-offset-5 text-wrapper"><h3>کارگران</h3></div>
+                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/red_kargars.png' %}"></div>
                 </div>
                 <ul>
                     <div class="row">
@@ -271,17 +457,17 @@
             <div class="links-wrapper col-md-4 container-fluid">
                 <div class="links-header-wrapper row">
                     <div class="link-header-label col-md-4 col-md-offset-5 text-wrapper"><h3>سفارش ها</h3></div>
-                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/reserves.png' %}"></div>
+                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/red_reserves.png' %}"></div>
                 </div>
                 <ul>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها</a></div>
+                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'change_process_reserveProcess' %}">سفارش های تازه ثبت شده</a></div>
+                            <div class="link"><a href="{% url 'change_process_reserveProcess' %}">سفارش های تازه ثبت شده(فرایند ثبت سفارش)</a></div>
                         </div>
                     </div>
                     <div class="row">
@@ -292,9 +478,104 @@
                 </ul>
             </div>
         </div>
+        <div class="row">
+            <div class="links-wrapper col-md-4 col-md-offset-1 container-fluid">
+                <div class="links-header-wrapper row">
+                    <div class="link-header-label col-md-4 col-md-offset-5 text-wrapper"><h3>مشتریان</h3></div>
+                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/red_customers.png' %}"></div>
+                </div>
+                <ul>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'add_customer' %}">ثبت مشتری جدید</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_customer' %}">لیست مشتریان و ثبت رویداد</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_customerMessages' %}">پیام های مشتریان</a></div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+            <div class="links-wrapper col-md-4 container-fluid">
+                <div class="links-header-wrapper row">
+                    <div class="link-header-label col-md-4 col-md-offset-5 text-wrapper"><h3>کاربران سامانه</h3></div>
+                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/red_systemUsers.png' %}"></div>
+                </div>
+                <ul>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'add_karbarTehran' %}">افزودن کاربر فروشنده</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_karbarTehran' %}">لیست کاربران فروشنده</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'add_karbarKarkhane' %}">افزودن کاربر کارخانه</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_karbarKarkhane' %}">افزودن کاربر کارخانه</a></div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="links-wrapper col-md-4 col-md-offset-1 container-fluid">
+                <div class="links-header-wrapper row">
+                    <div class="link-header-label col-md-4 col-md-offset-5 text-wrapper"><h3>اطلاعات پایه</h3></div>
+                    <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/red_baseInformation.png' %}"></div>
+                </div>
+                <ul>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_dookht' %}">انواع دوخت</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_parche' %}">انواع پارچه</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_servicetarh' %}">خدمات طرح</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_chap' %}">انواع چاپ</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_otherServices' %}">سایر خدمات</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_process' %}">فرايندهای خط تولید</a></div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
     </div>
-
 </div>
+
+
+
 {% endif %}
 
 </body>

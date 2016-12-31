@@ -1,62 +1,186 @@
-#main-wrapper{
-    font-family: "B Yekan+";
-    min-width: 33cm;
-    min-height: 13cm;
-    padding-top: 5cm;
+/*#main-wrapper{*/
+    /*font-family: "B Yekan+";*/
+    /*min-width: 33cm;*/
+    /*min-height: 13cm;*/
+    /*padding-top: 5cm;*/
+/*}*/
+
+/*#form-wrapper{*/
+    /*margin: 0 auto;*/
+    /*width: 8cm;*/
+    /*height: 7cm;*/
+    /*max-height: 4.5cm;*/
+    /*padding: 2.5cm;*/
+    /*padding-top: 2cm;*/
+    /*border-radius: 0.5cm;*/
+    /*border: solid 1px #999999;*/
+/*}*/
+
+/*.input-wrapper input{*/
+    /*width: 7cm;*/
+    /*height: 0.9cm;*/
+    /*padding-left: 0.2cm;*/
+    /*margin-bottom: 0.4cm;*/
+    /*border-radius: 0.2cm;*/
+/*}*/
+
+/*#submit-wrappper{*/
+    /*margin-top: 0.3cm;*/
+    /*text-align: center;*/
+/*}*/
+
+/*#submit-wrappper input{*/
+    /*height: 1cm;*/
+    /*width: 2cm;*/
+    /*border: hidden;*/
+    /*background-color: #5cb85c;*/
+    /*border-radius: 0.2cm;*/
+    /*color: white;*/
+    /*font-size: 0.5cm;*/
+/*}*/
+
+/*#forgetpassword_link{*/
+    /*margin-top: 0.5cm;*/
+    /*margin-bottom: 0.5cm;*/
+    /*text-align: center;*/
+/*}*/
+
+/*#forgetpassword_link a{*/
+    /*text-decoration: none;*/
+/*}*/
+
+/*#forgetpassword_link a:visited{*/
+    /*!*color: black;*!*/
+/*}*/
+
+/*.error-message{*/
+    /*margin-bottom: 0.5cm;*/
+    /*color: red;*/
+    /*text-align: center;*/
+/*}*/
+
+
+
+
+
+
+body{
+    background-image: url("/static/img/back.jpg");
+	background-color: #fafafa;
+    /*background-image: url("Wallpaper/across_the_floors_of_union_station-wallpaper-1366x768.jpg");*/
+    /*background-repeat: no-repeat;*/
+    height: 100%;
+    width: 100%;
 }
 
-#form-wrapper{
-    margin: 0 auto;
-    width: 8cm;
-    height: 7cm;
-    max-height: 4.5cm;
-    padding: 2.5cm;
-    padding-top: 2cm;
-    border-radius: 0.5cm;
-    border: solid 1px #999999;
+body:hover{
 }
 
-.input-wrapper input{
-    width: 7cm;
-    height: 0.9cm;
-    padding-left: 0.2cm;
-    margin-bottom: 0.4cm;
-    border-radius: 0.2cm;
+body:lang(fa){
+    float: right;
+    direction: rtl;
 }
 
-#submit-wrappper{
-    margin-top: 0.3cm;
-    text-align: center;
+body:lang(en){
+    float: left;
+    direction: ltr;
 }
 
-#submit-wrappper input{
-    height: 1cm;
-    width: 2cm;
-    border: hidden;
-    background-color: #5cb85c;
-    border-radius: 0.2cm;
+
+.circle{
+    width:20rem;
+    height:20rem;
+    border-radius: 50%;
+    border: 2px solid blueviolet;
+}
+
+.inputA{
+    width:100%;
+    height:3rem;
+    border:1px solid #dbdbdb;
+    border-radius: 3px;
+    text-indent: 1rem;
+    background-color: transparent;
+    /*direction: rtl;*/
+    margin-bottom: 1.5rem;
+	font-family: "B Yekan", "Yekan", "A Yekan", "tahoma";
+}
+
+.inputA:focus{
+    border: 1px solid #efefef;
+    outline: none;
+}
+
+input[type="submit"]{
     color: white;
-    font-size: 0.5cm;
+    background-color:#3897f0;
+    border: 1px solid #3897f0;
+    border-radius: 3px;
+	cursor: pointer;
+    /*border: 0;*/
+
 }
 
-#forgetpassword_link{
-    margin-top: 0.5cm;
-    margin-bottom: 0.5cm;
-    text-align: center;
+
+.login{
+    background-color: white;
+	opacity: 0.95;
+    width: 21.875rem;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 10px;
+    border: 1px solid #efefef;
+	padding-top: 30px;
 }
 
-#forgetpassword_link a{
-    text-decoration: none;
+.signup{
+    background-color: white;
+	opacity: 0.95;
+    width: 21.875rem;
+    height: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 100px;
+	padding-top: 15px;
+    border: 1px solid #efefef;
+	text-align: center;
+	font-family: "B Yekan", "Yekan", "A Yekan", "tahoma";
+
 }
 
-#forgetpassword_link a:visited{
-    /*color: black;*/
+.link{
+	text-decoration: none;
 }
 
-.error-message{
-    margin-bottom: 0.5cm;
-    color: red;
-    text-align: center;
+form{
+    width: 80%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+	position: relative;
 }
+
+.forget {
+	color: #3897f0;
+	background-color: white;
+	position:absolute;
+	top: 5.65rem;
+	left: 0.5rem;
+	text-decoration: none;
+	font-family: "B Yekan", "Yekan", "A Yekan", "tahoma";
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
