@@ -52,13 +52,19 @@ class KarbarTehranAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if change == False:
             user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'],
-                                            email = form.cleaned_data['email'])
+                                            email = form.cleaned_data['email'], first_name = form.cleaned_data['name'])
             obj.user = user
             user.is_staff = True
             user.save()
             obj.save()
             group = Group.objects.get(name='karbarTehran')
             group.user_set.add(user)
+        else:
+            if 'name' in form.cleaned_data:
+                obj.user.first_name = form.cleaned_data['name']
+                obj.name = form.cleaned_data['name']
+                obj.user.save()
+                obj.save()
 
 
 
@@ -76,6 +82,12 @@ class KarbarKharkhaneAdmin(admin.ModelAdmin):
             obj.save()
             group = Group.objects.get(name='karbarKarkhane')
             group.user_set.add(user)
+        else:
+            if 'name' in form.cleaned_data:
+                obj.user.first_name = form.cleaned_data['name']
+                obj.name = form.cleaned_data['name']
+                obj.user.save()
+                obj.save()
 
 
 
