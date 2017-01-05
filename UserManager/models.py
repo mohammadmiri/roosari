@@ -36,7 +36,7 @@ class Customer(models.Model):
     moaref = models.CharField(max_length=200, verbose_name='نام معرف',)
     workPhoneNumber = models.CharField(max_length=50, verbose_name='تلفن محل کار',)
     address = models.TextField(verbose_name='آدرس',)
-    companyName = models.TextField(verbose_name='نام شرکت',)
+    companyName = models.CharField(verbose_name='نام شرکت', max_length=100)
 
     class Meta:
         verbose_name = 'مشتری'
@@ -70,20 +70,48 @@ class Kargar(models.Model):
         return self.name
 
 
-
-class KarbarTehran(models.Model):
-    user = models.OneToOneField(User, editable=False)
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    email = models.EmailField(null=True)
+class AdminSite(models.Model):
+    user = models.OneToOneField(User)
+    username = models.CharField(max_length=100, verbose_name='نام کاربری', )
+    password = models.CharField(max_length=100, verbose_name='رمز ورود', )
+    name = models.CharField(max_length=100, verbose_name='نام', )
+    email = models.EmailField(null=True, verbose_name='ایمیل', )
+    image = models.ImageField(upload_to='karbarTehran/', verbose_name='عکس', null=True, blank=True)
 
     class Meta:
-        verbose_name = 'کاربر تهران'
-        verbose_name_plural = 'کاربر تهران'
+        verbose_name = 'ادمین'
+        verbose_name_plural = 'ادمین'
 
     def __str__(self):
         return self.username
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        else:
+            return '/static/img/anonymous.png'
+
+
+class KarbarTehran(models.Model):
+    user = models.OneToOneField(User, editable=False,)
+    username = models.CharField(max_length=100, verbose_name='نام کاربری',)
+    password = models.CharField(max_length=100, verbose_name='رمز ورود',)
+    name = models.CharField(max_length=100, verbose_name='نام',)
+    email = models.EmailField(null=True, verbose_name='ایمیل',)
+    image = models.ImageField(upload_to='karbarTehran/', verbose_name='عکس', null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'فروشنده'
+        verbose_name_plural = 'فروشنده'
+
+    def __str__(self):
+        return self.username
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        else:
+            return '/static/img/anonymous.png'
 
 
 class KarbarKarkhane(models.Model):
@@ -92,6 +120,7 @@ class KarbarKarkhane(models.Model):
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     email = models.EmailField(null=True)
+    image = models.ImageField(upload_to='karbarKarkhane/', verbose_name='عکس', null=True, blank=True)
 
     class Meta:
         verbose_name = 'کاربر کارخانه'
@@ -100,6 +129,11 @@ class KarbarKarkhane(models.Model):
     def __str__(self):
         return self.username
 
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        else:
+            return '/static/img/anonymous.png'
 
 
 class Event(models.Model):
@@ -114,7 +148,11 @@ class Event(models.Model):
         verbose_name = 'رویداد'
         verbose_name_plural = 'رویداد'
 
-
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        else:
+            return 'static/img/anonymous.png'
 
 #signals:
 

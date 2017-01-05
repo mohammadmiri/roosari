@@ -61,7 +61,7 @@
 
 
 
-
+{##}
 {#<!DOCTYPE html>#}
 {#{% load static %}#}
 {#<html lang="en">#}
@@ -124,7 +124,7 @@
     <form autocomplete="off" method="post" action="{% url 'loginCustomAdmin' %}">
         <input class="inputA" placeholder="نام کاربری" type="text" name="username">
         <input class="inputA" placeholder="رمز عبور" type="password" name="password">
-		<a class="forget" href="http://www.google.com">فراموش کردید؟</a>
+		<a class="forget" href="{% url 'ForgetPassword' %}">فراموش کردید؟</a>
         <input class="inputA" type="submit" value="ورود">
     </form>
 </div>

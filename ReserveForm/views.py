@@ -1,5 +1,5 @@
 from .models import ReserveForm, Dookht, Parche, Process, ProcessFormKargar, ServiceTarh, Chap
-from UserManager.models import Customer, Kargar, KarbarKarkhane, KarbarTehran
+from UserManager.models import Customer, Kargar, KarbarKarkhane, KarbarTehran, AdminSite
 
 from django.shortcuts import render, redirect, reverse
 from django.core.urlresolvers import get_resolver
@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
+
+
+site_url = 'http://localhost:8000/'
 
 
 dayChoice = [
@@ -27,17 +30,21 @@ def siteadmin(request):
     groups = list(request.user.groups.all())
     group = ''
     karbarKarkhane = ''
+    karbarTehran = ''
+    admin = ''
     if request.user.is_superuser:
         group = 'superuser'
     elif groups[0].name == 'admin':
         group = 'admin'
+        admin = AdminSite.objects.get(user=request.user)
     elif groups[0].name == 'karbarTehran':
         group = 'karbarTehran'
-        # karbarTehran = KarbarTehran.objects.get(user=request.user)
+        karbarTehran = KarbarTehran.objects.get(user=request.user)
     elif groups[0].name == 'karbarKarkhane':
         group = 'karbarKarkhane'
-        # karbarKarkhane = KarbarKarkhane.objects.get(user=request.user)
-    context = {'group':group, 'name_person':request.user.first_name, 'username_person':request.user.username}
+        karbarKarkhane = KarbarKarkhane.objects.get(user=request.user)
+    context = {'group':group, 'user':request.user, 'karbar_karkhane':karbarKarkhane, 'karbar_tehran':karbarTehran, 'site_url':site_url,
+               'admin':admin}
     return render(request, 'admin/index.html', context)
 
 

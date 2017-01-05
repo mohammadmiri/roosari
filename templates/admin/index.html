@@ -85,14 +85,12 @@
 
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>صفحه ارتباط با مشتری</title>
 
     <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'css/indexAdmin.css' %}" type="text/css" rel="stylesheet">
@@ -125,7 +123,7 @@
                 </div>
                 {% if group == 'admin' or group == 'karbarTehran' or group == 'superuser' %}
                     <div class="link-row row">
-                        <div class="link-label col-md-6 col-md-offset-6"><a href="{% url 'addform_reserveform' %}">افزودن سفارش جدید</a></div>
+                        <div class="link-label col-md-6 col-md-offset-6"><a href="{% url 'add_reserveform' %}">افزودن سفارش جدید</a></div>
                     </div>
                 {% endif %}
                 {% if group == 'admin' or group == 'karbarTehran' or group == 'superuser' %}
@@ -144,6 +142,11 @@
                 <div class="link-row row">
                     <div class="link-label col-md-6 col-md-offset-6"><a href="{% url 'changeList_customer' %}">مشتریان</a></div>
                 </div>
+                {% endif %}
+                {% if group == 'superuser' %}
+                    <div class=" link-row row">
+                        <div class="link-label col-md-6 col-md-offset-6"><a href="{% url 'changeList_admin' %}">ادمین</a></div>
+                    </div>
                 {% endif %}
                 {% if group == 'admin' or group == 'superuser' %}
                     <div class=" link-row row">
@@ -213,10 +216,10 @@
                 <div id="container-property" class="center-vertically">
                     <div id="username-wrapper">
                         <div id="username-label-wrapper">نام کاربری:</div>
-                        <div id="username-value-wrapper">{{ username_person }}</div>
+                        <div id="username-value-wrapper">{{ user.username }}</div>
                     </div>
                     <div id="links-wrapper">
-{#                        <div id="home-link"><a href="{% url 'HomepageCustomer' %}">خانه</a> |</div>#}
+                        <div id="home-link"><a href="{{ site_url }}admin/UserManager/karbarkarkhane/{{ karbar_karkhane.id }}/change/">پروفایل</a> |</div>
                         <div id="exit-link"><a href="{% url 'adminLogout' %}">خروج</a></div>
                     </div>
                 </div>
@@ -230,11 +233,11 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4" id="main-image-wrapper">
-            <img class="img-circle" src="{% static 'img/anonymous.png' %}">
+            <img class="img-circle" src="{{ karbar_karkhane.get_image_url }}">
         </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4 center-horizontally">
-                <h1 class="text-wrapper">سلام {{ name_person }}</h1>
+                <h1 class="text-wrapper">سلام {{ user.first_name }}</h1>
             </div>
         </div>
         <div class="row">
@@ -254,7 +257,7 @@
                 <ul>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'add_processformkargar' %}">ثبت فعالیت جدید برای کارگران</a></div>
+                            <div class="link"><a href="{% url 'add_processformkargar' %}">ثبت فعالیت جدید از کارگران</a></div>
                         </div>
                     </div>
                     <div class="row">
@@ -277,12 +280,12 @@
                 <ul>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
+                            <div class="link"><a href="{% url 'add_reserveform' %}">ثبت سفارش جدید</a></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'change_process_reserveProcess' %}">سفارش های تازه ثبت شده(فرایند ثبت سفارش)</a></div>
+                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
                         </div>
                     </div>
                     <div class="row">
@@ -305,10 +308,10 @@
                 <div id="container-property" class="center-vertically">
                     <div id="username-wrapper">
                         <div id="username-label-wrapper">نام کاربری:</div>
-                        <div id="username-value-wrapper">{{ username_person }}</div>
+                        <div id="username-value-wrapper">{{ user.username }}</div>
                     </div>
                     <div id="links-wrapper">
-{#                        <div id="home-link"><a href="{% url 'HomepageCustomer' %}">خانه</a> |</div>#}
+                        <div id="home-link"><a href="{{ site_url }}admin/UserManager/karbartehran/{{ karbar_tehran.id }}/change/">پروفایل</a> |</div>
                         <div id="exit-link"><a href="{% url 'adminLogout' %}">خروج</a></div>
                     </div>
                 </div>
@@ -322,11 +325,11 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4" id="main-image-wrapper">
-            <img class="img-circle" src="{% static 'img/anonymous.png' %}">
+            <img class="img-circle" src="{{ karbar_tehran.get_image_url }}">
         </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4 center-horizontally">
-                <h1 class="text-wrapper">سلام {{ name_person }}</h1>
+                <h1 class="text-wrapper">سلام {{ user.first_name }}</h1>
             </div>
         </div>
         <div class="row">
@@ -369,12 +372,12 @@
                 <ul>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
+                            <div class="link"><a href="{% url 'add_reserveform' %}">ثبت سفارش جدید</a></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'change_process_reserveProcess' %}">سفارش های تازه ثبت شده(فرایند ثبت سفارش)</a></div>
+                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
                         </div>
                     </div>
                     <div class="row">
@@ -398,10 +401,10 @@
                 <div id="container-property" class="center-vertically">
                     <div id="username-wrapper">
                         <div id="username-label-wrapper">نام کاربری:</div>
-                        <div id="username-value-wrapper">{{ username_person }}</div>
+                        <div id="username-value-wrapper">{{ user.username }}</div>
                     </div>
                     <div id="links-wrapper">
-{#                        <div id="home-link"><a href="{% url 'HomepageCustomer' %}">خانه</a> |</div>#}
+                        <div id="home-link"><a href="{{ site_url }}admin/UserManager/adminsite/{{ admin.id }}/change/">پروفایل</a> |</div>
                         <div id="exit-link"><a href="{% url 'adminLogout' %}">خروج</a></div>
                     </div>
                 </div>
@@ -415,11 +418,11 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4" id="main-image-wrapper">
-            <img class="img-circle" src="{% static 'img/anonymous.png' %}">
+            <img class="img-circle" src="{{ admin.get_image_url }}">
         </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4 center-horizontally">
-                <h1 class="text-wrapper">سلام {{ name_person }}</h1>
+                <h1 class="text-wrapper">سلام {{ user.first_name }}</h1>
             </div>
         </div>
         <div class="row">
@@ -439,7 +442,7 @@
                 <ul>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'add_processformkargar' %}">ثبت فعالیت جدید کارگران</a></div>
+                            <div class="link"><a href="{% url 'add_processformkargar' %}">ثبت فعالیت جدید از کارگران</a></div>
                         </div>
                     </div>
                     <div class="row">
@@ -462,12 +465,12 @@
                 <ul>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
+                            <div class="link"><a href="{% url 'add_reserveform' %}">ثبت سفارش جدید</a></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'change_process_reserveProcess' %}">سفارش های تازه ثبت شده(فرایند ثبت سفارش)</a></div>
+                            <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
                         </div>
                     </div>
                     <div class="row">
@@ -525,7 +528,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'changeList_karbarKarkhane' %}">افزودن کاربر کارخانه</a></div>
+                            <div class="link"><a href="{% url 'changeList_karbarKarkhane' %}">لیست کاربران کارخانه</a></div>
                         </div>
                     </div>
                 </ul>

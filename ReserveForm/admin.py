@@ -104,7 +104,7 @@ class ReserveFormAdmin(admin.ModelAdmin):
             return ()
         elif 'karbarTehran' in groupnames:
             return ()
-        elif 'karbarKarkhane' in groupnames:
+        elif 'karbarTehran' or 'karbarKarkhane' in groupnames:
             return ('customer', 'tarh', 'serviceTarh', 'hasParche', 'parche', 'parcheWidth', 'parcheHeight', 'typeChap', 'hasLabel',
                     'reserveDay', 'reserveMonth', 'reserveYear', 'deliveryDay', 'deliveryMonth', 'deliveryYear', 'description',
                      'dookht', 'number')
@@ -143,7 +143,11 @@ class ProcessStatusInline(admin.TabularInline):
         if 'admin' in groupnames:
             return ()
         elif 'karbarTehran' in groupnames:
-            return ()
+            return ('customer', 'tarh', 'serviceTarh', 'hasParche', 'parche', 'parcheWidth', 'parcheHeight', 'typeChap',
+                    'hasLabel',
+                    'reserveDay', 'reserveMonth', 'reserveYear', 'deliveryDay', 'deliveryMonth', 'deliveryYear',
+                    'description',
+                    'dookht', 'number')
         elif 'karbarKarkhane' in groupnames:
             return ('customer', 'tarh', 'serviceTarh', 'hasParche', 'parche', 'parcheWidth', 'parcheHeight', 'typeChap',
                     'hasLabel',
@@ -168,7 +172,7 @@ class ProcessAdmin(admin.ModelAdmin):
         if 'admin' in groupnames:
             return ()
         elif 'karbarTehran' in groupnames:
-            return ()
+            return ('name',)
         elif 'karbarKarkhane' in groupnames:
             return ('name',)
         else:

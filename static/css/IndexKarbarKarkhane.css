@@ -42,7 +42,7 @@
 }
 
 #ka-main-wrapper #user-property-wrapper{
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.7);
     height: 2cm;
     border-bottom-right-radius: 1cm;
     border-top-right-radius: 1cm;
@@ -50,7 +50,7 @@
 }
 
 #ka-main-wrapper #page-title-wrapper{
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.7);
     height: 2cm;
     border-bottom-left-radius: 1cm;
     border-top-left-radius: 1cm;
@@ -136,6 +136,11 @@
 #ka-main-wrapper #main-image-wrapper{
     text-align: center;
     margin-top: 0.1cm;
+}
+
+#ka-main-wrapper #main-image-wrapper img{
+    width: 5cm;
+    height: 5cm;
 }
 
 #ka-main-wrapper .text-wrapper{
