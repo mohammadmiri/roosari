@@ -1,9 +1,12 @@
 from UserManager.models import Kargar, Customer
 from .templatetags.toPersian import IntegerToPersian
+from ReserveForm.date_manager.Miladi_To_Shamsi import convert_miladi_to_shamsi
 
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
+
+import datetime
 
 dayChoice = (
         (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),
@@ -182,6 +185,15 @@ class ProcessFormKargar(models.Model):
         duration = self.endDateTime - self.startDateTime
         hours, reminder = divmod(duration.seconds, 3600)
         return 'روز' + '\t' + str(duration.days) + ' | ' +     'ساعت' + str(hours)
+
+
+
+
+
+def get_current_time():
+    current_date_time = datetime.datetime.now()
+    shamsi_date_time = convert_miladi_to_shamsi({'year':current_date_time.year, 'month':current_date_time.month, 'day':current_date_time.day})
+    return IntegerToPersian(shamsi_date_time['year'])+'/'+IntegerToPersian(shamsi_date_time['month'])+'/'+IntegerToPersian(shamsi_date_time['day'])
 
 
 #signals:

@@ -1,4 +1,4 @@
-from .models import ReserveForm, Dookht, Parche, Process, ProcessFormKargar, ServiceTarh, Chap
+from .models import ReserveForm, Dookht, Parche, Process, ProcessFormKargar, ServiceTarh, Chap, get_current_time
 from UserManager.models import Customer, Kargar, KarbarKarkhane, KarbarTehran, AdminSite
 
 from django.shortcuts import render, redirect, reverse
@@ -82,13 +82,13 @@ def factor_form(request, id):
 
 def printReserveFormsByOneKargar(request, id):
     karger = Kargar.objects.get(id=id)
-    context = {'processformkargars':karger.processformkargar_set.all(), 'kargar':karger}
+    context = {'processformkargars':karger.processformkargar_set.all(), 'kargar':karger, 'current_time':get_current_time()}
     return render(request, 'printReservesByOneKargar.html', context=context)
 
 
 def printReserveFormsInOneProcess(request, id):
     process = Process.objects.get(id=id)
-    context = {'forms':process.reserveform_set.all(), 'process':process}
+    context = {'forms':process.reserveform_set.all(), 'process':process, 'current_time':get_current_time()}
     return render(request, 'printReservesInOneProcess.html', context=context)
 
 

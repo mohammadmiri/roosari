@@ -15,33 +15,48 @@
     <div id="kargar-name">
         {{ kargar.name }}
     </div>
+    <div id="time-wrapper">
+        {{ current_time }}
+    </div>
     <div class="row">
-        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 col-xs-offset-2 col-md-offset-2 cell center-horizontally">
+        <div class="col-md-1 col-sm-1 col-lg-1 col-xs-2 col-xs-offset-1 col-md-offset-2 cell center-horizontally">
             کد سفارش
         </div>
-        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
-سفارش دهنده
+        <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1 cell center-horizontally">
+مشتری
         </div>
-        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
+        <div class="col-md-1 col-sm-1 col-lg-2 col-xs-2 cell center-horizontally">
+نام سفارش دهنده
+        </div>
+        <div class="col-md-1 col-sm-1 col-lg-2 col-xs-2 cell center-horizontally">
 فرایند
         </div>
-        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2 cell center-horizontally">
-امتیاز کارگر
+        <div class="col-md-1 col-sm-1 col-lg-1 col-xs-1 cell center-horizontally">
+امتیاز
+        </div>
+        <div class="col-md-1 col-sm-1 col-lg-2 col-xs-2 cell center-horizontally">
+مدت زمان
         </div>
     </div>
     {% for processformkargar in processformkargars %}
         <div class="row">
-            <div class="col-md-2 col-xs-2 col-xs-offset-2 col-md-offset-2 cell center-horizontally">
+            <div class="col-md-1 col-xs-2 col-xs-offset-1 col-md-offset-2 cell center-horizontally">
 {{ processformkargar.form.id }}
             </div>
-            <div class="col-md-2 col-xs-2 cell center-horizontally">
+            <div class="col-md-1 col-xs-1 cell center-horizontally">
 {{ processformkargar.form.customer.id }}
+            </div>
+            <div class="col-md-2 col-xs-2 cell center-horizontally">
+{{ processformkargar.form.customer.name }}
             </div>
             <div class="col-md-2 col-xs-2 cell center-horizontally">
 {{ processformkargar.process.name }}
             </div>
-            <div class="col-md-2 col-xs-2 cell center-horizontally">
+            <div class="col-md-1 col-xs-1 cell center-horizontally">
 {{ processformkargar.rate }}
+            </div>
+            <div class="col-md-2 col-xs-2 cell center-horizontally">
+{{ processformkargar.get_duration }}
             </div>
         </div>
     {% endfor %}

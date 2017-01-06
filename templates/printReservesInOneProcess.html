@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>سفارشات</title>
 
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/printReservesInOneProcess.css' %}" rel="stylesheet" type="text/css">
@@ -16,7 +16,7 @@
     <div id="process-name">
         {{ process.name }}
     </div>
-    <div>{{ current_time| }}</div>
+    <div id="time-wrapper">{{ current_time }}</div>
     <div class="row">
         <div class="col-md-2 col-md-offset-2 col-xs-2 col-xs-offset-2 cell center-horizontally">
             کد سفارش

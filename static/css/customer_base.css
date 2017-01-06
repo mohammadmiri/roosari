@@ -40,7 +40,7 @@ body{
 }
 
 #user-property-wrapper{
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.7);
     height: 2cm;
     border-bottom-right-radius: 1cm;
     border-top-right-radius: 1cm;
@@ -48,7 +48,7 @@ body{
 }
 
 #page-title-wrapper{
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.7);
     height: 2cm;
     border-bottom-left-radius: 1cm;
     border-top-left-radius: 1cm;
@@ -100,8 +100,8 @@ body{
 }
 
 #image-wrapper img{
-    height: 2cm;
-    width: 2cm;
+    height: 1.7cm;
+    width: 1.7cm;
 }
 
 

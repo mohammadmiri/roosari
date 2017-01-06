@@ -13,7 +13,7 @@ class EventInline(admin.TabularInline):
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('id', 'get_username', 'get_first_name', 'phoneNumber',)
     list_display_links = ('get_username',)
-    search_fields = ('get_name', 'id')
+    search_fields = ('username', 'id', 'name')
     raw_id_fields = ('user',)
     inlines = [EventInline]
     exclude = ['user']
