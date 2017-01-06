@@ -60,13 +60,13 @@ class ReserveForm(models.Model):
 
     def get_reserve_date(self):
         if self.reserveDay is not None and self.reserveMonth is not None and self.reserveYear is not None:
-            return IntegerToPersian(self.reserveDay) + '/' + IntegerToPersian(self.reserveMonth) + '/' + IntegerToPersian(self.reserveYear)
+            return IntegerToPersian(self.reserveYear) + '/' + IntegerToPersian(self.reserveMonth) + '/' + IntegerToPersian(self.reserveDay)
         else:
             return '-'
 
     def get_delivery_date(self):
         if self.deliveryDay is not None and self.deliveryMonth is not None and self.deliveryYear is not None:
-            return IntegerToPersian(self.deliveryDay) + '/' + IntegerToPersian(self.deliveryMonth) + '/' + IntegerToPersian(self.deliveryYear)
+            return IntegerToPersian(self.deliveryYear) + '/' + IntegerToPersian(self.deliveryMonth) + '/' + IntegerToPersian(self.deliveryDay)
         else:
             return '-'
 
