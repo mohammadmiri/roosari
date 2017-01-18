@@ -1,9 +1,12 @@
 from django.db import models
+from ReserveForm.date_manager.Miladi_To_Shamsi import convert_miladi_to_shamsi
+from ReserveForm.templatetags.toPersian import IntegerToPersian
 
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_delete, post_delete
 from django.dispatch import receiver
 
+import datetime
 
 dayChoice = (
         (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),
@@ -28,15 +31,15 @@ yearChoice = ((1395, '۱۳۹۵'), (1396, '۱۳۹۶'), (1397, '۱۹۳۷'), (1398,
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User,)
-    username = models.CharField(max_length=100)
-    name = models.CharField(max_length=100, null=True, verbose_name='نام')
-    phoneNumber = models.CharField(max_length=50, verbose_name='شماره تلفن همراه',)
+    user = models.OneToOneField(User, )
+    username = models.CharField(max_length=100, verbose_name='نام کاربری')
+    name = models.CharField(max_length=100, null=True, blank=True, verbose_name='نام')
+    phoneNumber = models.CharField(max_length=50, verbose_name='شماره تلفن همراه', blank=True, null=True)
     email = models.EmailField(verbose_name='ایمیل',)
-    moaref = models.CharField(max_length=200, verbose_name='نام معرف',)
-    workPhoneNumber = models.CharField(max_length=50, verbose_name='تلفن محل کار',)
-    address = models.TextField(verbose_name='آدرس',)
-    companyName = models.CharField(verbose_name='نام شرکت', max_length=100)
+    moaref = models.CharField(max_length=200, verbose_name='نام معرف', blank=True, null=True)
+    workPhoneNumber = models.CharField(max_length=50, verbose_name='تلفن محل کار', blank=True, null=True)
+    address = models.TextField(verbose_name='آدرس', null=True, blank=True)
+    companyName = models.CharField(verbose_name='نام شرکت', max_length=100, blank=True, null=True)
 
     class Meta:
         verbose_name = 'مشتری'
@@ -50,6 +53,8 @@ class Customer(models.Model):
 class CustomerMessage(models.Model):
     customer = models.ForeignKey(Customer, verbose_name='مشتری',)
     message = models.TextField(verbose_name='نامه',)
+    is_read = models.BooleanField(verbose_name='خوانده شده', blank=True, default=False)
+    date = models.DateTimeField(verbose_name='تاریخ', null=True, blank=True)
 
     class Meta:
         verbose_name = 'پیام مشتری'
@@ -57,6 +62,21 @@ class CustomerMessage(models.Model):
 
     def __str__(self):
         return self.message[:15]
+
+    def get_date(self):
+        if self.date is not None:
+            shamsi_date_time = convert_miladi_to_shamsi({'year': self.date.year, 'month': self.date.month, 'day': self.date.day})
+            return IntegerToPersian(shamsi_date_time['year']) + '/' + IntegerToPersian(
+                shamsi_date_time['month']) + '/' + IntegerToPersian(shamsi_date_time['day'])
+        else:
+            return '-'
+
+    def get_time(self):
+        if self.date is not None:
+            time = self.date + datetime.timedelta(0, 12600)
+            return str(time.hour) + ':' + str(time.minute)
+        else:
+            return '-'
 
 
 class Kargar(models.Model):
@@ -93,7 +113,7 @@ class AdminSite(models.Model):
 
 
 class KarbarTehran(models.Model):
-    user = models.OneToOneField(User, editable=False,)
+    user = models.OneToOneField(User, )
     username = models.CharField(max_length=100, verbose_name='نام کاربری',)
     password = models.CharField(max_length=100, verbose_name='رمز ورود',)
     name = models.CharField(max_length=100, verbose_name='نام',)
@@ -115,7 +135,7 @@ class KarbarTehran(models.Model):
 
 
 class KarbarKarkhane(models.Model):
-    user = models.OneToOneField(User, editable=False)
+    user = models.OneToOneField(User,)
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)

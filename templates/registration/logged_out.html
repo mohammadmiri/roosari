@@ -1,0 +1,53 @@
+{#{% extends "admin/base_site.html" %}#}
+{#{% load i18n %}#}
+{##}
+{#{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></div>{% endblock %}#}
+{##}
+{#{% block content %}#}
+{##}
+{#<p>{% trans "Thanks for spending some quality time with the Web site today." %}</p>#}
+{##}
+{#salam#}
+{##}
+{#<p><a href="{% url 'admin:index' %}">{% trans 'Log in again' %}</a></p>#}
+{##}
+{#{% endblock %}#}
+
+
+<!DOCTYPE html>
+<html lang="fa">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>سامانه ارتباط با مشتری</title>
+    <!--<meta http-equiv="refresh" content="2">-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/logged_out.css' %}"/>
+</head>
+<body lang="fa">
+
+<div class="signup">
+	شما از سامانه خارج شدید!
+</div>
+
+<div class="login">
+
+    <div class="link-wrapper">
+        <a href="{% url 'admin:index' %}">
+            <div id="login-again-link">ورود مجدد</div>
+        </a>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

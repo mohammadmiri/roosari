@@ -1,0 +1,129 @@
+body{
+    background-image: url("/static/img/back.jpg");
+	background-color: #fafafa;
+    /*background-image: url("Wallpaper/across_the_floors_of_union_station-wallpaper-1366x768.jpg");*/
+    /*background-repeat: no-repeat;*/
+    height: 100%;
+    width: 100%;
+}
+
+
+.signup{
+    background-color: white;
+	opacity: 0.95;
+    width: 21.875rem;
+    height: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 100px;
+	padding-top: 15px;
+    border: 1px solid #efefef;
+	text-align: center;
+	font-family: "B Yekan", "Yekan", "A Yekan", "tahoma";
+
+}
+
+/*body:hover{*/
+/*}*/
+
+body:lang(fa){
+    float: right;
+    direction: rtl;
+}
+
+
+.link-wrapper{
+    background-color: white;
+	opacity: 0.95;
+    width: 21.875rem;
+    height: 6rem;
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 15px;
+	padding-top: 15px;
+    border: 1px solid #efefef;
+	text-align: center;
+	font-family: "B Yekan", "Yekan", "A Yekan", "tahoma";
+}
+
+
+#login-again-link{
+    width:80%;
+    height:2rem;
+    border:1px solid #dbdbdb;
+    border-radius: 3px;
+    text-indent: 1rem;
+    background-color: transparent;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    margin-right: 10%;
+    padding-top: 0.4cm;
+	font-family: "B Yekan", "Yekan", "A Yekan", "tahoma";
+    background-color:#3897f0;
+    color: white;
+}
+
+
+.login a{
+    text-decoration: none;
+}
+
+
+
+/*body:lang(en){*/
+    /*float: left;*/
+    /*direction: ltr;*/
+/*}*/
+
+
+/*.circle{*/
+    /*width:20rem;*/
+    /*height:20rem;*/
+    /*border-radius: 50%;*/
+    /*border: 2px solid blueviolet;*/
+/*}*/
+
+
+
+/*.inputA:focus{*/
+    /*border: 1px solid #efefef;*/
+    /*outline: none;*/
+/*}*/
+
+/*input[type="submit"]{*/
+    /*color: white;*/
+    /*background-color:#3897f0;*/
+    /*border: 1px solid #3897f0;*/
+    /*border-radius: 3px;*/
+	/*cursor: pointer;*/
+    /*!*border: 0;*!*/
+
+/*}*/
+
+
+
+
+
+
+/*.link{*/
+	/*text-decoration: none;*/
+/*}*/
+
+/*form{*/
+    /*width: 80%;*/
+    /*height: auto;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+	/*position: relative;*/
+/*}*/
+
+/*.forget {*/
+	/*color: #3897f0;*/
+	/*background-color: white;*/
+	/*position:absolute;*/
+	/*top: 5.65rem;*/
+	/*left: 0.5rem;*/
+	/*text-decoration: none;*/
+	/*font-family: "B Yekan", "Yekan", "A Yekan", "tahoma";*/
+
+/*}*/

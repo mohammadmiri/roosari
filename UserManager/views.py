@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect, reverse
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 
+import datetime
 
 urlsite = 'http://108.61.200.118:8000'
 
@@ -140,6 +141,7 @@ def contact_us(request):
         customerMessage = CustomerMessage()
         customerMessage.message = message
         customerMessage.customer = customer
+        customerMessage.date = datetime.datetime.now()
         customerMessage.save()
         return redirect(reverse('HomepageCustomer'))
     context = {'customer':customer}

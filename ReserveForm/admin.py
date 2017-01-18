@@ -264,14 +264,24 @@ class ProcessFormKargarAdmin(admin.ModelAdmin):
 
 
 class CustomerMessageAdmin(admin.ModelAdmin):
-    list_display = ('get_customer', 'message')
+    list_display = ('get_customer', 'get_date', 'get_time', 'get_message')
     readonly_fields = ('message', 'customer')
 
     def get_customer(self, obj):
         return obj.customer.name
     get_customer.__name__ = 'مشتری'
 
+    def get_message(self, obj):
+        return obj.message
+    get_message.__name__ = 'متن نامه'
 
+    def get_date(self, obj):
+        return obj.get_date()
+    get_date.__name__ = 'تاریخ ارسال'
+
+    def get_time(self, obj):
+        return obj.get_time()
+    get_time.__name__ = 'ساعت'
 
 
 admin.site.register(ReserveForm, ReserveFormAdmin)

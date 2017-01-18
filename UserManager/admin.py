@@ -2,13 +2,28 @@ from .models import Kargar, Customer, KarbarKarkhane, KarbarTehran, Event, Admin
 
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
-
-
+from django.db import models, IntegrityError, transaction
+from django import forms
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 class EventInline(admin.TabularInline):
     model = Event
     extra = 1
 
+
+class CustomerAdminForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        exclude = ('user',)
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        try:
+            user = User.objects.get(username=username)
+            raise forms.ValidationError('نام کاربری تکراری است')
+        except User.DoesNotExist:
+            return username
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('id', 'get_username', 'get_first_name', 'phoneNumber',)
@@ -17,12 +32,17 @@ class CustomerAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
     inlines = [EventInline]
     exclude = ['user']
+    form = CustomerAdminForm
 
     def get_username(self, obj):
+        if obj.user.username is None:
+            return '-'
         return obj.user.username
     get_username.__name__ = 'نام کاربری'
 
     def get_first_name(self, obj):
+        if obj.name is None:
+            return '-'
         return obj.name
     get_first_name.__name__ = 'نام'
 
@@ -40,6 +60,11 @@ class CustomerAdmin(admin.ModelAdmin):
                 user.save()
             obj.save()
 
+    formfield_overrides = {
+        models.TextField: {'widget': forms.Textarea(attrs={'rows':1, 'cols':32})},
+    }
+
+
 
 
 class KargarAdmin(admin.ModelAdmin):
@@ -48,9 +73,23 @@ class KargarAdmin(admin.ModelAdmin):
 
 
 
+class KarbarTehranAdminForm(forms.ModelForm):
+    class Meta:
+        model = KarbarTehran
+        exclude = ('user',)
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        try:
+            user = User.objects.get(username=username)
+            raise forms.ValidationError('نام کاربری تکراری است')
+        except User.DoesNotExist:
+            return username
+
 class KarbarTehranAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'name')
     list_display_links = ('id', 'username', 'name')
+    form = KarbarTehranAdminForm
 
     def get_readonly_fields(self, request, obj=None):
         groupnames = request.user.groups.values_list('name', flat=True)
@@ -83,10 +122,23 @@ class KarbarTehranAdmin(admin.ModelAdmin):
             obj.save()
 
 
+class KarbarKarkhaneAdminForm(forms.ModelForm):
+    class Meta:
+        model = KarbarKarkhane
+        exclude = ('user',)
 
-class KarbarKharkhaneAdmin(admin.ModelAdmin):
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        try:
+            user = User.objects.get(username=username)
+            raise forms.ValidationError('نام کاربری تکراری است')
+        except User.DoesNotExist:
+            return username
+
+class KarbarKarkhaneAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'name')
     list_display_links = ('id', 'username', 'name')
+    form = KarbarKarkhaneAdminForm
 
     def get_readonly_fields(self, request, obj=None):
         groupnames = request.user.groups.values_list('name', flat=True)
@@ -157,7 +209,7 @@ admin.site.register(AdminSite, AdminSiteAdmin)
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Kargar, KargarAdmin)
 admin.site.register(KarbarTehran, KarbarTehranAdmin)
-admin.site.register(KarbarKarkhane, KarbarKharkhaneAdmin)
+admin.site.register(KarbarKarkhane, KarbarKarkhaneAdmin)
 
 
 
