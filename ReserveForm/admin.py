@@ -5,13 +5,14 @@ from UserManager.models import CustomerMessage
 from django.contrib import admin
 from django.db import models
 from django.forms import CheckboxSelectMultiple
+from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import reverse
 from django.conf.urls import url
 
 
 class ProcessInline(admin.TabularInline):
     model = ProcessFormKargar
-    extra = 1
+    extra = 0
     fieldsets = (
         ('فرایند', {
             'fields':('process',)
@@ -20,17 +21,38 @@ class ProcessInline(admin.TabularInline):
             'fields':('kargar',)
         }),
         ('زمان شروع', {
-            'fields':('startDay', 'startMonth', 'startYear',)
+            'fields':('startDateTime',)
         }),
         ('زمان اتمام', {
-            'fields':('endDay', 'endMonth', 'endYear',)
+            'fields':('endDateTime',)
         }),
     )
+
+
+class ProcessFilter(admin.SimpleListFilter):
+    title = _('فرایند')
+    parameter_name = 'process'
+
+    def lookups(self, request, model_admin):
+        tuple = ()
+        for process in Process.objects.all():
+            tuple += (str(process.id), str(process.name))
+        return tuple
+
+    def queryset(self, request, queryset):
+        for process in Process.objects.all():
+            if self.value() == str(process.id):
+                return ReserveForm.objects.filter(process=process)
+
 
 class ReserveFormAdmin(admin.ModelAdmin):
     list_display = ('id', 'get_customer_name', 'get_status', 'get_number', 'reserve_date', 'delivery_date',)
     list_display_links = ('get_customer_name',)
     search_fields = ['id', 'customer__name', 'process__name']
+    inlines = [ProcessInline,]
+    list_filter = (
+        ('process', admin.RelatedFieldListFilter),
+    )
 
     def get_customer_name(self, obj):
         return obj.customer.name
@@ -102,8 +124,6 @@ class ReserveFormAdmin(admin.ModelAdmin):
         groupnames = request.user.groups.values_list('name', flat=True)
         if 'admin' in groupnames:
             return ()
-        elif 'karbarTehran' in groupnames:
-            return ()
         elif 'karbarTehran' or 'karbarKarkhane' in groupnames:
             return ('customer', 'tarh', 'serviceTarh', 'hasParche', 'parche', 'parcheWidth', 'parcheHeight', 'typeChap', 'hasLabel',
                     'reserveDay', 'reserveMonth', 'reserveYear', 'deliveryDay', 'deliveryMonth', 'deliveryYear', 'description',
@@ -112,7 +132,7 @@ class ReserveFormAdmin(admin.ModelAdmin):
             return ()
 
     def save_model(self, request, obj, form, change):
-        if change and 'tarh' in form.changed_data:
+        if change == True and 'tarh' in form.changed_data:
             reserve = ReserveForm.objects.get(id=obj.id)
             reserve.tarh.delete(False)
         obj.save()
@@ -261,11 +281,29 @@ class ProcessFormKargarAdmin(admin.ModelAdmin):
     )
 
 
+class IsReadFilter(admin.SimpleListFilter):
+    title = _('خواندن')
+    parameter_name = 'is_read'
+
+    def lookups(self, request, model_admin):
+        tuple = (
+            ('readed', _('خوانده شده است')),
+            ('not readed', _('خوانده نشده است')),
+        )
+        return tuple
+
+    def queryset(self, request, queryset):
+        if self.value() == 'readed':
+            return CustomerMessage.objects.filter(is_read=True)
+        elif self.value() == 'not reader':
+            return CustomerMessage.objects.filter(is_read=False)
+
 
 
 class CustomerMessageAdmin(admin.ModelAdmin):
     list_display = ('get_customer', 'get_date', 'get_time', 'get_message')
     readonly_fields = ('message', 'customer')
+    list_filter = [IsReadFilter,]
 
     def get_customer(self, obj):
         return obj.customer.name
@@ -282,6 +320,8 @@ class CustomerMessageAdmin(admin.ModelAdmin):
     def get_time(self, obj):
         return obj.get_time()
     get_time.__name__ = 'ساعت'
+
+
 
 
 admin.site.register(ReserveForm, ReserveFormAdmin)

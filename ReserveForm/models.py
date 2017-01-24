@@ -4,7 +4,7 @@ from ReserveForm.date_manager.Miladi_To_Shamsi import convert_miladi_to_shamsi
 
 from django.db import models
 from django.dispatch import receiver
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, pre_save, post_save
 
 import datetime
 
@@ -46,13 +46,14 @@ class ReserveForm(models.Model):
     # reserve date
     reserveDay = models.IntegerField(choices=dayChoice, verbose_name='روز', blank=True, null=True)
     reserveMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه', blank=True, null=True)
-    reserveYear = models.IntegerField(verbose_name='سال', blank=True, null=True)
+    reserveYear = models.IntegerField(choices=yearChoice, verbose_name='سال', blank=True, null=True)
     # delivery date
     deliveryDay = models.IntegerField(choices=dayChoice, verbose_name='روز', blank=True, null=True)
     deliveryMonth = models.IntegerField(choices=monthChoice, verbose_name='ماه', blank=True, null=True)
-    deliveryYear = models.IntegerField(verbose_name='سال', blank=True, null=True)
+    deliveryYear = models.IntegerField(choices=yearChoice, verbose_name='سال', blank=True, null=True)
     description = models.TextField(verbose_name='توضیح', blank=True, null=True)
     process = models.ForeignKey('Process', verbose_name='فرایند', blank=True, null=True, default=2)
+
 
     class Meta:
         verbose_name = "سفارش"
@@ -160,7 +161,7 @@ class Process(models.Model):
 
 class ProcessFormKargar(models.Model):
     process = models.ForeignKey(Process, verbose_name='فرایند',)
-    kargar = models.ForeignKey(Kargar, verbose_name='کارگر',)
+    kargar = models.ForeignKey(Kargar, verbose_name='کارگر', null=True, blank=True)
     form = models.ForeignKey(ReserveForm, verbose_name='کد سفارش',)
     rate = models.IntegerField(verbose_name='امتیاز کارگر', null=True, blank=True, default=0)
     # start date
@@ -198,6 +199,21 @@ def get_current_time():
 
 #signals:
 
+@receiver(post_save, sender=ReserveForm)
+def reserveForm_post_save(sender, instance, created, **kwargs):
+    if created == True:
+        for process in Process.objects.all():
+            processform = ProcessFormKargar()
+            processform.process = process
+            processform.form = instance
+            processform.save()
+
+
+
 @receiver(pre_delete, sender=ReserveForm)
 def reserveForm_pre_delete(sender, instance, **kwargs):
     instance.tarh.delete(False)
+    # form = ReserveForm.objects.get(id=1)
+    # form.processformkargar_set
+    # for process in instance.process_set.all():
+    #     process.delete()
