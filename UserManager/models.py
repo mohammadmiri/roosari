@@ -52,9 +52,10 @@ class Customer(models.Model):
 
 class CustomerMessage(models.Model):
     customer = models.ForeignKey(Customer, verbose_name='مشتری',)
+    date = models.DateTimeField(verbose_name='تاریخ', null=True, blank=True)
     message = models.TextField(verbose_name='نامه',)
     is_read = models.BooleanField(verbose_name='خوانده شده', blank=True, default=False)
-    date = models.DateTimeField(verbose_name='تاریخ', null=True, blank=True)
+
 
     class Meta:
         verbose_name = 'پیام مشتری'

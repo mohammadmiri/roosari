@@ -29,20 +29,6 @@ class ProcessInline(admin.TabularInline):
     )
 
 
-class ProcessFilter(admin.SimpleListFilter):
-    title = _('فرایند')
-    parameter_name = 'process'
-
-    def lookups(self, request, model_admin):
-        tuple = ()
-        for process in Process.objects.all():
-            tuple += (str(process.id), str(process.name))
-        return tuple
-
-    def queryset(self, request, queryset):
-        for process in Process.objects.all():
-            if self.value() == str(process.id):
-                return ReserveForm.objects.filter(process=process)
 
 
 class ReserveFormAdmin(admin.ModelAdmin):
@@ -288,21 +274,21 @@ class IsReadFilter(admin.SimpleListFilter):
     def lookups(self, request, model_admin):
         tuple = (
             ('readed', _('خوانده شده است')),
-            ('not readed', _('خوانده نشده است')),
+            ('not_readed', _('خوانده نشده است')),
         )
         return tuple
 
     def queryset(self, request, queryset):
         if self.value() == 'readed':
             return CustomerMessage.objects.filter(is_read=True)
-        elif self.value() == 'not reader':
+        elif self.value() == 'not_readed':
             return CustomerMessage.objects.filter(is_read=False)
 
 
 
 class CustomerMessageAdmin(admin.ModelAdmin):
     list_display = ('get_customer', 'get_date', 'get_time', 'get_message')
-    readonly_fields = ('message', 'customer')
+    readonly_fields = ('message', 'customer', 'date')
     list_filter = [IsReadFilter,]
 
     def get_customer(self, obj):
@@ -321,6 +307,11 @@ class CustomerMessageAdmin(admin.ModelAdmin):
         return obj.get_time()
     get_time.__name__ = 'ساعت'
 
+    fieldsets = (
+        ('', {
+            'fields': ('customer', 'is_read', 'message',)
+        }),
+    )
 
 
 
