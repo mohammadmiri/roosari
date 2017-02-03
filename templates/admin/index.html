@@ -278,11 +278,7 @@
                     <div class="link-header-icon col-md-2 xs-invisible"><img src="{% static 'img/yellow_reserves.png' %}"></div>
                 </div>
                 <ul>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'add_reserveform' %}">ثبت سفارش جدید</a></div>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
                             <div class="link"><a href="{% url 'changeList_reserveform' %}">لیست تمام سفارش ها و تغییر وضعیت یک سفارش</a></div>
@@ -290,7 +286,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2">
-                            <div class="link"><a href="{% url 'changeList_process' %}">سفارش ها بر اساس وضعیت در کار خانه</a></div>
+                            <div class="link"><a href="{% url 'change_process_reserveProcess' %}">سفارش های تازه ثبت شده</a></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="link"><a href="{% url 'changeList_process' %}">سفارش ها بر اساس وضعیت در کارخانه</a></div>
                         </div>
                     </div>
                 </ul>

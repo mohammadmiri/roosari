@@ -124,12 +124,12 @@ class ReserveFormAdmin(admin.ModelAdmin):
         groupnames = request.user.groups.values_list('name', flat=True)
         if 'admin' in groupnames:
             return ()
-        elif 'karbarTehran' or 'karbarKarkhane' in groupnames:
+        elif 'karbarKarkhane' in groupnames:
             return ('customer', 'tarh', 'serviceTarh', 'hasParche', 'parche', 'parcheWidth', 'parcheHeight', 'typeChap', 'hasLabel',
                     'reserveDay', 'reserveMonth', 'reserveYear', 'deliveryDay', 'deliveryMonth', 'deliveryYear', 'description',
                      'dookht', 'number')
-        else:
-            return ()
+        elif 'karbarTehran' in groupnames:
+            return ('process')
 
     def save_model(self, request, obj, form, change):
         if change == True and 'tarh' in form.changed_data:
